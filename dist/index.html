@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#8fd1d2"><meta name="description" content="A little sky, and a few things hiding in it."><title>A Little Sky for You</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="daylight.css"></head>
+<body>
+<main id="world">
+ <div id="stardust" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
+ <div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div><div class="cloud cloud-three" aria-hidden="true"></div>
+ <header><a class="brand" href="./">✦ <span>a little sky for you</span></a><label class="sky-picker">Your sky <select id="sky-mode" aria-label="Choose your sky"><option value="clouds">Peach clouds</option><option value="pink">Pink & blue</option><option value="purple">Purple & blue</option></select></label></header>
+ <section id="welcome" class="welcome"><p class="eyebrow" id="greeting">HEY, YOU</p><h1>I made you<br>a little <span>sky.</span></h1><p>There are a few things hiding in it.<br>And they’re all for you.</p><button id="start" class="primary">Show me <span aria-hidden="true">✦</span></button><span class="welcome-note">a small adventure. a slightly big confession.</span></section>
+ <section id="explore" hidden aria-label="Your heart constellation"><div class="explore-heading"><p class="eyebrow">A FEW LITTLE THINGS</p><h1>Follow the stars.</h1><p>Each one has something I wanted to tell you.</p></div><div id="constellation"><svg id="lines" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg><div id="stars"></div></div><div class="progress"><p id="counter" role="status" aria-live="polite"></p><div id="progress-marks" aria-hidden="true"></div><button id="next" class="primary" hidden disabled>One last question <span aria-hidden="true">→</span></button><p id="progress-hint">A little more sky to discover.</p></div></section>
+ <div class="landscape" aria-hidden="true"><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="couple"><span class="person person-one"></span><span class="person person-two"></span><span class="little-heart">♥</span></div><span class="flower f1">✿</span><span class="flower f2">✿</span><span class="flower f3">✿</span><span class="flower f4">✿</span></div>
+ <footer><span>made with a little courage & a lot of you</span><span>✧</span></footer>
+</main>
+<dialog id="card" aria-labelledby="card-title"><button class="close" id="close" aria-label="Close message">×</button><div id="card-content"></div></dialog>
+<script type="module" src="app.js"></script></body></html>
+
+
+
+
+

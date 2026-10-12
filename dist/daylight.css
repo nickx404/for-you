@@ -1,0 +1,102 @@
+/* The reference's peach clouds and aqua sky replace the earlier night palette. */
+:root{--sky:#8fd1d2;--ink:#254e5b;--muted:#335a65;--gold:#fff0c5}
+body{color:var(--ink)}
+#world,body[data-theme=illustrated] #world{background:linear-gradient(145deg,#a8dadd,#8dcece 55%,#edb6ac)}
+#world::before{content:'';position:absolute;inset:-7%;z-index:-1;background:url('assets/peach-cloud-sky.png') center/cover no-repeat;animation:sky-drift 30s ease-in-out infinite alternate;pointer-events:none}
+.cloud,.moon{display:none}
+.brand,.header-note{color:#315866}
+.welcome .eyebrow,.explore-heading .eyebrow{color:#674857}
+h1{color:#254e5b;text-shadow:0 2px 0 #e6f7ef88;font-size:clamp(36px,4.3vw,60px)}
+h1 span{color:#9d4f57;text-shadow:0 2px 0 #ffe1c8}
+.welcome>p:not(.eyebrow),.welcome-note,.explore-heading>p:last-child{color:#315764}
+.welcome-note{font-weight:500}
+.primary{background:#fff0cf;color:#354d54;box-shadow:4px 4px 0 #bc827c}
+.primary:hover{background:#fff8e3}
+.primary:disabled{background:#f2ded1;color:#765d60;box-shadow:4px 4px 0 #b99088}
+.dust{background:#fff8e5;box-shadow:0 0 5px #fff4dd}
+.hill-back{background:#edb4a9}
+.hill-front{background:#f7d1bb}
+.flower{color:#aa6b86}.f2,.f4{color:#8a9c82}
+footer{color:#5c666a}
+.star-shape{color:#fff7df;text-shadow:2px 0 #a46c60,-2px 0 #a46c60,0 2px #a46c60,0 -2px #a46c60,0 0 18px #fff7db}
+.visited .star-shape{color:#ffdf83;text-shadow:2px 0 #8f6152,-2px 0 #8f6152,0 2px #8f6152,0 -2px #8f6152,0 0 24px #fff5cf}
+.check{background:#fff2cb;color:#315663;box-shadow:0 0 0 1px #b68670}
+.heart-guide{stroke:#95665f;opacity:.48}
+.heart-complete{stroke:#986057}
+.complete .heart-complete{filter:drop-shadow(0 0 4px #fff0c0)}
+.star-label{background:#fff2df;color:#315663;border-color:#ccaa99}
+#counter,#progress-hint{color:#294f59;text-shadow:0 1px #fff2e4}
+#progress-marks span{color:#8b7575}
+#progress-marks .filled{color:#84584e}
+dialog{color:#294f59;box-shadow:8px 8px 0 #d29a95,0 25px 100px #315b6555}
+dialog::backdrop{background:#43778055}
+.secondary{color:#315663;border-color:#a78b86}
+.little-heart,.celebration-heart{color:#b45973}
+@keyframes sky-drift{from{transform:translateX(-3%) scale(1.025)}to{transform:translateX(3%) scale(1.025)}}
+@media(max-width:700px){h1{font-size:32px}.explore-heading h1{font-size:21px}#world::before{background-position:50% center}}
+@media(prefers-reduced-motion:reduce){#world::before{animation:none}}
+
+#constellation{width:min(490px,43vh,86vw);height:auto;aspect-ratio:1;top:clamp(210px,26vh,280px)}
+.star.tip .star-label{top:auto;bottom:64px}
+#constellation::before{content:'';position:absolute;inset:-12%;background:radial-gradient(ellipse,#a3dede88,transparent 70%);pointer-events:none}
+.heart-complete{stroke:#a04f62;stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1;transition:none;vector-effect:non-scaling-stroke}
+.complete .heart-complete{opacity:1;stroke-dashoffset:0;filter:drop-shadow(0 0 3px #fff8df) drop-shadow(0 0 7px #fff0c6);animation:draw-heart 1.3s ease-out both}
+@keyframes draw-heart{from{stroke-dashoffset:1;opacity:.4}to{stroke-dashoffset:0;opacity:1}}
+@media(max-width:700px){#constellation{width:min(340px,82vw);height:auto;top:27%}.heart-complete{stroke-width:3}}
+@media(prefers-reduced-motion:reduce){.complete .heart-complete{animation:none;stroke-dashoffset:0}}
+
+.sky-picker{display:flex;align-items:center;gap:12px;font-size:12px;color:inherit}
+.sky-picker select{font:inherit;color:#315663;background:#fff2df;border:1px solid #ccaa99;padding:9px 12px;cursor:pointer;border-radius:0}
+.sky-picker select:focus-visible{outline:3px solid #a04f62;outline-offset:4px}
+body[data-sky=purple],body[data-sky=pink]{color:#fff6e1;--muted:#ddd5e9}
+body[data-sky=purple] #world{background:radial-gradient(ellipse at 50% 100%,#433858,transparent 60%),linear-gradient(#121329,#22203d)}
+body[data-sky=pink] #world{background:radial-gradient(ellipse at 85% 78%,#d58aa066,transparent 55%),linear-gradient(170deg,#132f49,#285373 38%,#8b6079 72%,#a86680)}
+body[data-sky=purple] #world::before,body[data-sky=pink] #world::before{display:none}
+body[data-sky=purple] .cloud,body[data-sky=pink] .cloud,body[data-sky=purple] .moon,body[data-sky=pink] .moon{display:block}
+body[data-sky=purple] .cloud{background:#9c88ba;opacity:.24}
+body[data-sky=pink] .cloud{background:#f1b6cb;opacity:.3}
+body[data-sky=pink] .cloud-two{background:#aacfe9}
+body[data-sky=purple] .hill-back{background:#39344f}body[data-sky=purple] .hill-front{background:#242737}
+body[data-sky=pink] .hill-back{background:#54748c}body[data-sky=pink] .hill-front{background:#203d54}
+body[data-sky]:not([data-sky=clouds]) :is(.brand,.sky-picker,h1,.welcome>p:not(.eyebrow),.welcome-note,.explore-heading>p:last-child,#counter,#progress-hint){color:#eee4f4;text-shadow:none}
+body[data-sky]:not([data-sky=clouds]) h1 span{color:#f5d898;text-shadow:none}
+body[data-sky]:not([data-sky=clouds]) :is(.welcome .eyebrow,.explore-heading .eyebrow){color:#e1bbd4}
+body[data-sky]:not([data-sky=clouds]) footer{color:#bbccda}
+body[data-sky]:not([data-sky=clouds]) #constellation::before{background:none}
+body[data-sky]:not([data-sky=clouds]) .heart-guide{stroke:#e8c6ce}
+body[data-sky]:not([data-sky=clouds]) .heart-complete{stroke:#ffd2df}
+body[data-sky]:not([data-sky=clouds]) #progress-marks .filled{color:#f5d898}
+@media(max-width:700px){header{padding:20px 16px}.sky-picker{gap:6px;font-size:10px}.sky-picker select{padding:8px 5px}.brand{gap:5px;font-size:10px}}
+
+.star-shape{display:block;width:48px;height:48px;object-fit:contain;image-rendering:pixelated;filter:grayscale(1) drop-shadow(0 0 7px #ffffff66);transition:filter .3s}
+.visited .star-shape{filter:drop-shadow(0 0 9px #fff0b9)}
+.heart-reveal{position:absolute;left:50%;top:55%;width:120px;height:120px;opacity:0;transform:translate(-50%,-50%) scale(.15);pointer-events:none}
+.heart-reveal::before{content:'';position:absolute;inset:-30%;background:radial-gradient(ellipse,#fff2d9aa,transparent 70%);z-index:-1}
+.heart-reveal img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+.heart-shown .heart-reveal{opacity:1;transform:translate(-50%,-50%) scale(1);animation:heart-pop .7s ease-out both}
+@keyframes heart-pop{0%{opacity:0;transform:translate(-50%,-50%) scale(.15)}65%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@media(max-width:700px){.star-shape{width:40px;height:40px}.heart-reveal{width:88px;height:88px}}
+@media(prefers-reduced-motion:reduce){.heart-shown .heart-reveal{animation:none}}
+
+#stars{z-index:3}
+.pixel-outline,.heart-reveal{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;pointer-events:none}
+.pixel-outline{filter:url('#pixel-outline');transform:none}
+.heart-guide.pixel-outline{opacity:.35}
+.heart-complete.pixel-outline{opacity:0;transition:none}
+.complete .heart-complete.pixel-outline{opacity:1;filter:url('#pixel-outline');animation:pixel-outline-reveal 1.3s ease-out both}
+.heart-reveal{left:0;top:0;transform:scale(.15);z-index:1}
+.heart-shown .heart-reveal{transform:scale(1);animation:pixel-heart-fill .7s ease-out both}
+.heart-reveal::before{inset:0}
+@keyframes pixel-outline-reveal{from{opacity:.2;clip-path:inset(100% 0 0 0)}to{opacity:.6;clip-path:inset(0)}}
+@keyframes pixel-heart-fill{0%{opacity:0;transform:translateY(22px) scale(.15)}70%{opacity:1;transform:translateY(0) scale(1.04)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.complete .heart-complete.pixel-outline,.heart-shown .heart-reveal{animation:none}.heart-shown .heart-reveal{transform:scale(1)}}
+
+.star-number{position:absolute;right:-2px;top:2px;display:grid;place-items:center;min-width:22px;height:22px;padding:0 4px;background:#fff2df;color:#315663;border:1px solid #bd977e;font-size:11px;font-weight:600;border-radius:50%}
+.visited .star-number{display:none}
+
+.heart-glow.pixel-outline{opacity:0;filter:url('#pixel-outline') drop-shadow(0 0 3px #ffe7ed) drop-shadow(0 0 10px #ffd0e0)}
+.complete.outline-glow .heart-glow.pixel-outline{opacity:1;animation:outline-glow 2s ease-out both}
+@keyframes outline-glow{from{opacity:.2;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(0)}}
+#next:not([hidden]){animation:next-rise .4s ease-out both}
+@keyframes next-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.complete.outline-glow .heart-glow.pixel-outline,#next:not([hidden]){animation:none}}
