@@ -5,7 +5,7 @@ const runtimeRequire = createRequire(path.join(process.env.USERPROFILE, '.cache/
 const { chromium } = runtimeRequire('playwright');
 (async () => {
   const browser = await chromium.launch({headless:true,channel:'msedge'});
-  for (const [width,height] of [[1366,768],[1920,1080],[390,844]]) {
+  for (const [width,height] of [[1366,768],[1920,1080],[393,852]]) {
     const page = await browser.newPage({viewport:{width,height}});
     const errors=[]; page.on('pageerror',error=>errors.push(error.message));
     await page.goto('http://127.0.0.1:4173');
@@ -34,6 +34,16 @@ const { chromium } = runtimeRequire('playwright');
     for (let i=0;i<count;i++) {
       await stars.nth(i).click();
       assert.equal(await page.locator('#card').isVisible(),true);
+      if(i===3) {
+        const video=page.locator('.tv video');
+        assert.ok((await video.getAttribute('src')).endsWith('for-you-optimized.mp4'));
+        await page.getByLabel('Playback speed').selectOption('2');
+        assert.equal(await video.evaluate(el=>el.playbackRate),2);
+        await video.evaluate(el=>el.play());
+        await page.waitForFunction(()=>document.querySelector('.tv video').currentTime>0);
+        const box=await page.getByLabel('Playback speed').boundingBox();
+        assert.ok(box.x>=0 && box.x+box.width<=width);
+      }
       await page.keyboard.press('Escape');
       assert.equal(await stars.nth(i).locator('.star-number').isVisible(),false);
       await page.waitForFunction(index=>!getComputedStyle(document.querySelectorAll('.star-shape')[index]).filter.includes('grayscale'),i);

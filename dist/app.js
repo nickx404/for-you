@@ -94,8 +94,15 @@ function openStar(index) {
     const frame = document.createElement('div'); frame.className = 'tv';
     if (star.video) {
       const video = document.createElement('video'); video.controls = true; video.playsInline = true; video.preload = 'metadata'; video.src = star.video;
+      const speedLabel = document.createElement('label'); speedLabel.className = 'playback-speed'; speedLabel.textContent = 'Playback speed';
+      const speed = document.createElement('select'); speed.setAttribute('aria-label', 'Playback speed');
+      for (const rate of [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]) {
+        const option = document.createElement('option'); option.value = rate; option.textContent = `${rate}×`; option.selected = rate === 1; speed.append(option);
+      }
+      speed.addEventListener('change', () => { video.playbackRate = Number(speed.value); });
+      speedLabel.append(speed);
       video.addEventListener('error', () => { frame.replaceChildren(); paragraph(frame, 'The video couldn’t load, but you can keep exploring.'); });
-      frame.append(video);
+      frame.append(video, speedLabel);
     } else paragraph(frame, '▶\nA message from me\nComing with a little courage.');
     area.append(frame);
   }
