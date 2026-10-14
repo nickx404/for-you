@@ -9,6 +9,9 @@ const { chromium } = runtimeRequire('playwright');
     const page = await browser.newPage({viewport:{width,height}});
     const errors=[]; page.on('pageerror',error=>errors.push(error.message));
     await page.goto('http://127.0.0.1:4173');
+    const initialSkyX=await page.locator('#world').evaluate(el=>new DOMMatrixReadOnly(getComputedStyle(el,'::before').transform).m41);
+    await page.waitForFunction(start=>Math.abs(new DOMMatrixReadOnly(getComputedStyle(document.querySelector('#world'),'::before').transform).m41-start)>2,initialSkyX,{timeout:2000});
+    assert.equal(await page.locator('#welcome').isVisible(),true);
     for(const mode of ['purple','pink','clouds']) {
       await page.locator('#sky-mode').selectOption(mode);
       assert.equal(await page.locator('body').getAttribute('data-sky'),mode);

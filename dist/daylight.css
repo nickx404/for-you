@@ -2,7 +2,7 @@
 :root{--sky:#8fd1d2;--ink:#254e5b;--muted:#335a65;--gold:#fff0c5}
 body{color:var(--ink)}
 #world,body[data-theme=illustrated] #world{background:linear-gradient(145deg,#a8dadd,#8dcece 55%,#edb6ac)}
-#world::before{content:'';position:absolute;inset:-7%;z-index:-1;background:url('assets/peach-cloud-sky.png') center/cover no-repeat;animation:sky-drift 30s ease-in-out infinite alternate;pointer-events:none}
+#world::before{content:'';position:absolute;inset:-7%;z-index:-1;background:url('assets/peach-cloud-sky.png') center/cover no-repeat;animation:sky-drift 18s linear infinite alternate;pointer-events:none}
 .cloud,.moon{display:none}
 .brand,.header-note{color:#315866}
 .welcome .eyebrow,.explore-heading .eyebrow{color:#674857}
@@ -32,7 +32,7 @@ dialog{color:#294f59;box-shadow:8px 8px 0 #d29a95,0 25px 100px #315b6555}
 dialog::backdrop{background:#43778055}
 .secondary{color:#315663;border-color:#a78b86}
 .little-heart,.celebration-heart{color:#b45973}
-@keyframes sky-drift{from{transform:translateX(-3%) scale(1.025)}to{transform:translateX(3%) scale(1.025)}}
+@keyframes sky-drift{from{transform:translateX(-6%) scale(1.025)}to{transform:translateX(6%) scale(1.025)}}
 @media(max-width:700px){h1{font-size:32px}.explore-heading h1{font-size:21px}#world::before{background-position:50% center}}
 @media(prefers-reduced-motion:reduce){#world::before{animation:none}}
 
@@ -54,6 +54,7 @@ body[data-sky=pink] #world{background:radial-gradient(ellipse at 85% 78%,#d58aa0
 body[data-sky=purple] #world::before,body[data-sky=pink] #world::before{display:none}
 body[data-sky=purple] .cloud,body[data-sky=pink] .cloud,body[data-sky=purple] .moon,body[data-sky=pink] .moon{display:block}
 body[data-sky=purple] .cloud{background:#9c88ba;opacity:.24}
+body[data-sky=purple] .cloud,body[data-sky=pink] .cloud{animation-duration:28s;animation-timing-function:linear}
 body[data-sky=pink] .cloud{background:#f1b6cb;opacity:.3}
 body[data-sky=pink] .cloud-two{background:#aacfe9}
 body[data-sky=purple] .hill-back{background:#39344f}body[data-sky=purple] .hill-front{background:#242737}
