@@ -1,4 +1,4 @@
-import { content } from './content.js?v=first-date-motion';
+import { content } from './content.js?v=cosmic-ending';
 import { heartPoints, allViewed, whatsappUrl } from './logic.js';
 const $ = selector => document.querySelector(selector);
 const viewed = new Set();
@@ -116,7 +116,7 @@ function openStar(index) {
       note.append(document.createTextNode(part));
     });
   }
-  button(area, 'Keep exploring ✦', closeDialog);
+  button(area, star.buttonText || 'Keep exploring ✦', closeDialog);
   viewed.add(index);
   const starButton = $(`.star[data-index="${index}"]`); starButton.classList.add('visited'); starButton.setAttribute('aria-label', `Reopen discovered star ${index+1}: ${star.title}`);
   updateProgress(); showDialog();

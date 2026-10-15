@@ -9,6 +9,6 @@ export const content = {
     { title: 'The first date?', label: 'The first date?', text: 'I joined your screen, and we started drawing together. Sooo I count this as our first date, e-date 😆.', photo: 'assets/first-date-drawing.png', photoAlt: 'Our shared drawing with hearts, handwritten messages, and a little cat saying glad I met you.', sticker: 'funny' },
     { title: 'Something from me', label: 'Press play', text: 'Some things sound better when I say them myself.', video: 'assets/for-you-optimized.mp4' },
     { title: 'The part we probably already know', label: 'A small confession', text: 'I think we’ve both known for a little while.\n\nBut I still wanted to ask you properly.' },
-    { title: 'Where all this was leading', label: 'One more little thing', text: 'Every little thing here comes back to you.\n\nAnd there’s one question I’d really like to ask.' }
+    { title: 'And we still met.', label: 'Somehow, us', text: 'Out of all the people, places, and tiny chances that had to line up… somehow, I still found you.', photo: 'assets/and-we-still-met.png', photoAlt: 'An illustrated universe filled with stars, planets, and galaxies, with the words All this and we still met.', buttonText: 'One more little thing ✦' }
   ]
 };
