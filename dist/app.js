@@ -1,4 +1,4 @@
-import { content } from './content.js';
+import { content } from './content.js?v=first-game';
 import { heartPoints, allViewed, whatsappUrl } from './logic.js';
 const $ = selector => document.querySelector(selector);
 const viewed = new Set();
@@ -107,7 +107,15 @@ function openStar(index) {
     area.append(frame);
   }
   if (star.photo) { const image = document.createElement('img'); image.className = 'memory-photo'; image.src = star.photo; image.alt = star.photoAlt || 'A shared memory'; image.onerror = () => image.remove(); area.append(image); }
-  if (star.note) paragraph(area, star.note, 'note');
+  if (star.note) {
+    const note = paragraph(area, '', 'note');
+    star.note.split('🫵🏻').forEach((part, index) => {
+      if (index) {
+        const hand = document.createElement('img'); hand.className = 'inline-emoji'; hand.src = 'assets/pointing-hand.png'; hand.alt = '🫵🏻'; note.append(hand);
+      }
+      note.append(document.createTextNode(part));
+    });
+  }
   button(area, 'Keep exploring ✦', closeDialog);
   viewed.add(index);
   const starButton = $(`.star[data-index="${index}"]`); starButton.classList.add('visited'); starButton.setAttribute('aria-label', `Reopen discovered star ${index+1}: ${star.title}`);
