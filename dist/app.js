@@ -1,4 +1,4 @@
-import { content } from './content.js?v=first-date';
+import { content } from './content.js?v=first-date-motion';
 import { heartPoints, allViewed, whatsappUrl } from './logic.js';
 const $ = selector => document.querySelector(selector);
 const viewed = new Set();
@@ -89,7 +89,6 @@ function openStar(index) {
   const star = content.stars[index];
   const area = card(star.title, `STAR ${String(index+1).padStart(2,'0')} / A LITTLE PIECE OF US`);
   paragraph(area, star.text);
-  if (star.sticker) sticker(area, star.sticker);
   if (Object.hasOwn(star, 'video')) {
     const frame = document.createElement('div'); frame.className = 'tv';
     if (star.video) {
@@ -107,7 +106,7 @@ function openStar(index) {
     area.append(frame);
   }
   if (star.photo) { const image = document.createElement('img'); image.className = 'memory-photo'; image.src = star.photo; image.alt = star.photoAlt || 'A shared memory'; image.onerror = () => image.remove(); area.append(image); }
-  if (star.signoffPhoto) { const image = document.createElement('img'); image.className = 'memory-photo memory-signoff'; image.src = star.signoffPhoto; image.alt = star.signoffAlt || ''; image.onerror = () => image.remove(); area.append(image); }
+  if (star.sticker) sticker(area, star.sticker);
   if (star.note) {
     const note = paragraph(area, '', 'note');
     star.note.split('🫵🏻').forEach((part, index) => {
