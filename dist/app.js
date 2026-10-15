@@ -1,4 +1,4 @@
-import { content } from './content.js?v=first-game';
+import { content } from './content.js?v=first-date';
 import { heartPoints, allViewed, whatsappUrl } from './logic.js';
 const $ = selector => document.querySelector(selector);
 const viewed = new Set();
@@ -107,6 +107,7 @@ function openStar(index) {
     area.append(frame);
   }
   if (star.photo) { const image = document.createElement('img'); image.className = 'memory-photo'; image.src = star.photo; image.alt = star.photoAlt || 'A shared memory'; image.onerror = () => image.remove(); area.append(image); }
+  if (star.signoffPhoto) { const image = document.createElement('img'); image.className = 'memory-photo memory-signoff'; image.src = star.signoffPhoto; image.alt = star.signoffAlt || ''; image.onerror = () => image.remove(); area.append(image); }
   if (star.note) {
     const note = paragraph(area, '', 'note');
     star.note.split('🫵🏻').forEach((part, index) => {
