@@ -25,3 +25,11 @@ html.page-arriving::after {
     display: none;
   }
 }
+
+/* Avoid a full-screen composited dark layer on mobile Safari, even at opacity 0. */
+@media (max-width: 700px), (pointer: coarse) {
+  html::after {
+    content: none !important;
+    display: none !important;
+  }
+}

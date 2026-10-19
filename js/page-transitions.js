@@ -1,5 +1,11 @@
 (() => {
   const root = document.documentElement;
+  // Phones navigate normally without creating a dark transition layer.
+  if (matchMedia('(max-width: 700px), (pointer: coarse)').matches) {
+    try { sessionStorage.removeItem('pippo-sky-transition'); } catch {}
+    root.classList.remove('page-leaving', 'page-arriving');
+    return;
+  }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const storageKey = 'pippo-sky-transition';
   const skyPage = /\/sky(?:\/|\/index\.html)$/.test(location.pathname);
