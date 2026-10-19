@@ -84,6 +84,8 @@ class PasscodeGate {
     }
     this.opening = true;
     window.clawAudio?.playPasscodeEffect('unlock');
+    // Start within the successful submit gesture, before the celebration timer.
+    window.clawAudio?.startSceneMusic();
     this.button.disabled = true;
     this.input.disabled = true;
     this.gate.querySelectorAll('[data-code-key]').forEach(key => { key.disabled = true; });

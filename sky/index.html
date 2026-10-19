@@ -1,20 +1,36 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080f30"><meta name="description" content="A little sky, and a few things hiding in it."><title>A Little Sky for You</title><link rel="stylesheet" href="style.css?v=cosmic-ending"><link rel="stylesheet" href="daylight.css?v=meadow-flowers"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080f30"><meta name="description" content="A little sky, and a few things hiding in it."><title>A Little Sky for You</title><link rel="stylesheet" href="style.css?v=cosmic-ending"><link rel="stylesheet" href="../css/personal-art.css"><link rel="stylesheet" href="daylight.css?v=sky-breathing-room"><link rel="stylesheet" href="../css/page-transitions.css"><script src="../js/page-transitions.js"></script></head>
 <body data-sky="clouds">
 <main id="world">
- <picture class="meadow-background" aria-hidden="true"><source media="(max-width:700px)" srcset="assets/starry-meadow-mobile.webp"><img src="assets/starry-meadow-desktop.webp" alt="" fetchpriority="high"></picture>
+ <picture class="meadow-background" aria-hidden="true"><source media="(max-width:700px)" srcset="assets/starry-meadow-mobile-v2.png"><img src="assets/starry-meadow-desktop.webp" alt="" fetchpriority="high"></picture>
+ <div class="daydream-background" aria-hidden="true"></div>
  <div id="stardust" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
+ <div class="sky-ambience" aria-hidden="true"></div>
  <div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div><div class="cloud cloud-three" aria-hidden="true"></div>
- <header><a class="brand" href="./">✦ <span>a little sky for you</span></a><label class="sky-picker">Your sky <select id="sky-mode" aria-label="Choose your sky"><option value="clouds">Starry meadow</option><option value="pink">Pink & blue</option><option value="purple">Purple & blue</option></select></label></header>
- <section id="welcome" class="welcome"><p class="eyebrow" id="greeting">HEY, YOU</p><h1>I made you<br>a little <span>sky.</span></h1><p>There are a few things hiding in it.<br>And they’re all for you.</p><button id="start" class="primary">Show me <span aria-hidden="true">✦</span></button><span class="welcome-note">a small adventure. a slightly big confession.</span></section>
- <section id="explore" hidden aria-label="Your heart constellation"><div class="explore-heading"><p class="eyebrow">A FEW LITTLE THINGS</p><h1>Follow the stars.</h1><p>Each one has something I wanted to tell you.</p></div><div id="constellation"><svg id="lines" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg><div id="stars"></div></div><div class="progress"><p id="counter" role="status" aria-live="polite"></p><div id="progress-marks" aria-hidden="true"></div><button id="next" class="primary" hidden disabled>One last question <span aria-hidden="true">→</span></button><p id="progress-hint">A little more sky to discover.</p></div></section>
+ <header><a class="brand" href="./">✦ <span>a little sky for you</span></a></header>
+ <section id="welcome" class="welcome"><p class="eyebrow" id="greeting">HEY, YOU</p><h1>I made a little <span>sky</span><br>for you kuttupups</h1><p>There are a few things hiding in it.<br>And they’re all for you.</p><button id="start" class="primary">Show me <span aria-hidden="true">✦</span></button></section>
+ <section id="explore" hidden aria-label="Your heart constellation"><div class="explore-heading"><p class="eyebrow">A FEW LITTLE THINGS</p><h1>Follow the stars</h1><p class="sky-dedication">Always by your side, through every star and every story</p><p>Each one has something I wanted to tell you.</p></div><div id="constellation"><svg id="lines" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg><div id="stars"></div></div><div class="progress"><p id="counter" role="status" aria-live="polite"></p><div id="progress-marks" aria-hidden="true"></div><button id="next" class="primary" hidden disabled>One last question <span aria-hidden="true">→</span></button><p id="progress-hint">A little more sky to discover.</p></div></section>
  <div class="landscape" aria-hidden="true"><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="couple"><span class="person person-one"></span><span class="person person-two"></span><span class="little-heart">♥</span></div><span class="flower f1">✿</span><span class="flower f2">✿</span><span class="flower f3">✿</span><span class="flower f4">✿</span></div>
+ <aside class="sky-guides" aria-label="Otter and Bunny watching the sky"><img class="guide-otter" src="../assets/otter-pixel.png" alt="Otter looking up at the constellation" width="186" height="243"><p class="guide-speech"><span id="guide-line">Come sit with me da. I made this little sky for you.</span></p><img class="guide-bunny" src="../assets/bunny-pixel.png" alt="Bunny looking up at the constellation" width="147" height="258"></aside>
  <footer><span>made with a little courage & a lot of you</span><span>✧</span></footer>
 </main>
-<dialog id="card" aria-labelledby="card-title"><button class="close" id="close" aria-label="Close message">×</button><div id="card-content"></div></dialog>
-<script type="module" src="app.js?v=meadow"></script></body></html>
-
-
-
-
-
+<button id="sky-music-control" class="sky-music-toggle" type="button">♫ Play music</button>
+<dialog id="card" aria-labelledby="card-title"><button class="close" id="close" aria-label="Close message">×</button><div class="mascot-conversation"><img src="../assets/otter-pixel.png" alt="Otter" width="186" height="243"><p>A little story under our stars.</p><img src="../assets/bunny-pixel.png" alt="Bunny" width="147" height="258"></div><div id="card-content"></div><button class="sky-music-toggle" type="button">♫ Play music</button></dialog>
+<dialog id="finale" aria-labelledby="question-title">
+ <div id="heart-rain" aria-hidden="true" hidden></div>
+ <button class="sky-music-toggle" type="button">♫ Play music</button>
+ <button id="finale-close" class="close" aria-label="Back to our sky">×</button>
+ <section id="final-question" class="finale-scene">
+  <div id="question-stickers" class="sticker-collage" aria-hidden="true"></div>
+  <div class="question-core">
+   <div class="mascot-conversation question-mascots"><img src="../assets/otter-pixel.png" alt="Otter asking Bunny" width="186" height="243"><p>One last thing Swetha…</p><img src="../assets/bunny-pixel.png" alt="Bunny listening to Otter" width="147" height="258"></div>
+   <div class="question-copy"><p class="eyebrow">OKAY. ENOUGH PRETENDING.</p><h2 id="question-title" tabindex="-1">So...<br>Is this us?<br>Officially?</h2></div>
+   <div class="question-actions"><div class="answer-row"><button id="answer-yes" class="primary">Yes 💛</button><span class="no-slot"><button id="answer-no" class="secondary">No</button></span></div></div>
+  </div>
+ </section>
+ <section id="celebration" class="finale-scene" hidden>
+  <div id="party-stickers" class="sticker-collage" aria-hidden="true"></div><div id="party-drift" class="finale-particles" aria-hidden="true"></div><div id="party-burst" class="finale-particles" aria-hidden="true"></div>
+  <div class="celebration-core"><img class="party-heart" src="assets/hand-heart-drawing.png" alt="A blushing character making a heart with their hands" width="736" height="1308"><h2 id="celebration-title" tabindex="-1">Okay, now I’m smiling at my screen.</h2><div class="celebration-friends"><p class="cheer-bubble">YAAAYYY!!!</p><img class="cheer-otter" src="../assets/otter-pixel.png" alt="Otter celebrating" width="186" height="243"><div class="celebration-actions"><a id="party-contact" class="primary" href="https://wa.me/?text=I%27m%20here" target="_blank" rel="noopener noreferrer" title="Open WhatsApp">Come to me</a><button id="party-back" class="text-button">Back to our sky</button></div><img class="cheer-bunny" src="../assets/bunny-pixel.png" alt="Bunny celebrating" width="147" height="258"></div></div>
+ </section>
+</dialog>
+<script src="../js/sky-music.js?v=sky-music"></script><script type="module" src="app.js?v=ordered-stars"></script></body></html>

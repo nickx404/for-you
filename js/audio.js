@@ -9,6 +9,8 @@ class ClawAudio {
     this.masterGain = null;
     this.isMuted = false;
     this._noiseBuffer = null;
+    this.sceneMusic = null;
+    this.sceneMusicActive = false;
   }
 
   /**
@@ -572,6 +574,32 @@ class ClawAudio {
     }
   }
 
+  startSceneMusic() {
+    if (!this.sceneMusic) {
+      this.sceneMusic = new Audio('assets/scene-music.mp3');
+      this.sceneMusic.loop = true;
+      this.sceneMusic.volume = 0.25;
+      this.sceneMusic.muted = this.isMuted;
+    }
+    this.sceneMusicActive = true;
+    this.resumeSceneMusic();
+  }
+
+  resumeSceneMusic() {
+    if (this.sceneMusicActive && this.sceneMusic?.paused) {
+      // Restored visits may need a user gesture before the browser permits music.
+      this.sceneMusic.play().catch(() => {});
+    }
+  }
+
+  stopSceneMusic() {
+    this.sceneMusicActive = false;
+    if (this.sceneMusic) {
+      this.sceneMusic.pause();
+      this.sceneMusic.currentTime = 0;
+    }
+  }
+
   /**
    * Toggles sound mute state.
    * @returns {boolean} - true if currently muted, false if unmuted.
@@ -584,6 +612,9 @@ class ClawAudio {
     }
     if (this.isabellaAudio) {
       this.isabellaAudio.muted = this.isMuted;
+    }
+    if (this.sceneMusic) {
+      this.sceneMusic.muted = this.isMuted;
     }
     return this.isMuted;
   }

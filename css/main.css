@@ -110,6 +110,11 @@ button {
   pointer-events: auto;
 }
 
+/* Scene headings receive focus for announcements, without a decorative box. */
+.scene :is(h1, h2)[tabindex="-1"]:focus {
+  outline: none;
+}
+
 /* ==========================================================================
    Interactive Pixel Buttons
    ========================================================================== */

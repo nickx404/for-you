@@ -1,0 +1,51 @@
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const {createRequire} = require('node:module');
+const {chromium} = createRequire(path.join(process.env.USERPROFILE, '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/package.json'))('playwright');
+const base = process.env.SITE_URL || 'http://127.0.0.1:4173';
+(async () => {
+  const browser = await chromium.launch({headless: true, channel: 'msedge'});
+  try {
+    for (const mobile of [false, true]) {
+      for (const reduced of [false, true]) {
+        const context = await browser.newContext({viewport: mobile ? {width: 390, height: 844} : {width: 1280, height: 800}, reducedMotion: reduced ? 'reduce' : 'no-preference'});
+        const page = await context.newPage();
+        const errors = [];
+        page.on('pageerror', error => errors.push(error.message));
+        await page.addInitScript(() => {
+          document.addEventListener('DOMContentLoaded', () => {
+            window.arrivedCovered = document.documentElement.classList.contains('page-arriving');
+          });
+        });
+        await page.goto(base);
+        await require('./unlock.cjs')(page);
+        await page.evaluate(() => window.showScene('scene-sky'));
+        await page.locator('#btn-enter-sky').click({modifiers: ['Control']});
+        assert.equal(await page.locator('html').getAttribute('class'), null, 'Modified clicks preserve normal browser behavior');
+        await page.locator('#btn-enter-sky').click();
+        if (!reduced) {
+          assert.equal(await page.locator('html').evaluate(el => el.classList.contains('page-leaving')), true);
+          await page.waitForTimeout(250);
+          const opacity = await page.evaluate(() => Number(getComputedStyle(document.documentElement, '::after').opacity));
+          assert.ok(opacity > 0 && opacity < 1, 'Departure actually fades before navigation');
+          await page.screenshot({path: `screenshots/sky-departure-${mobile ? 'mobile' : 'desktop'}.png`});
+        }
+        await page.waitForURL('**/sky/index.html');
+        assert.equal(await page.evaluate(() => window.arrivedCovered), !reduced, 'Arrival starts with the matching cover');
+        await page.waitForFunction(() => getComputedStyle(document.documentElement, '::after').opacity === '0');
+        assert.equal(await page.locator('.meadow-background img').evaluate(img => img.complete && img.naturalWidth > 0), true);
+        await page.locator('#start').click();
+        assert.equal(await page.locator('#explore').isVisible(), true);
+        await page.goBack();
+        await page.waitForSelector('#scene-sky.active');
+        await page.waitForFunction(() => !document.documentElement.matches('.page-leaving, .page-arriving'));
+        await page.locator('#btn-enter-sky').click();
+        await page.waitForURL('**/sky/index.html');
+        await page.waitForFunction(() => getComputedStyle(document.documentElement, '::after').opacity === '0');
+        assert.deepEqual(errors, []);
+        console.log(`${mobile ? 'Mobile' : 'Desktop'}, ${reduced ? 'reduced motion' : 'animated'}: fade, arrival, modified click, Back, and re-entry passed`);
+        await context.close();
+      }
+    }
+  } finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

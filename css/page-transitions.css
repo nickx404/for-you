@@ -1,0 +1,27 @@
+/* The same night-sky cover bridges both documents without a blank flash. */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  background: #080f30;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 550ms ease-in-out;
+}
+
+html.page-leaving::after,
+html.page-arriving::after {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+html.page-arriving::after {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html::after {
+    display: none;
+  }
+}

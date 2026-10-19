@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.clawAudio.init();
       audioInitialized = true;
     }
+    window.clawAudio?.resumeSceneMusic();
   };
 
   document.addEventListener('click', initAudio, { once: true });
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!passcodeGate?.unlocked) return;
     const targetScene = document.getElementById(sceneId);
     if (!targetScene?.classList.contains('scene')) return;
+    window.clawAudio?.startSceneMusic();
 
     currentSceneIndex = sceneIds.indexOf(sceneId);
     furthestSceneIndex = Math.max(furthestSceneIndex, currentSceneIndex);
@@ -406,4 +408,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   passcodeGate.start();
+  // The first soundtrack ends only when navigating to the separate Sky page.
+  document.getElementById('btn-enter-sky')?.addEventListener('click', () => {
+    try { sessionStorage.removeItem('sky-music-position'); } catch {}
+  });
+  window.addEventListener('pagehide', () => window.clawAudio?.stopSceneMusic());
+  window.addEventListener('pageshow', event => {
+    if (event.persisted && passcodeGate.unlocked) window.clawAudio?.startSceneMusic();
+  });
 });

@@ -15,6 +15,19 @@ test('counts can change without breaking heart layout or completion', () => {
   }
   assert.equal(allViewed([],new Set()),false);
 });
+test('eight stars follow the pixel heart edges in symmetric pairs', () => {
+  const points = heartPoints(8);
+  for (const [right, left] of [[1,7],[2,6],[3,5]]) {
+    assert.equal(points[right].x + points[left].x, 100);
+    assert.equal(points[right].y, points[left].y);
+  }
+  assert.deepEqual(points[0], { x: 50, y: 30.75 });
+  assert.deepEqual(points[4], { x: 50, y: 89.05 });
+  assert.deepEqual(points[1], { x: 71, y: 13.2425 });
+  assert.equal(points[2].y, 37.4);
+  assert.deepEqual(points[3], { x: 70, y: 65.4575 });
+});
+
 test('WhatsApp links validate destination and encode the message', () => {
   assert.equal(whatsappUrl('','hi'),null);
   assert.equal(whatsappUrl('javascript:alert(1)','hi'),null);

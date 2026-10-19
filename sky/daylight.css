@@ -1,5 +1,16 @@
 /* The meadow artwork stays still; mobile fills the screen, while unusual desktop shapes protect the moon. */
 :root{--sky:#080f30;--ink:#254e5b;--muted:#ddd5e9;--gold:#fff0c5}
+.reel-list{margin-top:28px;padding-top:20px;border-top:1px solid #d6c8b5}
+.reel-list>p{font-size:15px;line-height:1.7}
+.reel-list .reel-link{display:flex;position:relative;width:100%;min-height:48px;margin:14px 0;padding:12px 48px}
+.reel-status{position:absolute;right:16px;display:grid;place-items:center;width:22px;height:22px;border:1px solid #bba995;border-radius:50%;color:transparent}
+.opened .reel-status{background:#287344;border-color:#287344;color:#fff}
+.sky-music-toggle{position:relative;display:inline-grid;place-items:center;width:28px;height:28px;min-height:28px;padding:0;border:1px solid #ccaa99;border-radius:50%;background:#fff6e9;color:#683949;font:14px 'Segoe UI',sans-serif}
+.sky-music-toggle::before{content:'';position:absolute;inset:-8px;border-radius:50%}
+.sky-music-toggle[aria-pressed=true]::after{content:'';position:absolute;width:18px;height:2px;background:#683949;rotate:-45deg}
+#sky-music-control{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:6}
+#card>.sky-music-toggle{position:absolute;top:8px;right:58px;margin:0}
+#finale>.sky-music-toggle{position:fixed;right:max(76px,env(safe-area-inset-right));top:max(22px,env(safe-area-inset-top));bottom:auto;min-height:28px;z-index:8}
 body{color:#fff6e1}
 #world,body[data-theme=illustrated] #world{background:var(--sky);container:sky / size}
 .meadow-background{position:absolute;inset:0;z-index:-1;pointer-events:none}
@@ -8,7 +19,7 @@ body{color:#fff6e1}
 @media(max-width:700px){
   .meadow-background img{object-fit:cover;object-position:center 30%}
 }
-body[data-sky=clouds] :is(.hill,.flower,#stardust){display:none}
+body[data-sky=clouds] :is(.hill,.flower){display:none}
 .cloud,.moon{display:none}
 .brand,.header-note{color:#315866}
 .welcome .eyebrow,.explore-heading .eyebrow{color:#674857}
@@ -19,11 +30,13 @@ h1 span{color:#9d4f57;text-shadow:0 2px 0 #ffe1c8}
 .primary{background:#fff0cf;color:#354d54;box-shadow:4px 4px 0 #bc827c}
 .primary:hover{background:#fff8e3}
 .primary:disabled{background:#f2ded1;color:#765d60;box-shadow:4px 4px 0 #b99088}
-.dust{background:#fff8e5;box-shadow:0 0 5px #fff4dd}
+.dust{background:#fff8e5;box-shadow:0 0 4px #fff4dd,0 0 9px #fff4dd80}
 .hill-back{background:#edb4a9}
 .hill-front{background:#f7d1bb}
 .flower{color:#aa6b86}.f2,.f4{color:#8a9c82}
-footer{color:#fff6e1;text-shadow:0 1px 4px #080f30,0 0 8px #080f30}
+footer{top:32px;bottom:auto;left:auto;right:64px;justify-content:flex-end;color:#fff6e1;text-shadow:0 1px 4px #080f30,0 0 8px #080f30}
+footer>span:last-child{display:none}
+@media(max-width:700px){footer{top:max(20px,env(safe-area-inset-top));bottom:auto;left:auto;right:64px;max-width:140px;text-align:right;font-size:8px;line-height:1.6}}
 .star-shape{color:#fff7df;text-shadow:2px 0 #a46c60,-2px 0 #a46c60,0 2px #a46c60,0 -2px #a46c60,0 0 18px #fff7db}
 .visited .star-shape{color:#ffdf83;text-shadow:2px 0 #8f6152,-2px 0 #8f6152,0 2px #8f6152,0 -2px #8f6152,0 0 24px #fff5cf}
 .check{background:#fff2cb;color:#315663;box-shadow:0 0 0 1px #b68670}
@@ -31,6 +44,7 @@ footer{color:#fff6e1;text-shadow:0 1px 4px #080f30,0 0 8px #080f30}
 .heart-complete{stroke:#986057}
 .complete .heart-complete{filter:drop-shadow(0 0 4px #fff0c0)}
 .star-label{background:#fff2df;color:#315663;border-color:#ccaa99}
+.star-label{pointer-events:none}
 #counter,#progress-hint{color:#294f59;text-shadow:0 1px #fff2e4}
 #progress-marks span{color:#d5c3dc}
 #progress-marks .filled{color:#84584e}
@@ -49,8 +63,11 @@ dialog::backdrop{background:#080f3099}
 @media(max-width:700px){#constellation{width:min(340px,82vw);height:auto;top:27%}.heart-complete{stroke-width:3}}
 @media(prefers-reduced-motion:reduce){.complete .heart-complete{animation:none;stroke-dashoffset:0}}
 
-.sky-picker{display:flex;align-items:center;gap:12px;font-size:12px;color:inherit}
-.sky-picker select{font:inherit;color:#315663;background:#fff2df;border:1px solid #ccaa99;padding:9px 12px;cursor:pointer;border-radius:0}
+header{position:absolute;top:0;left:0;align-items:flex-start;flex-direction:column;gap:8px;padding:28px 48px}
+.sky-picker{display:flex;align-items:center;gap:7px;font-size:10px;color:inherit}
+.sky-picker select{font:inherit;color:#315663;background:#fff2df;border:1px solid #ccaa99;padding:4px 6px;width:132px;min-height:28px;cursor:pointer;border-radius:0}
+.welcome{padding-top:clamp(100px,13vh,140px)}
+.explore-heading{margin-top:0;padding-top:80px}
 .sky-picker select:focus-visible{outline:3px solid #a04f62;outline-offset:4px}
 body[data-sky=purple],body[data-sky=pink]{color:#fff6e1;--muted:#ddd5e9}
 body[data-sky=purple] #world{background:radial-gradient(ellipse at 50% 100%,#433858,transparent 60%),linear-gradient(#121329,#22203d)}
@@ -61,6 +78,11 @@ body[data-sky=purple] .cloud{background:#9c88ba;opacity:.24}
 body[data-sky=purple] .cloud,body[data-sky=pink] .cloud{animation-duration:28s;animation-timing-function:linear}
 body[data-sky=pink] .cloud{background:#f1b6cb;opacity:.3}
 body[data-sky=pink] .cloud-two{background:#aacfe9}
+.daydream-background{display:none;position:absolute;inset:-4%;z-index:-1;pointer-events:none;background:#66bfd0 url('assets/peach-cloud-sky.png') center / cover no-repeat}
+body[data-sky=daydream] .daydream-background{display:block}
+body[data-sky=daydream] :is(.meadow-background,.hill,.flower,#stardust){display:none}
+@media(prefers-reduced-motion:no-preference){body[data-sky=daydream] .daydream-background{animation:sky-drift 55s ease-in-out infinite alternate}}
+@keyframes sky-drift{from{transform:translate(-1%,0) scale(1)}to{transform:translate(1%,1%) scale(1.045)}}
 body[data-sky=purple] .hill-back{background:#39344f}body[data-sky=purple] .hill-front{background:#242737}
 body[data-sky=pink] .hill-back{background:#54748c}body[data-sky=pink] .hill-front{background:#203d54}
 body[data-sky] :is(.brand,.sky-picker,h1,.welcome>p:not(.eyebrow),.welcome-note,.explore-heading>p:last-child,#counter,#progress-hint){color:#eee4f4;text-shadow:0 2px 5px #080f30}
@@ -70,7 +92,11 @@ body[data-sky] #constellation::before{background:none}
 body[data-sky] .heart-guide{stroke:#e8c6ce}
 body[data-sky] .heart-complete{stroke:#ffd2df}
 body[data-sky] #progress-marks .filled{color:#f5d898}
-@media(max-width:700px){header{padding:20px 16px}.sky-picker{gap:6px;font-size:10px}.sky-picker select{padding:8px 5px}.brand{gap:5px;font-size:10px}}
+body[data-sky=daydream] :is(.brand,.sky-picker,h1,.welcome>p:not(.eyebrow),.welcome-note,.explore-heading>p:last-child,#counter,#progress-hint,footer){color:#254e5b;text-shadow:0 1px 2px #fff7e8}
+body[data-sky=daydream] h1 span{color:#974f63;text-shadow:0 1px 2px #fff7e8}
+body[data-sky=daydream] :is(.welcome .eyebrow,.explore-heading .eyebrow){color:#674857}
+body[data-sky=daydream] #progress-marks .filled{color:#84584e}
+@media(max-width:700px){header{padding:20px 16px}.brand{gap:5px;font-size:10px}}
 
 .star{padding:0;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
 .star-shape{display:block;width:48px;height:48px;object-fit:contain;image-rendering:pixelated;filter:grayscale(1) drop-shadow(0 0 7px #ffffff66);transition:filter .3s}
@@ -98,6 +124,9 @@ body[data-sky] #progress-marks .filled{color:#f5d898}
 
 .star-number{position:absolute;right:-2px;top:2px;display:grid;place-items:center;min-width:22px;height:22px;padding:0 4px;background:#fff2df;color:#315663;border:1px solid #bd977e;font-size:11px;font-weight:600;border-radius:50%}
 .visited .star-number{display:none}
+.star:disabled{opacity:.45;cursor:default}
+.star:disabled:hover .star-shape{transform:none}
+.star.current .star-number{background:#ffe6a6;border-color:#d9a965;box-shadow:0 0 9px #fff0bd88}
 
 .heart-glow.pixel-outline{opacity:0;filter:url('#pixel-outline') drop-shadow(0 0 3px #ffe7ed) drop-shadow(0 0 10px #ffd0e0)}
 .complete.outline-glow .heart-glow.pixel-outline{opacity:1;animation:outline-glow 2s ease-out both}
@@ -110,11 +139,11 @@ body[data-sky] #progress-marks .filled{color:#f5d898}
 @media(max-width:700px){
   #world{height:100svh;min-height:700px}
   header{padding-top:max(16px,env(safe-area-inset-top));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
-  .sky-picker select{min-height:44px;font-size:16px;max-width:155px}
-  .welcome{padding-top:clamp(70px,12svh,115px)}
-  .explore-heading{margin-top:20px}
+  .sky-picker select{min-height:28px;font-size:10px;width:132px}
+  .welcome{padding-top:110px}
+  .explore-heading{margin-top:0;padding-top:90px}
   #constellation{width:min(340px,82vw,40svh)}
-  footer{bottom:max(22px,env(safe-area-inset-bottom))}
+  footer{bottom:auto}
   dialog{padding:48px 18px 24px;max-height:calc(100svh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));border-radius:8px}
   .close{width:44px;height:44px;right:6px;top:4px}
   .tv{padding:8px;border-width:6px}
@@ -122,3 +151,250 @@ body[data-sky] #progress-marks .filled{color:#f5d898}
   .playback-speed select{min-height:44px;min-width:84px;font-size:16px}
   .playback-speed select:focus-visible{outline:3px solid #ffaece;outline-offset:3px}
 }
+
+/* Individual crop windows preserve the new supplied love sticker sheet unchanged. */
+.romantic-love{aspect-ratio:462/333;background-image:url('assets/love-sticker-sheet.png');background-size:249.3506% 615.0150%;background-position:7.5362% 4.3732%}
+.heart-jar{aspect-ratio:244/350;background-image:url('assets/love-sticker-sheet.png');background-size:472.1311% 585.1429%;background-position:58.2599% 3.7691%}
+.love-letter{aspect-ratio:279/353;background-image:url('assets/love-sticker-sheet.png');background-size:412.9032% 580.1700%;background-position:89.0034% 2.6549%}
+.painted-heart{aspect-ratio:294/272;background-image:url('assets/love-sticker-sheet.png');background-size:391.8367% 752.9412%;background-position:3.7296% 23.6486%}
+.love-balloons{aspect-ratio:381/571;background-image:url('assets/love-sticker-sheet.png');background-size:302.3622% 358.6690%;background-position:45.9144% 28.7745%;clip-path:polygon(0 0,100% 0,100% 100%,24% 100%,24% 65%,0 65%)}
+.love-coupon{aspect-ratio:326/194;background-image:url('assets/love-sticker-sheet.png');background-size:353.3742% 1055.6701%;background-position:90.3148% 22.3840%}
+.bear-hug{aspect-ratio:277/198;background-image:url('assets/love-sticker-sheet.png');background-size:415.8845% 1034.3434%;background-position:9.7143% 37.2973%}
+.capybara-kiss{aspect-ratio:345/278;background-image:url('assets/love-sticker-sheet.png');background-size:333.9130% 736.6906%;background-position:91.6976% 35.0282%}
+.couple-heart{aspect-ratio:384/348;background-image:url('assets/love-sticker-sheet.png');background-size:300.0000% 588.5057%;background-position:8.4635% 52.8824%}
+.kiss-mark{aspect-ratio:223/152;background-image:url('assets/love-sticker-sheet.png');background-size:516.5919% 1347.3684%;background-position:48.8698% 54.5886%}
+.couple-headpat{aspect-ratio:370/330;background-image:url('assets/love-sticker-sheet.png');background-size:311.3514% 620.6061%;background-position:90.0256% 53.5506%}
+.love-bubble{aspect-ratio:280/145;background-image:url('assets/love-sticker-sheet.png');background-size:411.4286% 1412.4138%;background-position:10.8945% 69.3642%}
+.couple-kiss{aspect-ratio:401/358;background-image:url('assets/love-sticker-sheet.png');background-size:287.2818% 572.0670%;background-position:52.7297% 71.3609%}
+.love-hearts{aspect-ratio:249/105;background-image:url('assets/love-sticker-sheet.png');background-size:462.6506% 1950.4762%;background-position:91.0299% 66.1348%}
+.love-script{aspect-ratio:289/159;background-image:url('assets/love-sticker-sheet.png');background-size:398.6159% 1288.0503%;background-position:93.3951% 73.7427%}
+.couple-hug{aspect-ratio:379/337;background-image:url('assets/love-sticker-sheet.png');background-size:303.9578% 607.7151%;background-position:9.8318% 91.0579%}
+.pink-ribbon{aspect-ratio:193/170;background-image:url('assets/love-sticker-sheet.png');background-size:596.8912% 1204.7059%;background-position:49.7393% 84.6645%}
+.love-ticket{aspect-ratio:208/129;background-image:url('assets/love-sticker-sheet.png');background-size:553.8462% 1587.5969%;background-position:48.5169% 91.5581%}
+.couple-embrace{aspect-ratio:365/327;background-image:url('assets/love-sticker-sheet.png');background-size:315.6164% 626.2997%;background-position:90.3431% 91.1098%}
+
+/* A warm reveal leads into the same pixel world, with room for the final surprise. */
+#world::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(160deg,#d84b7b38,#a3246570 65%,#f088a64d);opacity:0;transition:opacity 1.2s}
+.rose-sky #world::after{opacity:1}
+.heart-settled .heart-reveal img{animation:soft-heartbeat 2.8s ease-in-out infinite}
+.floating-heart{position:absolute;bottom:2%;color:#ffd1e2;font-size:18px;pointer-events:none;z-index:2;opacity:0;animation:heart-drift 7s var(--delay) linear infinite;text-shadow:0 0 12px #ed5a98}
+@keyframes soft-heartbeat{0%,45%,100%{transform:scale(1)}12%{transform:scale(1.035)}24%{transform:scale(1)}33%{transform:scale(1.02)}}
+@keyframes heart-drift{0%{opacity:0;transform:translate(0,0) rotate(-10deg)}20%,70%{opacity:.65}100%{opacity:0;transform:translate(12px,-160px) rotate(15deg)}}
+body.finale-open{overflow:hidden}
+#finale{position:fixed;inset:0;margin:0;padding:0;width:100%;max-width:none;height:100dvh;max-height:none;border:0;border-radius:0;box-shadow:none;transform:none;overflow-y:auto;overflow-x:hidden;color:#fff2e3;background:#230f29e8;overscroll-behavior:contain;transition:background .7s}
+#finale::backdrop{background:#260e2840;backdrop-filter:blur(4px)}
+#finale{--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+#finale::before{display:none}
+#finale .close{position:fixed;z-index:8;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));width:48px;height:48px;color:#fff2e3;background:#541c4055;border:1px solid #ffd4d64d}
+#finale :is(h2,button):focus-visible{outline:3px solid #ffe7a3;outline-offset:6px}
+#finale h2:focus{outline:none}
+.finale-scene{position:relative;isolation:isolate;min-height:100%;display:grid;place-items:center;padding:max(92px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(76px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}
+.question-core{width:min(660px,100%);position:relative;z-index:2}
+#finale .eyebrow{color:#ffd2b8;font-size:10px;letter-spacing:3px;line-height:1.8;margin:0 0 24px}
+#finale h2{font-family:Pixel,'Courier New',monospace;color:#fff1de;font-size:clamp(27px,4vw,44px);line-height:1.5;text-shadow:3px 3px #7c254e;letter-spacing:-1px;margin:0 0 22px}
+.question-copy>p:last-child{font-size:16px;line-height:1.8;color:#f7dbe6;margin:0 0 26px}
+.answer-row{display:flex;justify-content:center;align-items:center;gap:18px}
+#finale button{min-height:48px}
+#finale .primary{margin:0;background:#ffe9b4;color:#59233c;box-shadow:4px 4px #bd5275;padding:16px 24px}
+#finale .primary:hover{background:#fff3d5}
+.no-slot{display:inline-flex;width:88px;height:52px}
+#finale #answer-no{margin:0;min-width:88px;height:52px;padding:12px 20px;border:1px solid #f5bad0;color:#fff0e3;background:#492037;touch-action:none;transition:none;z-index:6}
+#answer-no.dodging{position:fixed}
+#finale .text-button{color:#ffe3df;margin:18px auto 0;padding:10px 12px;text-underline-offset:5px;font-size:13px}
+#finale,#finale.is-celebrating{background:#fcf5e9;color:#683949}
+#final-question,#celebration{background:#fcf5e9 url('assets/finale-heart-pattern.png') repeat;background-size:338px 600px;overflow:hidden}
+.celebration-core{position:relative;z-index:3;width:min(620px,calc(100% - 128px));text-align:center}
+#finale #celebration-title{font-size:clamp(22px,3vw,34px);line-height:1.6;margin:12px 0 28px}
+.party-heart{display:block;width:min(280px,100%);height:auto;max-height:30dvh;object-fit:contain;margin:0 auto;image-rendering:pixelated;filter:drop-shadow(0 0 32px #ffc4c377);animation:soft-heartbeat 2.8s ease-in-out infinite}
+.celebration-actions{display:flex;flex-direction:column;align-items:center;gap:8px}
+.celebration-friends{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:end;gap:16px 12px}
+.celebration-friends>img{display:block;height:120px;width:auto;max-width:100%;object-fit:contain;image-rendering:pixelated;justify-self:center}
+.cheer-bubble{grid-column:1/-1;position:relative;justify-self:center;margin:0;padding:10px 16px;border:2px solid #4a2e56;border-radius:6px;box-shadow:3px 3px #ffd1dc;background:#fff;color:#4a2e56;font-family:Pixel,'Courier New',monospace;font-size:12px;line-height:1.6}
+.cheer-bubble::after{content:'';position:absolute;top:100%;left:calc(50% - 6px);border:6px solid transparent;border-top-color:#4a2e56;border-bottom:0}
+@media(max-width:700px){.celebration-friends>img{height:85px}.cheer-bubble{font-size:10px}}
+#finale .celebration-actions .text-button{margin:4px 0 0}
+.sticker-collage{position:absolute;inset:-12px;pointer-events:none;z-index:0;display:grid;grid-template-columns:repeat(var(--columns),minmax(0,1fr));grid-template-rows:repeat(var(--rows),minmax(0,1fr));overflow:hidden}
+.party-sticker{position:relative;display:grid;place-items:center;min-width:0;min-height:0;transform:translateX(var(--offset)) rotate(var(--tilt)) scale(var(--scale));mix-blend-mode:multiply}
+.sticker-collage .art-sticker{position:relative;display:block;width:84%;background-repeat:no-repeat;animation:none;mix-blend-mode:multiply}
+@media(prefers-reduced-motion:no-preference){
+  .party-sticker{animation:collage-bob 1.8s calc(var(--i) * -.17s) ease-in-out infinite}
+  .party-sticker:nth-child(even){animation-name:collage-slide;animation-duration:2.2s}
+  .party-sticker:nth-child(3n){animation-duration:1.5s}
+}
+.question-core,.celebration-core{background:#fff8eeed;padding:28px 24px;border:1px solid #f2d8cb;box-shadow:0 6px 28px #68394912}
+.question-core{width:min(620px,100%)}
+.celebration-core{width:min(560px,100%)}
+#finale h2{color:#713b50;text-shadow:2px 2px #f5d2d4}
+#finale .eyebrow{color:#a05b66}
+.question-copy>p:last-child,#finale .text-button{color:#74495a}
+#finale .close{background:#fff8eef2;color:#713b50;border-color:#cf9ca8}
+#finale :is(h2,button):focus-visible{outline-color:#a04169}
+.party-heart{width:min(240px,100%,24dvh);height:auto;max-height:none;aspect-ratio:736/900;object-fit:cover;object-position:center bottom;image-rendering:auto;mix-blend-mode:multiply;filter:none}
+.finale-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#party-drift{z-index:1}#party-burst{z-index:4}
+#party-drift .floating-heart{bottom:-20px;font-size:25px;animation-duration:9s}
+#party-drift .floating-heart:nth-child(even){color:#ffe9b4}
+#party-burst>span{position:absolute;left:50%;top:60%;animation:party-burst 3.6s var(--delay) ease-out both;color:#ffe9b4}
+.party-confetti{width:9px;height:16px;background:#ffe9b4}
+.party-confetti:nth-child(even){background:#ffb9d1}.party-confetti:nth-child(3n){background:#ffeddc}
+.party-spark-heart{font-size:26px}
+@keyframes party-burst{0%{opacity:0;transform:translate(0,0) rotate(0) scale(.3)}10%{opacity:1}65%{opacity:1;transform:translate(var(--x),var(--y)) rotate(var(--spin)) scale(1)}100%{opacity:0;transform:translate(var(--x),calc(var(--y) + 45vh)) rotate(var(--spin)) scale(.7)}}
+@keyframes collage-bob{0%,100%{transform:translateX(var(--offset)) translateY(7px) rotate(calc(var(--tilt) - 2deg)) scale(var(--scale))}50%{transform:translateX(var(--offset)) translateY(-7px) rotate(calc(var(--tilt) + 2deg)) scale(var(--scale))}}
+@keyframes collage-slide{0%,100%{transform:translateX(calc(var(--offset) - 7px)) rotate(calc(var(--tilt) - 2deg)) scale(var(--scale))}50%{transform:translateX(calc(var(--offset) + 7px)) rotate(calc(var(--tilt) + 2deg)) scale(var(--scale))}}
+@media(max-width:700px){
+  .celebration-core{width:100%}
+  .question-core,.celebration-core{padding:24px 16px}
+  #finale #celebration-title{font-size:21px;letter-spacing:-.7px;line-height:1.65}
+  #finale .celebration-actions .primary{font-size:12px;padding:14px 12px;gap:10px}
+  #finale #celebration .eyebrow{font-size:9px;letter-spacing:2px}
+}
+@media(prefers-reduced-motion:reduce){
+  .heart-settled .heart-reveal img,.party-heart,.party-sticker{animation:none}
+  .floating-heart,#party-burst{display:none}
+  #world::after,#finale{transition:none}
+}
+@media(max-height:550px) and (min-width:550px){
+  .question-core{width:calc(100vw - 260px)}
+  #finale .question-core h2{font-size:24px}
+}
+@media(max-height:550px) and (min-width:701px){
+  #constellation{width:300px}
+}
+
+/* The original mascots narrate the sky, with tiny motion around the meadow. */
+.landscape .couple{display:none}
+.sky-guides{position:absolute;z-index:4;left:50%;bottom:48px;width:340px;height:170px;transform:translateX(-50%);pointer-events:none}
+.sky-guides img,.mascot-conversation img{display:block;object-fit:contain;image-rendering:pixelated;flex-shrink:0}
+.sky-guides img{position:absolute;bottom:0;height:90px;width:auto;filter:drop-shadow(0 4px 0 #4a2e5626);transform-origin:center bottom}
+.guide-otter{left:73px;rotate:-8deg}.guide-bunny{right:73px;rotate:8deg}
+.guide-speech{position:absolute;bottom:104px;left:0;width:100%;margin:0;padding:10px 12px;background:#fff;color:#4a2e56;border:3px solid #4a2e56;border-radius:6px;box-shadow:3px 3px 0 #ffd1dc,4px 4px 0 #4a2e561f;font-family:Pixel,'Courier New',monospace;font-size:9px;line-height:1.8;text-align:center}
+.guide-speech::after{content:'';position:absolute;top:100%;left:105px;border:6px solid transparent;border-top-color:#4a2e56;border-bottom:0}
+.exploring{--constellation-top:clamp(135px,16svh,180px);--constellation-size:min(490px,43svh,86vw)}
+#world.exploring{height:100svh;min-height:100svh}
+.exploring .explore-heading{padding-top:12px}
+.explore-heading .sky-dedication{font-size:16px;line-height:1.4;margin:6px auto;max-width:calc(100% - 32px)}
+.exploring .explore-heading h1{margin-bottom:6px}
+.exploring .explore-heading>p:last-child{margin:6px 0}
+.exploring #constellation{top:var(--constellation-top);width:var(--constellation-size)}
+.exploring .progress{left:50%;right:auto;top:calc(var(--constellation-top) + var(--constellation-size) + 12px);bottom:auto;transform:translateX(-50%);width:400px}
+.exploring #progress-marks{margin-bottom:8px}
+.exploring #next:not([hidden]){top:0}
+.exploring #progress-hint{margin-top:8px}
+.exploring .progress{display:grid;grid-template-columns:1fr;justify-content:center;align-items:center;gap:6px;top:calc(var(--constellation-top) + var(--constellation-size) + 6px)}
+.exploring #counter,.exploring #progress-marks,.exploring #progress-hint{margin:0}
+.exploring #next,.exploring #progress-hint{grid-column:1/-1}
+.exploring #next{justify-self:center}
+.exploring #progress-marks{justify-self:center}
+.exploring .sky-guides{bottom:24px;width:min(640px,calc(100% - 32px));height:112px;display:flex;align-items:center;gap:14px}
+.exploring .sky-guides img{position:static;height:100px;width:auto}
+.exploring .guide-speech{position:relative;bottom:auto;left:auto;width:auto;flex:1;font-size:9px}
+.exploring .guide-speech::after{top:50%;left:-12px;border:6px solid transparent;border-right-color:#4a2e56}
+@media(min-width:701px) and (min-height:551px){
+  .exploring .explore-heading,.exploring #constellation,.exploring .progress{translate:0 clamp(16px,3svh,48px)}
+}
+@media(max-width:700px) and (min-height:780px){
+  .exploring .explore-heading,.exploring #constellation,.exploring .progress{translate:0 12px}
+}
+#card{background:#fff;border:3px solid #4a2e56;border-radius:6px;box-shadow:5px 5px 0 #ffd1dc,7px 7px 0 #4a2e5633;color:#4a2e56}
+.question-core{background:#fff;border:3px solid #4a2e56;border-radius:6px;box-shadow:5px 5px 0 #ffd1dc,7px 7px 0 #4a2e5633}
+.mascot-conversation{display:flex;justify-content:center;align-items:center;gap:22px;margin:0 0 24px;padding:0 4px 18px;border-bottom:1px solid #e8cabc}
+.mascot-conversation img{width:60px;height:80px}
+.mascot-conversation img:last-child{width:46px}
+.mascot-conversation p{margin:0;font-size:12px;color:#9a596b;line-height:1.6}
+.mascot-conversation p span{display:block;color:#74495a;font-size:11px;margin-top:4px}
+.question-mascots{gap:28px}.question-mascots img{height:100px;width:76px}.question-mascots img:last-child{width:57px}
+.sky-ambience{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.tiny-comet{position:absolute;left:-50px;top:calc(6% + var(--i) * 9%);width:5px;height:5px;background:#fff8df;box-shadow:0 0 7px #fff1ba;opacity:0;rotate:12deg}
+.tiny-comet::before{content:'';position:absolute;right:5px;top:1px;width:30px;height:2px;background:#ffeccabf;box-shadow:-7px -4px #ffecca80,-4px 4px #ffecca60}
+.meadow-breeze{position:absolute;bottom:calc(10% + var(--i) * 10%);left:-100px;width:70px;height:2px;background:#fff3d7aa;box-shadow:18px 6px #fff3d766,-12px -6px #fff3d766;opacity:0}
+.pixel-butterfly{position:absolute;bottom:calc(9% + var(--i) * 4%);right:calc(6% + var(--i) * 15%);display:flex;gap:2px;opacity:.9}
+.pixel-butterfly b{display:block;width:7px;height:9px;background:#e9b4d0;box-shadow:0 3px #c494be;transform-origin:right center}
+.pixel-butterfly b:last-child{transform-origin:left center;background:#f4c8da}
+.pixel-butterfly:nth-of-type(even) b{background:#ffe3a3;box-shadow:0 3px #dbad87}
+.falling-petal{position:absolute;left:calc(3% + var(--i) * 8%);top:35%;width:7px;height:10px;border-radius:70% 10% 65% 20%;background:#f8b5d5;box-shadow:inset 2px 0 #ffe6ef;opacity:0}
+.falling-petal:nth-of-type(3n){background:#ffe4bc}
+#stardust{z-index:1;bottom:25%}
+body[data-sky=clouds] .dust{opacity:.3}
+@media(prefers-reduced-motion:no-preference){
+  .sky-guides img{animation:mascot-breathe 5s ease-in-out infinite}.sky-guides .guide-bunny{animation-delay:-2s}
+  .tiny-comet{animation:comet-pass 24s calc(var(--i) * -4.8s) linear infinite}
+  .meadow-breeze{animation:meadow-breeze 14s calc(var(--i) * -4.6s) ease-in-out infinite}
+  .pixel-butterfly{animation:butterfly-wander 17s calc(var(--i) * -2.7s) ease-in-out infinite}.pixel-butterfly b{animation:butterfly-wing .65s ease-in-out infinite alternate}
+  .falling-petal{animation:petal-fall 19s calc(var(--i) * -1.6s) linear infinite}
+  .dust{animation:sky-twinkle var(--twinkle-duration,4.5s) var(--delay) ease-in-out infinite}
+}
+@keyframes mascot-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes comet-pass{0%{opacity:0;transform:translate(0,0)}4%,58%{opacity:.95}65%{opacity:0;transform:translate(115vw,18vh)}100%{opacity:0;transform:translate(115vw,18vh)}}
+@keyframes meadow-breeze{0%{opacity:0;transform:translate(0,0)}12%,60%{opacity:.65}85%,100%{opacity:0;transform:translate(115vw,-14px)}}
+@keyframes petal-fall{0%{opacity:0;transform:translate(0,-15px) rotate(0)}12%,75%{opacity:.75}45%{transform:translate(24px,30vh) rotate(140deg)}100%{opacity:0;transform:translate(-18px,70vh) rotate(300deg)}}
+@keyframes sky-twinkle{0%,70%,100%{opacity:.05;transform:scale(.65)}32%{opacity:1;transform:scale(1.25)}48%{opacity:.3;transform:scale(.85)}}
+@media(prefers-reduced-motion:no-preference){
+  .star .star-shape{animation:constellation-pulse 3.8s var(--delay) ease-in-out infinite}
+  .star:hover .star-shape,.star:focus-visible .star-shape{animation-play-state:paused}
+}
+@keyframes constellation-pulse{0%,100%{transform:scale(.96)}50%{transform:scale(1.045)}}
+@keyframes butterfly-wander{0%,100%{transform:translate(0,0) rotate(-8deg)}30%{transform:translate(-35px,-22px) rotate(8deg)}65%{transform:translate(-80px,5px) rotate(-6deg)}}
+@keyframes butterfly-wing{to{transform:scaleX(.25)}}
+@media(max-width:700px){
+  .sky-guides{width:min(320px,calc(100% - 40px));height:165px}
+  .sky-guides img{height:76px}.sky-guides .guide-bunny{height:74px}
+  .guide-otter{left:65px}.guide-bunny{right:65px}
+  .guide-speech{bottom:90px;font-size:8px;line-height:1.8;padding:9px 10px}
+  .guide-speech::after{left:86px}
+  .exploring{--constellation-top:170px;--constellation-size:min(300px,74vw,40svh)}
+  .exploring .explore-heading{padding-top:48px}
+  .explore-heading .sky-dedication{font-size:14px}
+  .exploring .progress{width:340px}
+  #constellation{width:min(300px,74vw,30svh)}
+  .mascot-conversation{gap:15px;margin-bottom:18px}.mascot-conversation img{height:64px;width:49px}.mascot-conversation img:last-child{width:37px}
+  .question-mascots img{height:78px;width:60px}.question-mascots img:last-child{width:45px}
+}
+@media(max-height:550px) and (min-width:701px){.sky-guides{width:280px;height:165px;bottom:48px}.guide-speech{font-size:8px}.sky-guides img{height:70px}.guide-speech{bottom:84px}#constellation{width:250px;top:180px}}
+@media(prefers-reduced-motion:reduce){.tiny-comet,.meadow-breeze,.pixel-butterfly,.falling-petal{display:none}body[data-sky=clouds] #stardust{display:none}}
+@media(max-height:550px) and (min-width:550px){
+  .exploring .star{width:44px;height:44px}
+  .exploring .star-shape{width:34px;height:34px}
+  .exploring .progress{top:calc(var(--constellation-top) + var(--constellation-size) + 20px)}
+  #final-question{padding-top:64px;padding-bottom:36px}
+  .question-core{padding:16px}
+  .question-mascots{margin-bottom:12px;padding-bottom:10px;gap:20px}
+  .question-mascots img{height:46px;width:36px}.question-mascots img:last-child{width:27px}
+  #finale .question-core .eyebrow{margin-bottom:12px}
+  #finale .question-core h2{font-size:24px;line-height:1.35;margin-bottom:12px}
+  .question-copy>p:last-child{margin-bottom:16px;font-size:14px}
+}
+@media(max-width:700px){
+  .exploring .sky-guides{gap:8px;height:80px}
+  .exploring .sky-guides img{height:62px}
+  .exploring .guide-speech{font-size:8px;line-height:1.7;padding:8px}
+}
+@media(max-height:550px) and (min-width:550px){
+  .exploring{--constellation-top:75px;--constellation-size:min(300px,72svh,44vw)}
+  .exploring #constellation{left:27%}
+  .exploring .explore-heading{position:absolute;top:22px;right:12px;width:45%;padding:0}
+  .exploring .explore-heading h1{font-size:18px;line-height:1.4;margin-bottom:8px}
+  .exploring .explore-heading .eyebrow{font-size:8px;margin-bottom:8px}
+  .exploring .explore-heading>p:last-child{font-size:11px}
+  .exploring .progress{top:150px;left:auto;right:12px;width:45%;transform:none}
+  .exploring .sky-guides{left:auto;right:12px;bottom:12px;width:45%;transform:none;gap:8px}
+  .exploring .sky-guides img{height:50px}
+  .exploring .guide-speech{font-size:7px;padding:8px}
+}
+@media(max-width:700px) and (min-height:780px){
+  #world .sky-guides{width:min(340px,calc(100% - 40px));height:200px;bottom:64px;display:block}
+  #world .sky-guides img{position:absolute;bottom:0;height:100px}
+  #world .guide-otter{left:65px}
+  #world .guide-bunny{right:65px}
+  #world .guide-speech{position:absolute;bottom:112px;left:0;width:100%;font-size:8px;line-height:1.8;padding:10px 12px}
+  #world .guide-speech::after{top:100%;left:85px;border:6px solid transparent;border-top-color:#4a2e56;border-bottom:0}
+}
+
+/* Falling hearts cover the question before the next scene appears. */
+#heart-rain{position:fixed;inset:0;z-index:9;overflow:hidden;isolation:isolate}
+#heart-rain>span{position:absolute;left:calc(var(--column) * 100% / var(--columns) - 1vw);top:calc(var(--row) * 100% / var(--rows) - 1vh);width:calc(100vw / var(--columns) + 2vw);height:calc(100dvh / var(--rows) + 2vh);background:#f184ad;filter:brightness(calc(.85 + var(--shade) * .1));clip-path:polygon(0 15%,15% 0,35% 0,50% 15%,65% 0,85% 0,100% 15%,100% 45%,85% 65%,50% 100%,15% 65%,0 45%);animation:heart-rain-fall 1.05s var(--delay) cubic-bezier(.3,.05,.6,1) both}
+#heart-rain::after{content:'';position:absolute;inset:0;background:#f7b5cc;z-index:-1;animation:heart-rain-cover .6s 1.85s both}
+#heart-rain.revealing{opacity:0;transition:opacity .6s ease-out;pointer-events:none}
+#finale:has(#heart-rain:not([hidden])) .close{z-index:10}
+@keyframes heart-rain-fall{from{transform:translateY(-125dvh) rotate(-12deg)}to{transform:translateY(0) rotate(0)}}
+@keyframes heart-rain-cover{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){#heart-rain{display:none}}

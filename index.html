@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="css/scenery.css">
   <link rel="stylesheet" href="css/personal-art.css">
   <link rel="stylesheet" href="css/passcode.css">
+  <link rel="stylesheet" href="css/page-transitions.css">
+  <script src="js/page-transitions.js"></script>
 </head>
 <body class="pixel-theme" data-theme="pixel">
 
@@ -149,7 +151,7 @@
         <picture class="scene-sticker card-tape tape-right" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/gingham-tape-still.png"><img src="assets/stickers/gingham-tape.webp" width="480" height="252" alt=""></picture>
         <div class="isabella-card-header">
           <span class="card-sparkle">✦</span>
-          <h2 class="isabella-title">Whatcha doin, pippo? <img src="assets/pixel-eyes.svg" class="pixel-icon inline-right" alt="eyes"></h2>
+          <h2 class="isabella-title">Whatcha doin pippo? <img src="assets/pixel-eyes.svg" class="pixel-icon inline-right" alt="eyes"></h2>
           <span class="card-sparkle">✦</span>
         </div>
         <div class="isabella-media-wrapper">
@@ -199,13 +201,13 @@
           <article id="envelope-letter" class="envelope-letter" aria-hidden="true" inert>
             <div class="letter-content">
               <img src="assets/pixel-sparkle.svg" class="letter-sparkle" alt="" aria-hidden="true">
-              <h3>For Pippo:</h3>
+              <h3>For Kuttupups:</h3>
               <p>Your surprise is waiting just beyond this letter... ✨</p>
-              <button id="btn-enter-arcade" class="spring-btn pixel-btn hidden" type="button">SHOWWMEE!</button>
+              <button id="btn-enter-arcade" class="spring-btn pixel-btn hidden" type="button">SHOWW MEE!</button>
             </div>
           </article>
           <div class="envelope-pocket" aria-hidden="true"></div>
-          <span class="envelope-address" aria-hidden="true">for pippo, with love</span>
+          <span class="envelope-address" aria-hidden="true"></span>
           <button id="wax-seal" class="wax-seal" type="button" aria-label="Open the envelope" aria-controls="envelope-letter" aria-expanded="false">
             <img src="assets/pixel-heart.svg" alt="" aria-hidden="true">
           </button>
@@ -260,7 +262,7 @@
         <div class="marquee-decorations left-stars">✦ ★</div>
         <div class="marquee-center">
           <h2 class="arcade-title">LUCKY CLAW</h2>
-          <div class="marquee-badge">FOR PIPPO <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></div>
+          <div class="marquee-badge">MADE FOR PIPPO <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></div>
         </div>
         <div class="marquee-decorations right-stars">★ ✦</div>
       </header>
@@ -569,7 +571,7 @@
        ========================================================================= -->
   <section id="scene-window" class="scene hidden" aria-label="Arched Window Scene">
     <div class="room-interior">
-      <h2 class="room-title">Open the window, kuttupups <img src="assets/pixel-moon.svg" class="pixel-icon inline-right" alt="moon"></h2>
+      <h2 class="room-title">Open the window kuttupups <img src="assets/pixel-moon.svg" class="pixel-icon inline-right" alt="moon"></h2>
       
       <!-- 3D Perspective Arched Window -->
       <div class="window-arch" id="window-frame">
@@ -607,7 +609,7 @@
       <div class="mascot-container window-mascots">
         <img class="mascot otter pixelated" src="assets/otter-pixel.png" 
              alt="Pixel Otter with Orange Scarf">
-        <div class="speech-bubble otter-bubble pixel-bubble" id="otter-window-bubble">Here's your key, pippo... try the lock! <img src="assets/pixel-key.svg" class="pixel-icon inline-right" alt="key"></div>
+        <div class="speech-bubble otter-bubble pixel-bubble" id="otter-window-bubble">Here's your key pippo, try the lock! <img src="assets/pixel-key.svg" class="pixel-icon inline-right" alt="key"></div>
         <img class="mascot bunny pixelated" src="assets/bunny-pixel.png" 
              alt="Pixel Bunny with Pink Ribbon">
       </div>
@@ -623,9 +625,9 @@
         <img class="mascot duo pixelated" src="assets/duo-pixel.png" 
              alt="Pixel Otter and Bunny together">
       </div>
-      <h1 class="pixel-heading">I built a sky for you, kuttupups <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></h1>
-      <p class="sky-subtitle pixel-subtitle">Always by your side, through every star and every story <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></p>
-      <a id="btn-enter-sky" class="spring-btn replay-btn pixel-btn" href="sky/index.html">ENTER YOUR SKY ✦</a>
+      <h1 class="pixel-heading">Oh, the sky is very clear today</h1>
+      <p class="sky-subtitle pixel-subtitle">Looks like a good night for a little stargazing.</p>
+      <a id="btn-enter-sky" class="spring-btn replay-btn pixel-btn" href="sky/index.html">Continue</a>
       <button id="btn-replay" class="spring-btn replay-btn pixel-btn">↺ PLAY AGAIN, PIPPO</button>
       <div class="stars-layer"></div>
     </div>
@@ -642,6 +644,6 @@
   <script src="js/capsule.js" defer></script>
   <script src="js/window.js" defer></script>
   <script src="js/envelope.js" defer></script>
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=separate-sky-music" defer></script>
 </body>
 </html>
