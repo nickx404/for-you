@@ -1,7 +1,7 @@
 // Personalise this file before sharing. Add or remove entries; layout and progress adapt.
 export const content = {
   name: '',
-  whatsappNumber: '', // International digits only, including country code, without +.
+  whatsappNumber: '918668066121', // International digits only, including country code, without +.
   whatsappMessage: "I'm here",
   stars: [
     { title: 'Remember this?', label: 'A little memory', text: 'We played this to decide who had to sing first.', photo: 'assets/first-game-score.png', photoAlt: 'Our first online game: You won with 5 points, swe scored 0.', note: 'HAHAHAHAHAHA YOU LOSTTT 🤣🤣🫵🏻\nNot once, but TWICEEEE 🤣🤣🤣🤣🤣🫵🏻🫵🏻' },
