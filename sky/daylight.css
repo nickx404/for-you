@@ -208,10 +208,13 @@ body.finale-open{overflow:hidden}
 .party-heart{display:block;width:min(280px,100%);height:auto;max-height:30dvh;object-fit:contain;margin:0 auto;image-rendering:pixelated;filter:drop-shadow(0 0 32px #ffc4c377);animation:soft-heartbeat 2.8s ease-in-out infinite}
 .celebration-actions{display:flex;flex-direction:column;align-items:center;gap:8px}
 .celebration-friends{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:end;gap:16px 12px}
-.celebration-friends>img{display:block;height:120px;width:auto;max-width:100%;object-fit:contain;image-rendering:pixelated;justify-self:center}
-.cheer-bubble{grid-column:1/-1;position:relative;justify-self:center;margin:0;padding:10px 16px;border:2px solid #4a2e56;border-radius:6px;box-shadow:3px 3px #ffd1dc;background:#fff;color:#4a2e56;font-family:Pixel,'Courier New',monospace;font-size:12px;line-height:1.6}
+.celebration-friends>img{grid-row:2;display:block;height:120px;width:auto;max-width:100%;object-fit:contain;image-rendering:pixelated;justify-self:center}
+.cheer-otter{grid-column:1}.cheer-bunny{grid-column:3}
+.celebration-friends .celebration-actions{grid-column:2;grid-row:2}
+.cheer-bubble{grid-row:1;position:relative;justify-self:center;margin:0;padding:8px 4px;max-width:100%;white-space:nowrap;text-align:center;border:2px solid #4a2e56;border-radius:6px;box-shadow:3px 3px #ffd1dc;background:#fff;color:#4a2e56;font-family:Pixel,'Courier New',monospace;font-size:clamp(6px,1.2vw,10px);line-height:1.6}
+.otter-cheer{grid-column:1}.bunny-cheer{grid-column:3}
 .cheer-bubble::after{content:'';position:absolute;top:100%;left:calc(50% - 6px);border:6px solid transparent;border-top-color:#4a2e56;border-bottom:0}
-@media(max-width:700px){.celebration-friends>img{height:85px}.cheer-bubble{font-size:10px}}
+@media(max-width:700px){.celebration-friends>img{height:85px}}
 #finale .celebration-actions .text-button{margin:4px 0 0}
 .sticker-collage{position:absolute;inset:-12px;pointer-events:none;z-index:0;display:grid;grid-template-columns:repeat(var(--columns),minmax(0,1fr));grid-template-rows:repeat(var(--rows),minmax(0,1fr));overflow:hidden}
 .party-sticker{position:relative;display:grid;place-items:center;min-width:0;min-height:0;transform:translateX(var(--offset)) rotate(var(--tilt)) scale(var(--scale));mix-blend-mode:multiply}
