@@ -11,6 +11,9 @@ class ClawAudio {
     this._noiseBuffer = null;
     this.sceneMusic = null;
     this.sceneMusicActive = false;
+    this.isabellaAudio = new Audio('assets/isabella.mp3');
+    this.isabellaAudio.preload = 'auto';
+    this.isabellaAudio.load();
   }
 
   /**
@@ -556,10 +559,6 @@ class ClawAudio {
   playIsabellaVoice() {
     if (this.isMuted) return;
     try {
-      if (!this.isabellaAudio) {
-        this.isabellaAudio = new Audio('assets/isabella.mp3');
-        this.isabellaAudio.loop = false;
-      }
       this.isabellaAudio.currentTime = 0;
       this.isabellaAudio.muted = this.isMuted;
       this.isabellaAudio.volume = 0.85;

@@ -6,6 +6,15 @@ const base = process.env.SITE_URL || 'http://127.0.0.1:4173';
 (async () => {
   const browser = await chromium.launch({headless: true, channel: 'msedge'});
   try {
+    const startupContext = await browser.newContext({viewport: {width: 390, height: 844}});
+    const startupPage = await startupContext.newPage();
+    await startupPage.addInitScript(() => sessionStorage.setItem('pippo-sky-transition', String(Date.now())));
+    await startupPage.goto(base);
+    assert.equal(await startupPage.locator('#passcode-gate').isVisible(), true, 'Passcode paints without a tap');
+    assert.equal(await startupPage.locator('html').evaluate(el => el.matches('.page-arriving, .page-leaving')), false, 'A stale sky transition cannot cover the passcode');
+    assert.notEqual(await startupPage.evaluate(() => getComputedStyle(document.body).backgroundColor), 'rgb(0, 0, 0)', 'Startup background is never black');
+    await startupContext.close();
+
     for (const mobile of [false, true]) {
       for (const reduced of [false, true]) {
         const context = await browser.newContext({viewport: mobile ? {width: 390, height: 844} : {width: 1280, height: 800}, reducedMotion: reduced ? 'reduce' : 'no-preference'});

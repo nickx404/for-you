@@ -2,12 +2,13 @@
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const storageKey = 'pippo-sky-transition';
+  const skyPage = /\/sky(?:\/|\/index\.html)$/.test(location.pathname);
   let leaving = false;
   let arriving = false;
   try {
     const started = Number(sessionStorage.getItem(storageKey));
     sessionStorage.removeItem(storageKey);
-    arriving = started > Date.now() - 10000 && !reduced.matches;
+    arriving = skyPage && started > Date.now() - 10000 && !reduced.matches;
   } catch { /* Navigation still works without browser storage. */ }
   if (arriving) root.classList.add('page-arriving');
 
@@ -19,11 +20,11 @@
         image?.decode().catch(() => {}),
         new Promise(resolve => setTimeout(resolve, 1800))
       ]);
-      requestAnimationFrame(() => {
-        root.classList.remove('page-arriving');
-        root.classList.add('page-leaving');
-        requestAnimationFrame(() => root.classList.remove('page-leaving'));
-      });
+      root.classList.remove('page-arriving');
+      root.classList.add('page-leaving');
+      void root.offsetWidth;
+      root.classList.remove('page-leaving');
+      setTimeout(() => root.classList.remove('page-leaving', 'page-arriving'), 650);
     }
 
     document.getElementById('btn-enter-sky')?.addEventListener('click', event => {
@@ -42,7 +43,7 @@
 
   // A restored page must never keep the opaque departure cover.
   addEventListener('pageshow', event => {
-    if (event.persisted) {
+    if (event.persisted || !skyPage) {
       leaving = false;
       root.classList.remove('page-leaving', 'page-arriving');
     }

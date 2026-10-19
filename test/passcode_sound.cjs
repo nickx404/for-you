@@ -13,6 +13,7 @@ const { chromium } = runtimeRequire('playwright');
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(process.env.SITE_URL || 'http://127.0.0.1:4173');
     assert.equal(await page.evaluate(() => window.clawAudio.ctx), null, 'No autoplay');
+    assert.equal(await page.evaluate(() => window.clawAudio.isabellaAudio.preload), 'auto', 'Meme voice is requested before its scene opens');
     await page.evaluate(() => {
       window.toneCount = 0;
       const createOscillator = AudioContext.prototype.createOscillator;
