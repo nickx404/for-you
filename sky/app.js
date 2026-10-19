@@ -125,6 +125,7 @@ function openStar(index) {
   if (Object.hasOwn(star, 'video')) {
     const frame = document.createElement('div'); frame.className = 'tv';
     if (star.video) {
+      window.skyMusic.hold();
       const video = document.createElement('video'); video.controls = true; video.playsInline = true; video.preload = 'metadata'; video.src = star.video;
       video.addEventListener('play', () => window.skyMusic.hold());
       video.addEventListener('ended', () => window.skyMusic.release());

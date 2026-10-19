@@ -39,12 +39,12 @@ async function playing(page) {
         await page.keyboard.press('Escape');
       }
       await page.locator('.star').nth(videoIndex).click();
-      assert.equal(await page.locator('#sky-music').evaluate(audio => audio.paused), false, 'Opening the video card alone does not stop music');
-      await page.locator('video').evaluate(video => video.play());
       await page.waitForTimeout(400);
       const fading = await page.evaluate(() => ({gain:window.musicGain.gain.value,paused:document.querySelector('#sky-music').paused}));
       assert.ok(fading.gain > .01 && fading.gain < .28 && !fading.paused, 'Music fades rather than stopping abruptly');
       await page.waitForFunction(() => document.querySelector('#sky-music').paused);
+      assert.equal(await page.locator('video').evaluate(video => video.paused), true, 'Opening Star 4 pauses music before the video starts');
+      await page.locator('video').evaluate(video => video.play());
       const pausedAt = await page.locator('#sky-music').evaluate(audio => audio.currentTime);
       await page.locator('video').evaluate(video => video.pause());
       await page.waitForTimeout(200);
