@@ -1,7 +1,7 @@
 from pathlib import Path
 from PIL import Image, ImageDraw
 
-target = Path(__file__).resolve().parents[1] / 'dist' / 'assets'
+target = Path(__file__).resolve().parents[1] / 'sky' / 'assets'
 target.mkdir(parents=True, exist_ok=True)
 heart = ['01100110','11111111','11111111','01111110','00111100','00011000']
 for kind in ['sweet', 'funny', 'celebration']:
@@ -30,3 +30,4 @@ for kind in ['sweet', 'funny', 'celebration']:
         frames.append(image.resize((192,160),Image.Resampling.NEAREST))
     frames[0].save(target / f'{kind}.png')
     frames[0].save(target / f'{kind}.gif',save_all=True,append_images=frames[1:],duration=220,loop=0)
+

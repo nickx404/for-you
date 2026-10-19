@@ -1,0 +1,330 @@
+/**
+ * animations.css - Complete Keyframes and Motion Physics Library
+ * Interactive Web Experience for Pippo ✨
+ */
+
+/* ==========================================================================
+   Interactive Key Animations
+   ========================================================================= */
+
+/**
+ * Floating bob & tilt for the Golden Key in modal and room interior.
+ * Creates an ethereal floating artifact feel.
+ */
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(-8px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(5deg);
+  }
+}
+
+/**
+ * Key turn animation when inserting and unlocking the padlock shackle.
+ * Emulates the mechanical resistance and final snap click into place.
+ */
+@keyframes keyTurn {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(85deg);
+  }
+  55% {
+    transform: rotate(80deg);
+  }
+  70% {
+    transform: rotate(92deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+/* ==========================================================================
+   Speech & UI Ambient Floats
+   ========================================================================= */
+
+/**
+ * Speech bubble gentle float.
+ * Provides subtle life to mascot dialogue without distracting the player.
+ */
+@keyframes bubbleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/**
+ * Marquee neon glow pulsation for the arcade claw cabinet header.
+ */
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--color-primary),
+                 0 0 20px var(--color-primary),
+                 0 0 40px var(--color-primary-light);
+  }
+  50% {
+    text-shadow: 0 0 5px var(--color-primary),
+                 0 0 10px var(--color-primary),
+                 0 0 20px var(--color-primary-light);
+  }
+}
+
+/**
+ * Marquee badge blink / shimmer effect.
+ */
+@keyframes badgeBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Capsule Modal Opening Sequence
+   ========================================================================= */
+
+/**
+ * Capsule wobble on each user tap / click.
+ * Gives elastic spring feedback as cracks appear.
+ */
+@keyframes wobble {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(-12deg) scale(1.05);
+  }
+  30% {
+    transform: rotate(10deg) scale(0.98);
+  }
+  45% {
+    transform: rotate(-8deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/**
+ * Light rays pulsing through fractures as the capsule shell weakens.
+ */
+@keyframes rayPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/**
+ * Top shell half bursting upward and spinning away upon final crack.
+ */
+@keyframes shellTopFly {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+/**
+ * Bottom shell half tumbling downward and fading out.
+ */
+@keyframes shellBottomFly {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px) rotate(30deg);
+    opacity: 0;
+  }
+}
+
+/**
+ * Unfurling animation for the parchment mini-scroll inside the capsule.
+ */
+@keyframes unrollScroll {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  100% {
+    max-height: 200px;
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Window & Mechanical Dynamics
+   ========================================================================= */
+
+/**
+ * Gentle breeze swaying the soft fabric curtains by the arched window.
+ */
+@keyframes curtainSway {
+  0%, 100% {
+    transform: skewX(0deg) translateX(0);
+  }
+  25% {
+    transform: skewX(-3deg) translateX(5px);
+  }
+  75% {
+    transform: skewX(2deg) translateX(-3px);
+  }
+}
+
+/**
+ * Radial golden aura flare triggered when the padlock successfully releases.
+ */
+@keyframes goldenFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+
+/**
+ * Padlock falling down after shackle pops open and lock disengages.
+ */
+@keyframes lockDrop {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(150px) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+/**
+ * High-frequency micro vibration of the claw gantry rail motor during travel.
+ */
+@keyframes motorVibrate {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-0.5px);
+  }
+  75% {
+    transform: translateY(0.5px);
+  }
+}
+
+/* ==========================================================================
+   Mascot Character Animations
+   ========================================================================= */
+
+/**
+ * Idle breathing squish and stretch for cute mascots (Otter & Bunny).
+ */
+@keyframes breathe {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.03);
+  }
+}
+
+/**
+ * Joyful celebration hop when the player wins or solves a puzzle.
+ */
+@keyframes celebrationHop {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-20px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-25px) scale(1.05);
+  }
+  70% {
+    transform: translateY(-10px) scale(1.08);
+  }
+}
+
+/**
+ * Otter leaning curiously towards movement direction
+ */
+.mascot.otter.leaning-left {
+  transform: rotate(-10deg) translateY(-2px) !important;
+  transition: transform 0.2s var(--ease-spring);
+}
+
+.mascot.otter.leaning-right {
+  transform: rotate(10deg) translateY(-2px) !important;
+  transition: transform 0.2s var(--ease-spring);
+}
+
+/**
+ * Bunny perking up holding breath in anticipation
+ */
+.mascot.bunny.anticipating {
+  transform: translateY(-8px) scale(1.08) !important;
+  filter: drop-shadow(0 0 14px rgba(255, 179, 198, 0.75)) !important;
+  transition: transform 0.25s var(--ease-spring), filter 0.25s ease;
+}
+
+/* ==========================================================================
+   Celestial & Cinematic Transitions
+   ========================================================================= */
+
+/**
+ * Subtle twinkling and scaling for night sky stars.
+ */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/**
+ * Cinematic camera zoom-glide into the open window towards the starry night.
+ */
+@keyframes cameraGlide {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3) translateY(-50px);
+    opacity: 0;
+  }
+}

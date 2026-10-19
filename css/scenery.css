@@ -1,0 +1,125 @@
+/* Decorative scene layers sit below the existing content and never receive input. */
+#scene-hello, #scene-isabella, #scene-envelope, #scene-claw { isolation: isolate; }
+.scene-backdrop { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+.scene-sticker { display: block; position: absolute; pointer-events: none; }
+.scene-sticker img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.envelope-scene-content { position: relative; z-index: 2; }
+
+/* Gingham paper, little snapshots, and animated washi tape. */
+.scrapbook-world { background-color: #fcf3f7; background-image: linear-gradient(90deg, #efcbd633 50%, transparent 50%), linear-gradient(#efcbd633 50%, transparent 50%); background-size: 48px 48px; }
+.scrapbook-world::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, #fff9fc 12%, #fff9fcaa 46%, transparent 77%); }
+.scrap-paper { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 165px; height: 205px; padding: 18px; background: #fffdf5; border: 1px solid #e7d8d9; box-shadow: 5px 7px 0 #b997a51f; }
+.scrap-paper::before { content: ''; position: absolute; width: 68px; height: 22px; top: -10px; background: #c6dbedbb; rotate: -6deg; }
+.scrap-paper span { font-family: var(--font-arcade); font-size: 0.8rem; line-height: 1.5; color: #826578; text-align: center; }
+.scrap-paper img { max-width: 100%; height: 110px; object-fit: contain; }
+.scrap-left { top: 20%; left: 5%; rotate: -10deg; }
+.scrap-right { bottom: 17%; right: 5%; width: 145px; height: 160px; rotate: 12deg; background: #eff0fc; }
+.scrap-right img { width: 54px; height: 54px; }
+.scrap-doodle { position: absolute; color: #c493bb; font-size: 58px; }
+.doodle-one { top: 9%; left: 26%; rotate: -12deg; }
+.doodle-two { bottom: 12%; left: 21%; }
+.doodle-three { top: 22%; right: 19%; color: #9ca9ce; font-size: 36px; }
+.scrap-heart { width: 85px; height: 85px; left: 10%; bottom: 14%; rotate: 12deg; }
+.scrap-bow { width: 120px; height: 120px; right: 8%; top: 10%; rotate: -10deg; }
+.scrap-bunny { width: 100px; height: 100px; right: 22%; bottom: 5%; }
+.card-tape { width: 112px; height: 60px; top: -19px; z-index: 3; }
+.tape-left { left: -28px; rotate: -28deg; }
+.tape-right { right: -28px; rotate: 28deg; }
+
+/* A stationery desk under the envelope: nothing is painted onto the letter itself. */
+.stationery-world { background-color: #f1e0df; background-image: repeating-linear-gradient(0deg, transparent 0 169px, #caa9b52b 169px 171px), linear-gradient(100deg, #fff2e333, transparent 55%, #e3c4d233); }
+.writing-mat { position: absolute; width: min(820px, 76vw); height: min(630px, 84vh); left: 50%; top: 50%; translate: -50% -50%; border-radius: 24px; background: #f8eaf0; border: 2px solid #e0b5c8; outline: 2px dashed #e4c3d1; outline-offset: -12px; box-shadow: 8px 10px 0 #a17a8b13; }
+.tea-saucer { position: absolute; top: 17%; left: 7%; width: 115px; height: 90px; border: 3px solid #ac94b4; border-radius: 50%; background: #eee4f3; box-shadow: 3px 5px 0 #ac94b422; rotate: -12deg; }
+.tea-cup { position: absolute; inset: 8px 17px 17px; border: 9px solid #fffbf8; border-radius: 50%; background: #c99c80; box-shadow: 0 0 0 2px #b3a0b8, inset 0 0 0 4px #b98570; }
+.tea-cup::after { content: ''; position: absolute; right: -31px; top: 9px; width: 20px; height: 24px; border: 7px solid #fffbf8; border-left: 0; border-radius: 0 50% 50% 0; }
+.tea-cup i { position: absolute; width: 7px; height: 30px; border-left: 2px solid #fffdf9; border-radius: 50%; top: -47px; left: 11px; opacity: 0.6; animation: teaSteam 3s ease-out infinite; }
+.tea-cup i:nth-child(2) { left: 26px; animation-delay: -1s; }
+.tea-cup i:nth-child(3) { left: 38px; animation-delay: -2s; }
+.stationery-note { position: absolute; right: 6%; top: 20%; width: 125px; height: 140px; background: #fff1c9; box-shadow: 5px 6px 0 #aa8d7620; rotate: 9deg; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; }
+.stationery-note span { font-family: var(--font-arcade); font-size: 0.7rem; }
+.postage-stamps { position: absolute; right: 9%; bottom: 20%; display: flex; gap: 10px; rotate: -10deg; }
+.postage-stamps span { display: grid; place-items: center; background: #f8f6ff; color: #b18bbb; font-size: 25px; width: 50px; height: 60px; border: 3px dashed #b7a2c3; outline: 5px solid #f8f6ff; }
+.postage-stamps span + span { background: #f8eff6; rotate: 15deg; }
+.desk-pencil { position: absolute; right: 19%; bottom: 8%; height: 200px; width: 12px; background: linear-gradient(90deg, #d5b1db 30%, #b492bd 30% 70%, #e4c7e9 70%); rotate: 35deg; border-top: 20px solid #f1a9bd; border-radius: 5px 5px 0 0; }
+.desk-pencil::after { content: ''; position: absolute; bottom: -24px; left: 0; width: 12px; height: 25px; background: linear-gradient(#d9b99b 70%, #6a4c77 70%); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.paper-clip { position: absolute; width: 20px; height: 50px; border: 3px solid #b393ba; border-radius: 12px; rotate: -22deg; }
+.paper-clip::after { content: ''; position: absolute; inset: 5px 3px 0; border: 2px solid #b393ba; border-bottom: 0; border-radius: 8px 8px 0 0; }
+.clip-one { top: 12%; left: 28%; }
+.clip-two { top: 14%; left: 31%; rotate: 12deg; border-color: #e49bac; }
+.desk-bow { width: 100px; height: 100px; top: 31%; left: 19%; rotate: -18deg; }
+.desk-heart { width: 65px; height: 65px; right: 27%; top: 10%; rotate: 12deg; }
+.desk-bunny { width: 110px; height: 110px; left: 10%; bottom: 9%; rotate: -6deg; }
+@keyframes teaSteam { from { opacity: 0; transform: translateY(8px); } 35% { opacity: 0.8; } to { opacity: 0; transform: translateY(-18px); } }
+
+/* The cabinet now lives in a room, with a wall, prize shelves, and a tiled floor. */
+.arcade-world { background: #fffafa url('../assets/personal-art/heart-wallpaper.png') repeat 0 0 / 313px auto; }
+.arcade-light-string { position: absolute; top: 14px; left: 4%; right: 4%; height: 34px; border-bottom: 2px solid #a48bb3; border-radius: 0 0 50% 50%; display: flex; align-items: flex-end; justify-content: space-around; }
+.arcade-light-string span { font-size: 27px; color: #e6b65c; text-shadow: 0 0 9px #fff7ba; transform: translateY(18px); animation: roomTwinkle 3s ease-in-out infinite alternate; }
+.arcade-light-string span:nth-child(2n) { color: #d091b9; animation-delay: -1s; }
+.arcade-light-string span:nth-child(3n) { color: #98b5d3; animation-delay: -2s; }
+.arcade-wall-sign { position: absolute; left: 6%; top: 19%; width: 150px; padding: 18px 12px; border: 4px double #bf93bc; background: #fff3fa; box-shadow: 5px 5px 0 #cfbadc; rotate: -5deg; text-align: center; font-family: var(--font-pixel); font-size: 0.9rem; line-height: 1.8; color: #a36e9f; }
+.arcade-wall-sign img { display: block; margin: 10px auto 0; }
+.plush-shelf, .prize-wall-shelf { position: absolute; left: 5%; top: 49%; width: 175px; height: 95px; border-bottom: 9px solid #b497c3; display: flex; align-items: flex-end; justify-content: center; gap: 12px; filter: drop-shadow(0 5px 0 #b6a1c52b); }
+.plush-shelf img { object-fit: contain; height: 85px; max-width: 75px; }
+.prize-wall-shelf { top: 68%; height: 60px; width: 150px; left: 6%; border-color: #c4a9c9; }
+.prize-wall-shelf img { object-fit: contain; margin-bottom: 8px; }
+.arcade-wall-window { position: absolute; right: 4%; top: 17%; width: 145px; height: 185px; border-radius: 70px 70px 5px 5px; background: #c5d7ef; border: 7px solid #fff3fb; box-shadow: 0 0 0 3px #c3afcd, 5px 6px 0 #d2c2df; display: flex; align-items: center; justify-content: space-evenly; color: #fff; font-size: 24px; }
+.arcade-wall-window::after { content: ''; position: absolute; top: 45%; left: 0; right: 0; border-top: 5px solid #fff3fb; }
+.arcade-stars { top: 43%; right: 1%; width: 220px; height: 230px; opacity: 0.8; }
+.arcade-heart { width: 55px; height: 55px; left: 24%; top: 13%; rotate: -12deg; }
+.arcade-skirting { position: absolute; left: 0; right: 0; bottom: 20%; height: 13px; background: #d4c3df; border-top: 3px solid #e8dbf0; border-bottom: 3px solid #bba4cb; }
+.arcade-floor { position: absolute; bottom: -8%; left: -12%; width: 124%; height: 29%; background: conic-gradient(#d7d3ec 25%, #eeebf8 0 50%, #d7d3ec 0 75%, #eeebf8 0) 0 0 / 88px 88px; transform: perspective(400px) rotateX(28deg); transform-origin: top center; }
+.arcade-plant { position: absolute; bottom: 13%; width: 65px; height: 120px; background: url('../assets/pixel-flower.svg') center top / 64px 64px no-repeat, linear-gradient(#8fa696, #8fa696) center 45px / 6px 40px no-repeat; }
+.arcade-plant::after { content: ''; position: absolute; bottom: 0; left: 12px; width: 44px; height: 42px; background: #e6b1c6; border: 3px solid #b38eae; clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%); }
+.plant-left { left: 1%; }
+.plant-right { right: 6%; }
+@keyframes roomTwinkle { from { opacity: 0.5; } to { opacity: 1; } }
+
+@media (max-width: 1050px) {
+  .scrap-paper { scale: 0.8; }
+  .scrap-left { left: -2%; }
+  .scrap-right { right: -2%; }
+  .arcade-wall-sign, .plush-shelf, .prize-wall-shelf { left: 1%; scale: 0.75; transform-origin: left center; }
+  .arcade-wall-window { right: -40px; }
+  .tea-saucer { left: 2%; scale: 0.8; }
+  .stationery-note { right: 1%; scale: 0.8; }
+}
+
+@media (max-width: 840px) {
+  .scrap-paper, .arcade-wall-sign, .plush-shelf, .prize-wall-shelf, .arcade-wall-window, .tea-saucer, .stationery-note, .postage-stamps, .desk-pencil { display: none; }
+  .scrap-bow { top: 4%; right: 6%; width: 80px; height: 80px; }
+  .scrap-heart { left: 5%; bottom: 7%; width: 55px; height: 55px; }
+  .scrap-bunny { right: 7%; bottom: 3%; width: 75px; height: 75px; }
+  .doodle-one { left: 7%; top: 5%; font-size: 30px; }
+  .doodle-two { left: 40%; bottom: 4%; font-size: 30px; }
+  .doodle-three { display: none; }
+  .writing-mat { width: 94vw; height: 86vh; border-radius: 16px; outline-offset: -8px; }
+  .desk-bow { top: 7%; left: 4%; width: 65px; height: 65px; }
+  .desk-heart { right: 8%; top: auto; bottom: 7%; width: 45px; height: 45px; }
+  .desk-bunny { left: 5%; bottom: 3%; width: 70px; height: 70px; }
+  .paper-clip { top: 5%; left: 70%; scale: 0.65; }
+  .clip-two { left: 77%; }
+  .arcade-light-string { top: 2px; }
+  .arcade-light-string span { font-size: 18px; }
+  .arcade-light-string span:nth-child(2n) { display: none; }
+  .arcade-stars { top: 13%; right: -20px; width: 120px; height: 180px; opacity: 0.5; }
+  .arcade-heart { left: 3%; top: 9%; width: 36px; height: 36px; }
+  .arcade-plant { scale: 0.65; transform-origin: bottom; bottom: 12%; }
+  .plant-right { right: -10px; }
+  .plant-left { left: -10px; }
+  .arcade-floor { background-size: 52px 52px; }
+}
+
+@media (max-width: 480px) {
+  .card-tape { width: 76px; height: 42px; top: -12px; }
+  .tape-left { left: -12px; }
+  .tape-right { right: -12px; }
+}
+
+@media (max-height: 650px) and (max-width: 840px) {
+  .desk-bow, .desk-bunny, .desk-heart, .paper-clip, .scrap-bunny, .scrap-heart { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-backdrop *, .scene-backdrop *::before, .scene-backdrop *::after { animation: none !important; }
+}

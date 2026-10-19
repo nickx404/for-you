@@ -1,0 +1,903 @@
+/**
+ * capsule.css - Capsule Cracking Modal & Reveal System
+ * Aesthetic: Sparkling Kawaii Treasure Chest Reveal
+ * Interactive Web Experience for Pippo ✨
+ */
+
+/* ==========================================================================
+   Capsule Cracking Modal Foundation
+   ========================================================================== */
+
+#capsule-modal.modal:not(.hidden) {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(43, 27, 61, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  z-index: 500;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+/* ==========================================================================
+   Capsule Stage Container
+   ========================================================================== */
+
+.capsule-stage {
+  position: relative;
+  max-width: min(92vw, 380px);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+}
+
+/* ==========================================================================
+   Interactive Capsule Shell (16-Bit Pixel Art Aesthetic)
+   ========================================================================== */
+
+.capsule-shell {
+  position: relative;
+  width: 120px;
+  height: 160px;
+  margin: 0 auto;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: linear-gradient(
+    180deg,
+    #fff9c4 0%,
+    #fff9c4 18%,
+    #ffd54f 18%,
+    #ffd54f 42%,
+    #ff80ab 42%,
+    #ff80ab 72%,
+    #c2185b 72%,
+    #c2185b 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.7),
+    0 0 24px var(--color-gold-glow);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 0.1s steps(2), box-shadow 0.1s steps(2);
+  image-rendering: pixelated;
+}
+
+.capsule-shell:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    4px 8px 0 var(--color-pixel-border),
+    0 0 30px var(--color-gold-glow),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.7);
+}
+
+.capsule-shell:active {
+  transform: translateY(2px);
+  box-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    0 0 16px var(--color-gold-glow);
+}
+
+/* Color Variants for Interactive Cracking Shell */
+.capsule-shell[data-color="blue"] {
+  background: linear-gradient(
+    180deg,
+    #e0faff 0%,
+    #e0faff 20%,
+    #a5f3fc 20%,
+    #67e8f9 45%,
+    #38bdf8 45%,
+    #0ea5e9 75%,
+    #0284c7 75%,
+    #0369a1 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(103, 232, 249, 0.7);
+}
+
+.capsule-shell[data-color="blue"]:hover {
+  box-shadow: 
+    4px 8px 0 var(--color-pixel-border),
+    0 0 32px rgba(103, 232, 249, 0.9),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75);
+}
+
+.capsule-shell[data-color="pink"] {
+  background: linear-gradient(
+    180deg,
+    #fff0f6 0%,
+    #fff0f6 20%,
+    #ffcbf2 20%,
+    #ff8fab 45%,
+    #ff4d6d 45%,
+    #f72585 75%,
+    #c9184a 75%,
+    #a01a56 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(255, 143, 171, 0.7);
+}
+
+.capsule-shell[data-color="pink"]:hover {
+  box-shadow: 
+    4px 8px 0 var(--color-pixel-border),
+    0 0 32px rgba(255, 143, 171, 0.9),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75);
+}
+
+.capsule-shell[data-color="red"] {
+  background: linear-gradient(
+    180deg,
+    #ffebee 0%,
+    #ffebee 20%,
+    #ff8a80 20%,
+    #ff5252 45%,
+    #ff1744 45%,
+    #d50000 75%,
+    #b71c1c 75%,
+    #7f0000 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(255, 23, 68, 0.7);
+}
+
+.capsule-shell[data-color="red"]:hover {
+  box-shadow: 
+    4px 8px 0 var(--color-pixel-border),
+    0 0 32px rgba(255, 23, 68, 0.9),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75);
+}
+
+/* 8-Bit Pixel Glint / Specular Sheen */
+.capsule-shell::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  width: 12px;
+  height: 16px;
+  background: #ffffff;
+  box-shadow: 
+    -4px 4px 0 #ffffff,
+    4px 4px 0 rgba(255, 255, 255, 0.8),
+    0 8px 0 rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity var(--duration-fast);
+}
+
+/* Stepped Pixel Wobble Feedback When Tapped */
+.capsule-shell.wobbling {
+  animation: pixelWobble 0.4s steps(4);
+}
+
+@keyframes pixelWobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg) translateX(-4px); }
+  50% { transform: rotate(8deg) translateX(4px); }
+  75% { transform: rotate(-4deg) translateX(-2px); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ==========================================================================
+   Stepped Pixel Crack Lines & Light Rays
+   ========================================================================== */
+
+/* Generic Crack Line Base */
+.crack-line {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity var(--duration-fast) steps(2);
+  background: var(--color-pixel-border);
+  box-shadow: 0 0 0 2px #ffffff, 0 0 12px var(--color-gold-glow);
+}
+
+/* Crack 1: Stepped horizontal pixel zigzag */
+.crack-line.crack-1 {
+  top: 46%;
+  left: 14%;
+  width: 72%;
+  height: 8px;
+  clip-path: polygon(
+    0% 0%, 25% 0%, 25% 50%, 50% 50%, 50% 0%, 75% 0%, 75% 50%, 100% 50%,
+    100% 100%, 75% 100%, 75% 50%, 50% 50%, 50% 100%, 25% 100%, 25% 50%, 0% 50%
+  );
+}
+
+/* Crack 2: Chunky pixel fracture diagonal */
+.crack-line.crack-2 {
+  top: 30%;
+  left: 10%;
+  width: 80%;
+  height: 10px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 16px var(--color-gold);
+  clip-path: polygon(
+    0% 50%, 20% 50%, 20% 0%, 40% 0%, 40% 50%, 65% 50%, 65% 0%, 85% 0%, 85% 50%, 100% 50%,
+    100% 100%, 85% 100%, 85% 50%, 65% 50%, 65% 100%, 40% 100%, 40% 50%, 20% 50%, 20% 100%, 0% 100%
+  );
+}
+
+/* Crack 3: Web of stepped cracks */
+.crack-line.crack-3 {
+  top: 20%;
+  left: 8%;
+  width: 84%;
+  height: 100px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.crack-line.crack-3::before,
+.crack-line.crack-3::after {
+  content: '';
+  position: absolute;
+  background: var(--color-pixel-border);
+  box-shadow: 0 0 0 2px #ffffff, 0 0 14px var(--color-gold-glow);
+}
+
+.crack-line.crack-3::before {
+  top: 12px;
+  left: 15%;
+  width: 65%;
+  height: 8px;
+  clip-path: polygon(
+    0% 0%, 30% 0%, 30% 50%, 60% 50%, 60% 0%, 100% 0%,
+    100% 100%, 60% 100%, 60% 50%, 30% 50%, 30% 100%, 0% 100%
+  );
+}
+
+.crack-line.crack-3::after {
+  bottom: 15px;
+  left: 20%;
+  width: 60%;
+  height: 8px;
+  clip-path: polygon(
+    0% 50%, 35% 50%, 35% 0%, 70% 0%, 70% 50%, 100% 50%,
+    100% 100%, 70% 100%, 70% 50%, 35% 50%, 35% 100%, 0% 100%
+  );
+}
+
+/* Pixel Light Rays Emanating Through Cracks */
+.light-rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 215, 0, 0.45) 0deg,
+    transparent 15deg,
+    rgba(255, 215, 0, 0.6) 35deg,
+    transparent 55deg,
+    rgba(255, 215, 0, 0.45) 80deg,
+    transparent 105deg,
+    rgba(255, 215, 0, 0.7) 130deg,
+    transparent 155deg,
+    rgba(255, 215, 0, 0.45) 190deg,
+    transparent 215deg,
+    rgba(255, 215, 0, 0.6) 245deg,
+    transparent 270deg,
+    rgba(255, 215, 0, 0.45) 305deg,
+    transparent 330deg,
+    rgba(255, 215, 0, 0.45) 360deg
+  );
+  mask-image: radial-gradient(circle, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--duration-normal) steps(3);
+}
+
+/* ==========================================================================
+   Shell Halves (Stepped Pixel Breaking)
+   ========================================================================== */
+
+.shell-top,
+.shell-bottom {
+  position: absolute;
+  left: 0;
+  width: 120px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+.shell-top {
+  top: 0;
+  height: 85px;
+  border-radius: 60px 60px 0 0 / 80px 80px 0 0;
+  background: linear-gradient(180deg, #fff9c4 0%, #ffd54f 45%, #ff80ab 100%);
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 70%, 85% 70%, 85% 90%, 70% 90%, 70% 70%,
+    50% 70%, 50% 95%, 35% 95%, 35% 70%, 15% 70%, 15% 90%, 0% 90%
+  );
+  box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.7);
+  transform-origin: center bottom;
+}
+
+.shell-bottom {
+  bottom: 0;
+  height: 85px;
+  border-radius: 0 0 60px 60px / 0 0 60px 60px;
+  background: linear-gradient(180deg, #ff80ab 0%, #c2185b 100%);
+  clip-path: polygon(
+    0% 30%, 15% 30%, 15% 10%, 35% 10%, 35% 35%, 50% 35%, 50% 10%,
+    70% 10%, 70% 30%, 85% 30%, 85% 10%, 100% 10%, 100% 100%, 0% 100%
+  );
+  box-shadow: inset 0 -4px 0 rgba(74, 46, 86, 0.4);
+  transform-origin: center top;
+}
+
+/* ==========================================================================
+   Crack Progression Stages (data-cracks: 0, 1, 2, 3)
+   ========================================================================== */
+
+/* Stage 0: Clean Shell */
+[data-cracks="0"] .crack-line,
+.capsule-shell[data-cracks="0"] .crack-line {
+  opacity: 0;
+}
+
+[data-cracks="0"] .light-rays,
+.capsule-shell[data-cracks="0"] .light-rays {
+  opacity: 0;
+}
+
+/* Stage 1: First crack appears */
+[data-cracks="1"] .crack-1,
+.capsule-shell[data-cracks="1"] .crack-1 {
+  opacity: 1;
+}
+
+/* Stage 2: Second crack & golden light rays begin pulsing */
+[data-cracks="2"] .crack-1,
+[data-cracks="2"] .crack-2,
+.capsule-shell[data-cracks="2"] .crack-1,
+.capsule-shell[data-cracks="2"] .crack-2 {
+  opacity: 1;
+}
+
+[data-cracks="2"] .light-rays,
+.capsule-shell[data-cracks="2"] .light-rays {
+  opacity: 0.7;
+  animation: rayPulse 1.5s ease-in-out infinite;
+}
+
+.capsule-shell[data-cracks="2"],
+[data-cracks="2"] .capsule-shell {
+  box-shadow: 
+    0 0 30px var(--color-gold-glow),
+    0 0 50px rgba(255, 215, 0, 0.3),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Stage 3: Burst open — shell halves fly apart! */
+[data-cracks="3"] .crack-line,
+.capsule-shell[data-cracks="3"] .crack-line {
+  opacity: 1;
+}
+
+[data-cracks="3"] .light-rays,
+.capsule-shell[data-cracks="3"] .light-rays {
+  opacity: 1;
+  animation: rayPulse 0.8s ease-in-out infinite;
+}
+
+.capsule-shell[data-cracks="3"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+.capsule-shell[data-cracks="3"]::before {
+  opacity: 0;
+}
+
+[data-cracks="3"] .shell-top,
+.capsule-shell[data-cracks="3"] .shell-top {
+  opacity: 1;
+  animation: shellTopFly 0.8s var(--ease-spring) forwards;
+}
+
+[data-cracks="3"] .shell-bottom,
+.capsule-shell[data-cracks="3"] .shell-bottom {
+  opacity: 1;
+  animation: shellBottomFly 0.8s var(--ease-spring) forwards;
+}
+
+/* ==========================================================================
+   Capsule Contents (Golden Key & Mini-Scroll)
+   ========================================================================== */
+
+.capsule-contents {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 260px;
+  z-index: 10;
+  transition: opacity var(--duration-slow) var(--ease-smooth);
+}
+
+/* ==========================================================================
+   CSS-Only Golden Key (16-Bit Pixel Float Preview)
+   ========================================================================== */
+
+.golden-key-float {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+  height: 68px;
+  animation: levitate 2.4s steps(4) infinite;
+  filter: drop-shadow(0 0 12px var(--color-gold-glow));
+  user-select: none;
+  image-rendering: pixelated;
+}
+
+/* Pixel Key Head */
+.golden-key-float .key-head {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: #ffd700;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    inset 2px 2px 0 #fff899,
+    inset -2px -2px 0 #cc9900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Key Head Keyhole Ring Cutout */
+.golden-key-float .key-ring {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #2b1b3d;
+  border: 2px solid var(--color-pixel-border);
+}
+
+/* Cute Heart Accent Inside Ring */
+.golden-key-float .key-heart {
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.golden-key-float .key-heart .pixel-icon {
+  width: 10px;
+  height: 10px;
+}
+
+/* Key Shaft / Stem */
+.golden-key-float .key-stem {
+  position: relative;
+  width: 8px;
+  height: 32px;
+  background: #ffd700;
+  border: 2px solid var(--color-pixel-border);
+  border-top: none;
+  box-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    inset 1px 0 0 #fff899;
+}
+
+/* Key Teeth Cutout */
+.golden-key-float .key-teeth {
+  position: absolute;
+  right: -8px;
+  bottom: 4px;
+  width: 8px;
+  height: 14px;
+  background: #ffd700;
+  border: 2px solid var(--color-pixel-border);
+  border-left: none;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 35%, 25% 35%, 25% 60%, 100% 60%, 100% 100%, 0% 100%);
+}
+
+/* Key Sparkle Accent */
+.golden-key-float .key-sparkle {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  animation: twinkle 1.5s steps(2) infinite alternate;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.golden-key-float .key-sparkle .pixel-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ==========================================================================
+   Parchment Mini-Scroll (16-Bit Pixel Letter)
+   ========================================================================== */
+
+.mini-scroll {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+  background: #fdf6e2;
+  border: 4px solid var(--color-pixel-border);
+  box-shadow: 4px 4px 0 var(--color-pixel-border);
+  cursor: pointer;
+  transition: transform 0.1s steps(2);
+  margin-top: 8px;
+  image-rendering: pixelated;
+}
+
+.mini-scroll:hover {
+  transform: translateY(-2px);
+}
+
+/* Rolled Edge Top Curl */
+.scroll-roll {
+  width: 100%;
+  height: 16px;
+  background: #eed5a1;
+  border-bottom: 3px solid var(--color-pixel-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+.scroll-roll::after {
+  content: '✦ ✦ ✦';
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: var(--color-pixel-border);
+  letter-spacing: 2px;
+}
+
+/* Parchment Paper Unrolling Body */
+.scroll-paper {
+  max-height: 0;
+  overflow: hidden;
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  line-height: 1.8;
+  color: var(--color-pixel-border);
+  text-align: center;
+  padding: 0 14px;
+  transition: max-height 0.8s var(--ease-smooth), padding 0.8s var(--ease-smooth);
+}
+
+.mini-scroll.unrolled .scroll-paper,
+.scroll-paper.unrolled {
+  animation: unrollScroll 0.8s var(--ease-smooth) forwards;
+  max-height: 220px;
+  padding: 14px 16px;
+}
+
+/* ==========================================================================
+   User Interaction Prompts & Action Buttons
+   ========================================================================== */
+
+.tap-prompt {
+  margin-top: 18px;
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0 var(--color-pixel-border);
+  animation: pixelBlink 1.2s steps(2) infinite;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+@keyframes pixelBlink {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.35; transform: translateY(2px); }
+}
+
+#btn-goto-window,
+#btn-collect-continue,
+#btn-try-again {
+  margin-top: 14px;
+  z-index: 10;
+}
+
+/* Multiple Reward Views inside Capsule Modal */
+.reward-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.reward-image-container {
+  position: relative;
+  min-width: 100px;
+  width: fit-content;
+  max-width: 150px;
+  height: 105px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 
+    3px 3px 0 var(--color-pixel-border),
+    0 0 20px rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: levitate 2.4s steps(4) infinite;
+  overflow: hidden;
+  padding: 8px 12px;
+}
+
+.reward-image {
+  max-width: 130px;
+  max-height: 88px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+/* Dedicated extra-large sizing & smooth rendering for flower and chocolate rewards */
+.reward-image-container.flower-reward,
+.reward-image-container.chocolate-reward {
+  min-width: min(84vw, 300px);
+  width: min(84vw, 300px);
+  height: min(84vw, 300px);
+  max-width: 320px;
+  max-height: 320px;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow: 
+    0 0 28px rgba(255, 255, 255, 0.7),
+    4px 4px 0 var(--color-pixel-border);
+}
+
+.flower-reward .reward-image,
+.chocolate-reward .reward-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+.reward-message-card {
+  background: #fdf6e2;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 3px 3px 0 var(--color-pixel-border);
+  padding: 10px 14px;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--color-pixel-border);
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  animation: bounceIn 0.5s ease-out;
+}
+
+/* Dud / Empty Egg Reward */
+.reward-image-container.dud-reward {
+  min-width: 120px;
+  height: 120px;
+  max-width: 130px;
+  background: #ffffff;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 
+    3px 3px 0 var(--color-pixel-border),
+    0 0 16px rgba(255, 209, 102, 0.4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.dud-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dud-tongue-img {
+  width: 78px;
+  height: 78px;
+  display: block;
+  margin: 0 auto;
+  image-rendering: pixelated;
+  animation: wobbleDud 1.8s steps(3) infinite;
+}
+
+.inline-tongue-emote {
+  vertical-align: -3px;
+  display: inline-block;
+  image-rendering: pixelated;
+}
+
+@keyframes wobbleDud {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-8deg) scale(1.05); }
+  75% { transform: rotate(8deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Dud Egg Shells (Gold, Green, Brown, Lavender) */
+.capsule-shell[data-color="gold"],
+.capsule-shell[data-color="yellow"] {
+  background: linear-gradient(
+    180deg,
+    #fffde7 0%,
+    #fff9c4 20%,
+    #fff59d 20%,
+    #ffd54f 45%,
+    #ffca28 45%,
+    #f59e0b 75%,
+    #d97706 75%,
+    #b45309 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(245, 158, 11, 0.6);
+}
+
+.capsule-shell[data-color="green"] {
+  background: linear-gradient(
+    180deg,
+    #f0fdf4 0%,
+    #dcfce7 20%,
+    #bbf7d0 20%,
+    #86efac 45%,
+    #4ade80 45%,
+    #22c55e 75%,
+    #16a34a 75%,
+    #15803d 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(34, 197, 94, 0.6);
+}
+
+.capsule-shell[data-color="brown"] {
+  background: linear-gradient(
+    180deg,
+    #fdf8f5 0%,
+    #ede0d4 20%,
+    #ddb892 20%,
+    #b08968 45%,
+    #9c6644 45%,
+    #7f5539 75%,
+    #582f0e 75%,
+    #3c1f06 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(176, 137, 104, 0.6);
+}
+
+.capsule-shell[data-color="lavender"] {
+  background: linear-gradient(
+    180deg,
+    #faf5ff 0%,
+    #f3e8ff 20%,
+    #e9d5ff 20%,
+    #d8b4fe 45%,
+    #c084fc 45%,
+    #a855f7 75%,
+    #9333ea 75%,
+    #7e22ce 100%
+  );
+  box-shadow: 
+    4px 4px 0 var(--color-pixel-border),
+    inset -4px -6px 0 rgba(74, 46, 86, 0.4),
+    inset 4px 6px 0 rgba(255, 255, 255, 0.75),
+    0 0 24px rgba(168, 85, 247, 0.6);
+}
+
+/* ==========================================================================
+   Mobile Responsive Adjustments for Capsule Modal
+   ========================================================================== */
+@media (max-width: 560px) {
+  .capsule-stage {
+    max-width: min(92vw, 340px);
+    min-height: auto;
+    padding: 10px 0;
+  }
+
+  .capsule-shell {
+    width: 105px;
+    height: 140px;
+  }
+
+  .reward-image-container.flower-reward,
+  .reward-image-container.chocolate-reward {
+    min-width: min(76vw, 250px);
+    width: min(76vw, 250px);
+    height: min(76vw, 250px);
+    max-width: 260px;
+    max-height: 260px;
+    padding: 8px;
+  }
+
+  .reward-message-card {
+    font-size: 0.58rem;
+    padding: 8px 10px;
+    line-height: 1.45;
+    max-width: 90vw;
+  }
+
+  .tap-prompt {
+    font-size: 0.56rem;
+    margin-top: 12px;
+  }
+
+  #btn-goto-window,
+  #btn-collect-continue,
+  #btn-try-again {
+    font-size: 0.65rem;
+    padding: 10px 18px;
+    margin-top: 10px;
+  }
+}
+
+

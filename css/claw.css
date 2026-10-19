@@ -1,0 +1,1736 @@
+/**
+ * claw.css - Kawaii Pixel Arcade Claw Machine
+ * Dominant: Light Baby Blue & Light Pink with Violet/Purple Accents
+ * Direct Inspiration: Winged Topper, Ceiling Grid, Coiled Cable, Acrylic Chute, Ball-Top Joystick & 3D DROP Button
+ * Interactive Web Experience for Pippo ✨
+ */
+
+/* ==========================================================================
+   Cabinet Crown Topper (Reference 1: Winged Mascot Topper)
+   ========================================================================== */
+
+.cabinet-crown {
+  position: absolute;
+  top: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 12;
+  pointer-events: none;
+}
+
+/* Winged Mascot Wings */
+.crown-wing {
+  width: 26px;
+  height: 22px;
+  background: #ffffff;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 2px 2px 0 rgba(74, 46, 86, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.crown-wing.left-wing {
+  border-radius: 14px 6px 4px 14px;
+  transform: rotate(-15deg);
+  margin-right: -4px;
+  animation: wingFlapLeft 2s ease-in-out infinite alternate;
+}
+
+.crown-wing.right-wing {
+  border-radius: 6px 14px 14px 4px;
+  transform: rotate(15deg);
+  margin-left: -4px;
+  animation: wingFlapRight 2s ease-in-out infinite alternate;
+}
+
+/* Chubby Winged Creature Head */
+.crown-character {
+  position: relative;
+  width: 58px;
+  height: 44px;
+  background: var(--color-arcade-purple-light);
+  border: 3px solid var(--color-pixel-border);
+  border-radius: 20px 20px 16px 16px;
+  box-shadow: 0 4px 0 var(--color-pixel-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cute Ears */
+.crown-ears {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 6px;
+}
+
+.crown-ears::before,
+.crown-ears::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: var(--color-arcade-purple);
+  border: 3px solid var(--color-pixel-border);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Face Details (Eyes & Cute Cat Mouth ω) */
+.crown-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.crown-eye {
+  width: 5px;
+  height: 6px;
+  background: var(--color-pixel-border);
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cabinet-crown { animation: crownWander 7s ease-in-out infinite; }
+  .crown-eye { animation: crownBlink 5.4s linear infinite; transform-origin: center; }
+}
+
+@keyframes crownWander {
+  0%, 100% { translate: -10px 0; }
+  50% { translate: 10px -3px; }
+}
+
+@keyframes crownBlink {
+  0%, 42%, 46%, 90%, 94%, 100% { transform: scaleY(1); }
+  44%, 92% { transform: scaleY(0.12); }
+}
+
+.crown-mouth {
+  font-family: var(--font-arcade);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-pixel-border);
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.crown-blush {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.crown-blush::before,
+.crown-blush::after {
+  content: '';
+  width: 7px;
+  height: 4px;
+  background: #ff8fab;
+  border-radius: 2px;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   Arcade Cabinet Main Structure & Collectibles Stage
+   ========================================================================== */
+
+#scene-claw {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.claw-stage-wrapper {
+  position: relative;
+  width: min(390px, 94vw);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.arcade-cabinet.pixel-cabinet {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  margin: 28px 0 0 0;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--color-arcade-blue-light) 0%, var(--color-arcade-pink-light) 100%);
+  border: 4px solid var(--color-pixel-border);
+  box-shadow: 
+    0 10px 0 var(--color-pixel-shadow),
+    0 16px 28px rgba(0, 0, 0, 0.25),
+    inset 0 3px 0 #ffffff,
+    inset 0 -3px 0 rgba(74, 46, 86, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  transition: transform var(--duration-fast) steps(2);
+}
+
+/* ==========================================================================
+   Collectibles Shelf (Right-Hand Arcade Side Panel)
+   ========================================================================== */
+
+.claw-collectibles-shelf.pixel-shelf {
+  position: absolute;
+  left: calc(100% + 28px);
+  top: 28px;
+  width: 170px;
+  background: linear-gradient(180deg, var(--color-arcade-blue-light) 0%, var(--color-arcade-pink-light) 100%);
+  border: 4px solid var(--color-pixel-border);
+  box-shadow: 
+    0 8px 0 var(--color-pixel-shadow),
+    0 12px 24px rgba(0, 0, 0, 0.2),
+    inset 0 2px 0 #ffffff;
+  border-radius: 6px;
+  padding: 10px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  user-select: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 6;
+}
+
+.shelf-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 3px solid var(--color-pixel-border);
+  background: linear-gradient(180deg, var(--color-arcade-blue) 0%, var(--color-arcade-pink) 100%);
+  margin: -10px -10px 0 -10px;
+  padding: 8px 6px 6px;
+  border-radius: 2px 2px 0 0;
+}
+
+.shelf-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.shelf-sparkle {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  color: var(--color-arcade-purple-dark);
+  animation: twinkle 1.5s ease-in-out infinite alternate;
+}
+
+.shelf-title {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 
+    1.5px 1.5px 0 var(--color-pixel-border),
+    -1.5px -1.5px 0 var(--color-pixel-border),
+    1.5px -1.5px 0 var(--color-pixel-border),
+    -1.5px 1.5px 0 var(--color-pixel-border);
+}
+
+.shelf-counter-badge {
+  font-family: var(--font-arcade);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--color-pixel-border);
+  color: #fff9a6;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+}
+
+.shelf-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shelf-slot {
+  position: relative;
+  background: #ffffff;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 2px 2px 0 var(--color-pixel-border);
+  border-radius: 4px;
+  padding: 6px 6px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.15s steps(2), box-shadow 0.15s steps(2);
+  cursor: default;
+}
+
+.shelf-slot.locked {
+  background: #f1ecf9;
+  opacity: 0.85;
+}
+
+.shelf-slot.unlocked {
+  background: #ffffff;
+  opacity: 1;
+  box-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    0 0 12px rgba(255, 203, 242, 0.8);
+  cursor: pointer;
+}
+
+.shelf-slot.unlocked:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    2px 4px 0 var(--color-pixel-border),
+    0 0 16px rgba(189, 224, 254, 0.9);
+}
+
+/* Slot Pedestal Area */
+.slot-pedestal {
+  width: 100%;
+  height: 44px;
+  background: #e6ddf5;
+  border: 2px solid var(--color-pixel-border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.shelf-slot.unlocked .slot-pedestal {
+  background: radial-gradient(circle, #ffffff 30%, #e2d9fc 100%);
+}
+
+.slot-mystery {
+  font-family: var(--font-pixel);
+  font-size: 1.1rem;
+  color: var(--color-arcade-purple-dark);
+  animation: mysteryFloat 2s ease-in-out infinite alternate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-mystery .pixel-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.slot-img {
+  max-width: 38px;
+  max-height: 34px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  animation: levitate 2s steps(4) infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+#slot-flower .slot-img {
+  mix-blend-mode: multiply;
+  image-rendering: auto;
+  max-width: 44px;
+  max-height: 44px;
+}
+
+.slot-key-glyph {
+  font-size: 1.5rem;
+  line-height: 1;
+  animation: levitate 2s steps(4) infinite;
+  filter: drop-shadow(0 0 8px var(--color-gold-glow));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-key-glyph .pixel-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.slot-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2px;
+  gap: 4px;
+}
+
+.slot-name {
+  font-family: var(--font-arcade);
+  font-size: 0.50rem;
+  font-weight: 700;
+  color: var(--color-pixel-border);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.slot-status {
+  font-family: var(--font-arcade);
+  font-size: 0.46rem;
+  font-weight: 700;
+  color: #8b5cf6;
+  white-space: nowrap;
+}
+
+.shelf-slot.unlocked .slot-status {
+  color: #10b981;
+}
+
+/* Key Completion Pointer and Glow */
+.slot-pointer {
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 12;
+  animation: pointBounce 0.7s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 6px #ffd700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-pointer .pixel-icon {
+  width: 24px;
+  height: 24px;
+}
+
+@keyframes pointBounce {
+  0% { transform: translateY(-50%) translateX(0); }
+  100% { transform: translateY(-50%) translateX(8px); }
+}
+
+@keyframes mysteryFloat {
+  0% { transform: translateY(0); opacity: 0.7; }
+  100% { transform: translateY(-3px); opacity: 1; }
+}
+
+/* Glowing Ready Pulse on Key Slot when 3/3 found */
+.shelf-slot#slot-key.ready-pulse {
+  animation: keyGlowPulse 1.2s ease-in-out infinite alternate;
+  border-color: #ffd700;
+}
+
+@keyframes keyGlowPulse {
+  0% {
+    box-shadow: 
+      0 0 10px #ffd700,
+      0 0 20px #ffb703,
+      2px 2px 0 var(--color-pixel-border);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 
+      0 0 18px #ffd700,
+      0 0 32px #ff85a2,
+      2px 2px 0 var(--color-pixel-border);
+    transform: scale(1.04);
+  }
+}
+
+.shelf-hint-box {
+  background: #fdf6e2;
+  border: 2px solid var(--color-pixel-border);
+  border-radius: 3px;
+  padding: 4px 6px;
+  text-align: center;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shelf-hint {
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  line-height: 1.35;
+  color: var(--color-pixel-border);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Cabinet Marquee Header (Light Blue & Pink with Pixel Stars)
+   ========================================================================== */
+
+.cabinet-marquee {
+  position: relative;
+  background: linear-gradient(180deg, var(--color-arcade-blue) 0%, var(--color-arcade-pink) 100%);
+  padding: 14px 16px 12px;
+  text-align: center;
+  border-bottom: 4px solid var(--color-pixel-border);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.marquee-decorations {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: var(--color-arcade-purple-dark);
+  animation: twinkle 1.5s ease-in-out infinite alternate;
+  user-select: none;
+}
+
+.marquee-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cabinet-marquee .arcade-title {
+  margin: 0;
+  font-family: var(--font-pixel);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    -2px -2px 0 var(--color-pixel-border),
+    2px -2px 0 var(--color-pixel-border),
+    -2px 2px 0 var(--color-pixel-border),
+    0 0 10px var(--color-arcade-blue);
+}
+
+.marquee-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 12px;
+  background: var(--color-gold);
+  color: #4a2e56;
+  font-family: var(--font-arcade);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 2px solid var(--color-pixel-border);
+  box-shadow: 2px 2px 0 var(--color-pixel-border);
+  animation: badgeBlink 1.5s steps(2) infinite;
+}
+
+/* ==========================================================================
+   Cabinet Glass Play Area & Overhead Ceiling Grid (Reference 2)
+   ========================================================================== */
+
+.cabinet-glass {
+  position: relative;
+  background: var(--color-glass-bg);
+  margin: 10px 12px 0 12px;
+  min-height: 290px;
+  height: 310px;
+  overflow: hidden;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 
+    inset 0 10px 24px rgba(0, 0, 0, 0.8),
+    inset 0 0 16px rgba(189, 224, 254, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Full Claw Machine Screen Perspective Grid Lines */
+.ceiling-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(189, 224, 254, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(189, 224, 254, 0.16) 1px, transparent 1px);
+  background-size: 32px 28px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* First Hint Popup inside the Black Screen (Fade In & Fade Out) */
+.glass-hint-popup {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(24, 13, 36, 0.94);
+  border: 2px solid #ffd166;
+  box-shadow: 
+    0 0 16px rgba(255, 209, 102, 0.55),
+    2px 2px 0 var(--color-pixel-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 86%;
+  width: max-content;
+  pointer-events: none;
+  z-index: 8;
+  opacity: 0;
+}
+
+.glass-hint-popup .hint-popup-text {
+  font-family: var(--font-pixel);
+  font-size: 0.52rem;
+  line-height: 1.4;
+  color: #fff9db;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+}
+
+.hint-popup-controls { display: block; margin-bottom: 10px; color: #ffffff; }
+
+.hint-popup-emote {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  animation: emoteWiggle 1.5s ease-in-out infinite;
+}
+
+.shelf-hint-emote {
+  width: 14px;
+  height: 14px;
+  image-rendering: pixelated;
+  vertical-align: -2px;
+  display: inline-block;
+  margin-right: 3px;
+}
+
+@keyframes emoteWiggle {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.1); }
+  75% { transform: rotate(10deg) scale(1.1); }
+}
+
+.glass-hint-popup.animate-fade {
+  animation: hintPopupFade 7.8s ease-in-out forwards;
+}
+
+@keyframes hintPopupFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -42%) scale(0.92);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -56%) scale(0.94);
+    visibility: hidden;
+  }
+}
+
+/* Glass Floating Diamond Sparkles */
+.glass-sparkle {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  pointer-events: none;
+  z-index: 5;
+  animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+.glass-sparkle.s1 { top: 20px; right: 28px; animation-delay: 0s; }
+.glass-sparkle.s2 { top: 52px; right: 48px; animation-delay: 0.7s; font-size: 0.5rem; }
+.glass-sparkle.s3 { top: 120px; left: 24px; animation-delay: 1.2s; }
+
+/* Glass Reflection Layer */
+.glass-reflection {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 60%);
+  pointer-events: none;
+  z-index: 6;
+}
+
+.glass-reflection::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 22%;
+  width: 32px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  transform: skewX(-25deg);
+}
+
+/* ==========================================================================
+   Gantry Rail, Carriage & Coiled Cable
+   ========================================================================== */
+
+.gantry-rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background: linear-gradient(180deg, var(--color-arcade-blue) 0%, #a2d2ff 50%, #70a9db 100%);
+  border-bottom: 2px solid var(--color-pixel-border);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.6);
+  z-index: 4;
+}
+
+.claw-carriage {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 48px;
+  transform: translateX(-50%);
+  transition: left var(--duration-fast) linear;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 4;
+}
+
+.claw-carriage::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 10px;
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  border: 2px solid var(--color-pixel-border);
+  border-radius: 2px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+
+.claw-carriage.vibrating {
+  animation: motorVibrate 0.1s linear infinite;
+}
+
+/* Coiled Cable Assembly (Reference 2) */
+.claw-cable-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.claw-cable {
+  width: 4px;
+  height: 20px;
+  margin: 0 auto;
+  background: repeating-linear-gradient(
+    180deg,
+    #ffffff 0px,
+    #94a3b8 2px,
+    #475569 4px
+  );
+  border-left: 1px solid var(--color-pixel-border);
+  border-right: 1px solid var(--color-pixel-border);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+  transition: height var(--duration-normal) var(--ease-smooth);
+}
+
+/* Claw Hub Head */
+.claw-head {
+  position: relative;
+  width: 38px;
+  height: 24px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.claw-head::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 12px;
+  background: linear-gradient(180deg, var(--color-arcade-blue) 0%, #70a9db 100%);
+  border: 2px solid var(--color-pixel-border);
+  border-radius: 3px;
+  box-shadow: 0 2px 0 var(--color-pixel-border);
+  z-index: 2;
+}
+
+/* Mechanical Pixel Claw Prongs */
+.claw-prong {
+  position: absolute;
+  top: 4px;
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(to bottom, #ffffff 0%, #cbd5e1 50%, #64748b 100%);
+  border-left: 1px solid var(--color-pixel-border);
+  border-right: 1px solid var(--color-pixel-border);
+  transition: transform var(--duration-normal) var(--ease-spring);
+}
+
+.claw-prong::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  width: 6px;
+  height: 5px;
+  background: var(--color-pixel-border);
+}
+
+.claw-prong.left {
+  left: 7px;
+  transform-origin: top center;
+  transform: rotate(0deg);
+}
+
+.claw-prong.left::after {
+  left: 0;
+  border-radius: 2px 0 0 2px;
+}
+
+.claw-prong.center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.claw-prong.right {
+  right: 7px;
+  transform-origin: top center;
+  transform: rotate(0deg);
+}
+
+.claw-prong.right::after {
+  right: 0;
+  border-radius: 0 2px 2px 0;
+}
+
+/* Claw Prongs Open & Grabbing States */
+.claw-head.open .claw-prong.left {
+  transform: rotate(-28deg);
+}
+
+.claw-head.open .claw-prong.right {
+  transform: rotate(28deg);
+}
+
+.claw-head.grabbing .claw-prong.left {
+  transform: rotate(14deg);
+}
+
+.claw-head.grabbing .claw-prong.right {
+  transform: rotate(-14deg);
+}
+
+/* ==========================================================================
+   Prize Pit: Pixel Plushies & Special Golden Star Capsule
+   ========================================================================== */
+
+.prize-pit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 12px 10px 10px 10px;
+  gap: 8px;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   Prize Pit: Kawaii Egg Capsules (Previous Design Shape)
+   ========================================================================== */
+
+.prize-pit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 12px 6px 8px 6px;
+  gap: 7px;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+/* Capsule Base Geometry (Kawaii Egg Shape) */
+.capsule {
+  position: relative;
+  width: 38px;
+  height: 52px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.55),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+  transition: transform var(--duration-fast) var(--ease-spring), box-shadow var(--duration-fast);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.capsule:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 
+    0 8px 18px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.65),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Glossy highlight ellipse near top */
+.capsule::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  width: 11px;
+  height: 15px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  transform: rotate(-25deg);
+  filter: blur(0.5px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Capsule Halves & Seam Divider */
+.capsule-half {
+  width: 100%;
+  flex: 1;
+}
+
+.capsule-band {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.capsule-band .star-pattern {
+  font-size: 0.65rem;
+  color: #ffd700;
+  line-height: 1;
+  text-shadow: 0 0 3px rgba(255, 215, 0, 0.9);
+}
+
+/* ==========================================================================
+   Egg Color Variations: Gold, Red, Pink, Blue, Brown, Green, Lavender
+   ========================================================================== */
+
+/* 1. Golden Egg (Gleaming Gold with Animated Twinkling Sparkle Alone) */
+.capsule[data-color="gold"],
+.capsule[data-color="yellow"] {
+  background: radial-gradient(circle at 35% 30%, #fff9a6 0%, #ffd700 45%, #f59e0b 80%, #d97706 100%);
+  box-shadow: 
+    0 0 16px var(--color-gold-glow),
+    0 6px 14px rgba(0, 0, 0, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.7),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+  z-index: 4;
+}
+
+.capsule[data-color="gold"] .egg-sparkle {
+  animation: goldenEggSparkle 1.2s ease-in-out infinite alternate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.capsule[data-color="gold"] .egg-sparkle .pixel-icon {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+}
+
+@keyframes goldenEggSparkle {
+  0% { transform: scale(0.85) rotate(-10deg); opacity: 0.75; filter: drop-shadow(0 0 4px #ffd700); }
+  100% { transform: scale(1.25) rotate(15deg); opacity: 1; filter: drop-shadow(0 0 10px #ffffff); }
+}
+
+/* 2. Proper Vibrant Red Egg */
+.capsule[data-color="red"] {
+  background: radial-gradient(circle at 35% 30%, #ff5252 0%, #ff1744 40%, #d50000 80%, #9b0000 100%);
+  box-shadow: 
+    0 4px 14px rgba(213, 0, 0, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Pink Egg */
+.capsule[data-color="pink"] {
+  background: linear-gradient(135deg, #ffcbf2 0%, #ff8fab 50%, #f72585 100%);
+  box-shadow: 
+    0 4px 12px rgba(247, 37, 133, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* 4. Light Cyan Blue Egg */
+.capsule[data-color="blue"],
+.capsule[data-color="cyan"] {
+  background: radial-gradient(circle at 35% 30%, #e0faff 0%, #67e8f9 40%, #06b6d4 80%, #0891b2 100%);
+  box-shadow: 
+    0 4px 14px rgba(6, 182, 212, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.7),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 5. Brown Egg */
+.capsule[data-color="brown"] {
+  background: linear-gradient(135deg, #e6ccb2 0%, #b08968 50%, #7f5539 100%);
+  box-shadow: 
+    0 4px 12px rgba(127, 85, 57, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 6. Green Egg */
+.capsule[data-color="green"] {
+  background: linear-gradient(135deg, #d8f3dc 0%, #74c69d 50%, #2d6a4f 100%);
+  box-shadow: 
+    0 4px 12px rgba(45, 106, 79, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* 7. Lavender Egg (and something else) */
+.capsule[data-color="lavender"] {
+  background: linear-gradient(135deg, #e2d9fc 0%, #c9b1ff 50%, #7c4dff 100%);
+  box-shadow: 
+    0 4px 12px rgba(124, 77, 255, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.capsule[data-color="peach"] {
+  background: linear-gradient(135deg, #ffe5d9 0%, #ffcad4 50%, #f4acb7 100%);
+  box-shadow: 
+    0 4px 12px rgba(244, 172, 183, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.capsule[data-color="mint"] {
+  background: linear-gradient(135deg, #c7f9cc 0%, #80ed99 50%, #57cc99 100%);
+}
+
+
+/* Lower Prize Collection Slot (Matching Marquee Gradient & Continuous Twinkling Stars) */
+.prize-chute {
+  position: relative;
+  background: linear-gradient(180deg, var(--color-arcade-blue) 0%, var(--color-arcade-pink) 100%);
+  border-top: 3px solid var(--color-pixel-border);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.75);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Continuous Pixel Star Constellation Track */
+.chute-stars-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+  padding: 0 10px 0 4px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.chute-star {
+  font-family: var(--font-pixel);
+  font-size: 0.72rem;
+  color: var(--color-arcade-purple-dark);
+  animation: twinkle 1.5s ease-in-out infinite alternate;
+  display: inline-block;
+  line-height: 1;
+  text-shadow: 0 0 6px rgba(189, 224, 254, 0.6);
+  transform-origin: center;
+}
+
+/* Staggered Continuous Twinkle & Subtle Size/Color Variety */
+.chute-star:nth-child(1) { animation-delay: 0s; font-size: 0.75rem; }
+.chute-star:nth-child(2) { animation-delay: 0.35s; font-size: 0.62rem; color: var(--color-arcade-purple); }
+.chute-star:nth-child(3) { animation-delay: 0.7s; font-size: 0.8rem; color: var(--color-arcade-purple-dark); }
+.chute-star:nth-child(4) { animation-delay: 1.05s; font-size: 0.65rem; color: var(--color-arcade-purple); }
+.chute-star:nth-child(5) { animation-delay: 0.2s; font-size: 0.78rem; color: var(--color-arcade-purple-dark); }
+.chute-star:nth-child(6) { animation-delay: 0.55s; font-size: 0.62rem; color: var(--color-arcade-purple); }
+.chute-star:nth-child(7) { animation-delay: 0.9s; font-size: 0.82rem; color: var(--color-arcade-purple-dark); }
+.chute-star:nth-child(8) { animation-delay: 1.25s; font-size: 0.68rem; color: var(--color-arcade-purple); }
+
+.chute-tray {
+  width: 72px;
+  height: 48px;
+  background: #190f26;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Won Capsule in Tray */
+.tray-capsule {
+  width: 36px;
+  height: 48px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: radial-gradient(circle at 35% 30%, #e0faff 0%, #67e8f9 40%, #06b6d4 80%, #0891b2 100%);
+  box-shadow: 0 0 16px rgba(103, 232, 249, 0.75), 0 4px 10px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  animation: bubbleFloat 1.8s steps(4) infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+.tray-capsule[data-color="blue"] {
+  background: radial-gradient(circle at 35% 30%, #e0faff 0%, #67e8f9 40%, #06b6d4 80%, #0891b2 100%);
+  box-shadow: 0 0 16px rgba(103, 232, 249, 0.8), 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.tray-capsule[data-color="pink"] {
+  background: radial-gradient(circle at 35% 30%, #ffcbf2 0%, #ff8fab 45%, #f72585 85%, #b5179e 100%);
+  box-shadow: 0 0 16px rgba(255, 143, 171, 0.8), 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.tray-capsule[data-color="red"] {
+  background: radial-gradient(circle at 35% 30%, #ff5252 0%, #ff1744 40%, #d50000 80%, #9b0000 100%);
+  box-shadow: 0 0 16px rgba(255, 23, 68, 0.8), 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.tray-capsule[data-color="gold"] {
+  background: radial-gradient(circle at 35% 30%, #fff9a6 0%, #ffd700 45%, #f59e0b 80%, #d97706 100%);
+  box-shadow: 0 0 16px var(--color-gold-glow), 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.tray-capsule::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  width: 10px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Arcade Control Console (References 1 & 2: Joystick, Coin, 3D Drop Button)
+   ========================================================================== */
+
+.control-deck.pixel-deck {
+  background: linear-gradient(180deg, var(--color-arcade-pink) 0%, #fbcfe8 100%);
+  border-top: 4px solid var(--color-pixel-border);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  align-items: center;
+  padding: 12px 14px;
+  gap: 8px;
+  box-shadow: 
+    inset 0 3px 0 #ffffff,
+    inset 0 -4px 0 rgba(74, 46, 86, 0.2);
+  z-index: 6;
+}
+
+.deck-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 1. Ball-Top Joystick Assembly */
+.joystick-section {
+  gap: 6px;
+}
+
+.joystick-pod {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.joystick-base {
+  position: absolute;
+  width: 36px;
+  height: 18px;
+  bottom: 4px;
+  background: #cbd5e1;
+  border: 3px solid var(--color-pixel-border);
+  border-radius: 50%;
+  box-shadow: 0 3px 0 var(--color-pixel-border);
+}
+
+.joystick-shaft {
+  position: relative;
+  width: 6px;
+  height: 24px;
+  background: linear-gradient(to right, #e2e8f0, #94a3b8);
+  border: 1px solid var(--color-pixel-border);
+  transform-origin: bottom center;
+  transition: transform 0.15s steps(2);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Peach/Coral Ball-Top Knob (Reference 2) */
+.joystick-ball {
+  position: absolute;
+  top: -14px;
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle at 35% 35%, #fed7aa, #fb923c 60%, #ea580c 100%);
+  border: 3px solid var(--color-pixel-border);
+  border-radius: 50%;
+  box-shadow: 1px 2px 0 var(--color-pixel-border);
+}
+
+/* Joystick Physical Tilt States */
+.joystick-shaft.tilt-left {
+  transform: rotate(-20deg);
+}
+
+.joystick-shaft.tilt-right {
+  transform: rotate(20deg);
+}
+
+/* Arrow Movement Buttons */
+.joystick-arrows {
+  display: flex;
+  gap: 6px;
+}
+
+.ctrl-btn.pixel-ctrl {
+  width: 32px;
+  height: 30px;
+  background: var(--color-arcade-blue-light);
+  border: 3px solid var(--color-pixel-border);
+  border-radius: 0;
+  box-shadow: 2px 2px 0 var(--color-pixel-border);
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--color-pixel-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+
+.ctrl-btn.pixel-ctrl:hover {
+  background: var(--color-arcade-blue);
+}
+
+.ctrl-btn.pixel-ctrl:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--color-pixel-border);
+}
+
+/* 2. Coin Slot & Status LED Panel (Reference 1 & 2) */
+.coin-insert-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.coin-label {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: var(--color-pixel-border);
+  letter-spacing: 0.5px;
+}
+
+.led-display {
+  background: #180d24;
+  border: 2px solid var(--color-pixel-border);
+  padding: 2px 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+  transition: background 0.1s steps(2);
+}
+
+.led-display.coin-inserted {
+  background: #ff3366;
+  box-shadow: 0 0 10px #ff3366;
+}
+
+.led-display.coin-inserted .led-text {
+  color: #ffffff;
+  text-shadow: 0 0 8px #ffffff;
+}
+
+.led-text {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  color: #ff3366;
+  text-shadow: 0 0 6px #ff3366;
+  letter-spacing: 1px;
+}
+
+.coin-slot-btn {
+  background: var(--color-arcade-blue);
+  border: 2px solid var(--color-pixel-border);
+  box-shadow: 2px 2px 0 var(--color-pixel-border);
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform 0.08s steps(2);
+}
+
+.coin-slot-btn:hover {
+  background: var(--color-arcade-blue-dark);
+}
+
+.coin-slot-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 var(--color-pixel-border);
+}
+
+.coin-slot {
+  width: 3px;
+  height: 10px;
+  background: #180d24;
+  border-radius: 1px;
+}
+
+.coin-text {
+  font-family: var(--font-pixel);
+  font-size: 0.45rem;
+  color: var(--color-pixel-border);
+}
+
+/* 3. Chunky 3D Arcade DROP Button (Reference 1 & 2) */
+.ctrl-btn.drop-btn.pixel-drop {
+  width: 58px;
+  height: 58px;
+  background: radial-gradient(circle at 35% 35%, #ff6b81, #ee5253 60%, #c23616 100%);
+  border: 4px solid var(--color-pixel-border);
+  border-radius: 50%;
+  box-shadow: 
+    0 6px 0 #8b0000,
+    0 9px 0 var(--color-pixel-border),
+    0 12px 10px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+
+.ctrl-btn.drop-btn.pixel-drop .drop-text {
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #8b0000, -1px -1px 0 #8b0000;
+}
+
+.ctrl-btn.drop-btn.pixel-drop:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 0 #8b0000,
+    0 11px 0 var(--color-pixel-border),
+    0 14px 14px rgba(0, 0, 0, 0.4);
+}
+
+.ctrl-btn.drop-btn.pixel-drop:active {
+  transform: translateY(6px);
+  box-shadow: 
+    0 0 0 #8b0000,
+    0 2px 0 var(--color-pixel-border);
+}
+
+/* ==========================================================================
+   Claw Machine Mascot Companions
+   ========================================================================== */
+
+.claw-mascots {
+  position: absolute;
+  bottom: -16px;
+  left: -82px;
+  right: -82px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.claw-mascots .mascot {
+  width: 76px;
+  height: auto;
+  pointer-events: auto;
+}
+
+.claw-mascots .mascot.otter { width: 100px; }
+
+.claw-mascots .arcade-pet {
+  position: absolute;
+  bottom: 0;
+  width: auto;
+  height: 66px;
+  scale: -1 1;
+  animation: none;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 0 #4a2e5633);
+}
+.claw-mascots .indian-dog { right: calc(100% + 8px); }
+.claw-mascots .husky { left: calc(100% + 8px); }
+
+.arcade-pet-talk {
+  position: absolute;
+  bottom: 70px;
+  min-width: 44px;
+  padding: 3px 5px;
+  border: 2px solid var(--color-pixel-border);
+  border-radius: 5px;
+  background: #ffe3ed;
+  color: #76374f;
+  font-family: var(--font-arcade);
+  font-size: 0.6rem;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 1px 2px 0 #4a2e5626;
+  pointer-events: none;
+}
+.arcade-pet-talk.husky { background: #e0f2ff; color: #355775; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .claw-mascots .arcade-pet {
+    transform-origin: center bottom;
+    animation: petWiggle 6s ease-in-out infinite;
+  }
+  .claw-mascots .arcade-pet.husky { animation-delay: -2.7s; animation-duration: 7s; }
+}
+@keyframes petWiggle {
+  0%, 45%, 80%, 100% { transform: rotate(0deg) scaleY(1); }
+  54% { transform: rotate(-2deg) scaleY(1.025); }
+  64% { transform: rotate(2deg) scaleY(1.015); }
+  73% { transform: rotate(-1deg) scaleY(1.01); }
+}
+
+.claw-mascots .speech-bubble {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  max-width: 130px;
+  font-size: 0.52rem;
+  line-height: 1.45;
+  padding: 5px 8px;
+  pointer-events: none;
+  white-space: normal;
+}
+
+.claw-mascots .otter-bubble {
+  left: -46px;
+  right: auto;
+}
+
+.claw-mascots .otter-bubble::after {
+  left: 54px;
+  right: auto;
+  bottom: -6px;
+  width: 7px;
+  height: 6px;
+}
+
+.claw-mascots .bunny-bubble {
+  left: auto;
+  right: -46px;
+  text-align: center;
+}
+
+.claw-mascots .bunny-bubble::after {
+  left: auto;
+  right: 54px;
+  bottom: -6px;
+  width: 7px;
+  height: 6px;
+}
+
+.mascot.bunny.cheering {
+  animation: bunnyCheer 0.6s ease-in-out infinite alternate;
+}
+
+.mascot.bunny.annoyed {
+  animation: bunnyAnnoyed 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes bunnyCheer {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-7px) scale(1.08); }
+}
+
+@keyframes bunnyAnnoyed {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ==========================================================================
+   Mobile & Tablet Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 840px) {
+  #scene-claw {
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 8px 48px 8px;
+  }
+
+  .claw-stage-wrapper {
+    flex-direction: column;
+    gap: 16px;
+    margin: 0 auto;
+    align-items: center;
+    width: min(390px, 94vw);
+  }
+
+  .arcade-cabinet.pixel-cabinet {
+    margin: 24px auto 0 auto;
+  }
+
+  /* Keep dialogue in its own row below the controls, even when messages grow. */
+  .claw-mascots {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 12px;
+    width: 100%;
+    padding: 8px 8px 0;
+  }
+
+  .claw-mascots .speech-bubble {
+    position: relative;
+    inset: auto;
+    grid-row: 1;
+    max-width: 100%;
+    width: fit-content;
+  }
+
+  .claw-mascots .otter-bubble { grid-column: 1; left: auto; }
+  .claw-mascots .bunny-bubble { grid-column: 2; right: auto; justify-self: end; }
+  .claw-mascots .mascot { grid-row: 2; transform-origin: center bottom; translate: 0 -8px; }
+  .claw-mascots .otter { grid-column: 1; }
+  .claw-mascots .bunny { grid-column: 2; justify-self: end; }
+
+  .claw-mascots .arcade-pet { height: 56px; bottom: 8px; }
+  .claw-mascots .arcade-pet-talk { bottom: 68px; }
+  .claw-mascots .indian-dog { left: auto; right: calc(50% + 4px); }
+  .claw-mascots .husky { left: calc(50% + 4px); right: auto; }
+
+  .claw-collectibles-shelf.pixel-shelf {
+    position: static;
+    left: auto;
+    top: auto;
+    width: 100%;
+    max-width: 390px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 18px;
+    gap: 8px;
+  }
+
+  .shelf-header {
+    width: 100%;
+    margin: -10px -10px 4px -10px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 6px 12px;
+  }
+
+  .shelf-slots {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .shelf-slot {
+    flex: 1;
+    min-width: 80px;
+  }
+
+  .shelf-hint-box {
+    width: 100%;
+  }
+
+  .slot-pointer {
+    left: 50%;
+    top: -24px;
+    transform: translateX(-50%) rotate(90deg);
+    animation: pointBounceVert 0.7s ease-in-out infinite alternate;
+  }
+}
+
+@media (max-width: 560px) {
+  #scene-claw {
+    padding: 16px 6px 40px 6px;
+  }
+
+  .arcade-cabinet.pixel-cabinet {
+    max-width: 335px;
+    width: min(335px, 94vw);
+    margin: 26px auto 0 auto;
+  }
+
+  .cabinet-marquee .arcade-title {
+    font-size: 0.95rem;
+  }
+
+  .marquee-badge {
+    font-size: 0.62rem;
+  }
+
+  .cabinet-glass {
+    height: 270px;
+    min-height: 250px;
+    margin: 8px 8px 0 8px;
+  }
+
+  .claw-mascots {
+    width: min(335px, 94vw);
+  }
+
+  .claw-mascots .mascot {
+    width: 48px;
+  }
+
+  .claw-mascots .mascot.otter { width: 64px; }
+  .claw-mascots .arcade-pet { height: 44px; }
+  .claw-mascots .arcade-pet-talk { bottom: 56px; }
+
+  .claw-mascots .speech-bubble {
+    bottom: auto;
+    font-size: 0.44rem;
+    line-height: 1.4;
+    padding: 5px 8px;
+    max-width: 135px;
+  }
+
+  .claw-mascots .otter-bubble {
+    left: auto;
+    right: auto;
+  }
+
+  .claw-mascots .otter-bubble::after {
+    left: 18px;
+    right: auto;
+    bottom: -5px;
+    width: 6px;
+    height: 5px;
+  }
+
+  .claw-mascots .bunny-bubble {
+    left: auto;
+    right: auto;
+  }
+
+  .claw-mascots .bunny-bubble::after {
+    left: auto;
+    right: 18px;
+    bottom: -5px;
+    width: 6px;
+    height: 5px;
+  }
+
+  .ctrl-btn.drop-btn.pixel-drop {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ctrl-btn.drop-btn.pixel-drop .drop-text {
+    font-size: 0.55rem;
+  }
+
+  .joystick-pod {
+    width: 36px;
+    height: 36px;
+  }
+
+  .joystick-ball {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ctrl-btn.pixel-ctrl {
+    width: 28px;
+    height: 26px;
+    font-size: 0.65rem;
+  }
+
+  .claw-collectibles-shelf.pixel-shelf {
+    max-width: 335px;
+    width: min(335px, 94vw);
+    padding: 8px;
+    margin-top: 14px;
+  }
+
+  .shelf-slot {
+    min-width: 72px;
+    padding: 4px;
+  }
+
+  .slot-name {
+    font-size: 0.44rem;
+  }
+
+  .shelf-hint {
+    font-size: 0.44rem;
+  }
+}
+
+@keyframes pointBounceVert {
+  0% { transform: translateX(-50%) translateY(0) rotate(90deg); }
+  100% { transform: translateX(-50%) translateY(6px) rotate(90deg); }
+}

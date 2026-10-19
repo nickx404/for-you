@@ -1,0 +1,432 @@
+/**
+ * main.css - Core Design System & Foundation Styles
+ * Interactive Web Experience for Pippo ✨
+ */
+
+/* ==========================================================================
+   CSS Custom Properties / Design Tokens
+   ========================================================================== */
+:root {
+  --scene-height: 100dvh;
+  /* Dominant Light Blue & Light Pink with Violet/Purple Accents (Reference Inspired) */
+  --color-bg: #fff5f8;
+  --color-arcade-blue: #bde0fe;
+  --color-arcade-blue-light: #e0f2fe;
+  --color-arcade-blue-dark: #7bc0f7;
+  --color-arcade-pink: #ffcbf2;
+  --color-arcade-pink-light: #ffe5f7;
+  --color-arcade-pink-dark: #f29ecf;
+  --color-arcade-purple: #c9b1ff;
+  --color-arcade-purple-light: #e2d9fc;
+  --color-arcade-purple-dark: #9f84db;
+  --color-pixel-border: #4a2e56;
+  --color-pixel-shadow: #2e1738;
+  --color-primary: #ff8fab;
+  --color-primary-light: #ffb3c6;
+  --color-cream: #fff9fb;
+  --color-glass-bg: #1e1333;
+  --color-text: #4a2e56;
+  --color-text-light: #7b5988;
+  --color-gold: #ffd700;
+  --color-gold-glow: rgba(255, 215, 0, 0.5);
+
+  /* Typography */
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-arcade: 'Silkscreen', 'Press Start 2P', cursive;
+  --font-main: 'Quicksand', 'Segoe UI', sans-serif;
+
+  /* Physics & Easing Functions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Transition Durations */
+  --duration-fast: 120ms;
+  --duration-normal: 250ms;
+  --duration-slow: 500ms;
+
+  /* Stepped Pixel Shadows */
+  --shadow-pixel: 4px 4px 0 var(--color-pixel-border);
+  --shadow-pixel-sm: 2px 2px 0 var(--color-pixel-border);
+  --shadow-pixel-lg: 6px 6px 0 var(--color-pixel-border);
+  --shadow-glow: 0 0 16px var(--color-gold-glow);
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* Remove default button styles */
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================================================
+   Scene Management System
+   ========================================================================== */
+.scene {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: var(--scene-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-slow) var(--ease-smooth);
+  overflow: hidden;
+}
+
+.scene.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   Interactive Pixel Buttons
+   ========================================================================== */
+.spring-btn, .pixel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-arcade-pink);
+  color: var(--color-pixel-border);
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  padding: 12px 22px;
+  border: 3px solid var(--color-pixel-border);
+  border-radius: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--color-pixel-border), 0 8px 0 rgba(74, 46, 86, 0.2);
+  text-decoration: none;
+  text-align: center;
+  z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform var(--duration-fast) steps(2),
+              box-shadow var(--duration-fast) steps(2),
+              background var(--duration-fast);
+}
+
+.spring-btn:hover, .pixel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--color-pixel-border), 0 10px 0 rgba(74, 46, 86, 0.25);
+  background: var(--color-arcade-pink-light);
+}
+
+.spring-btn:active, .pixel-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--color-pixel-border);
+}
+
+/* ==========================================================================
+   Stepped Pixel Speech Bubbles
+   ========================================================================== */
+.speech-bubble {
+  position: absolute;
+  background: #ffffff;
+  color: var(--color-pixel-border);
+  font-family: var(--font-pixel);
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1.45;
+  padding: 6px 10px;
+  max-width: 160px;
+  border: 2px solid var(--color-pixel-border);
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--color-pixel-border);
+  animation: bubbleFloat 3s steps(4) infinite;
+  pointer-events: none;
+  z-index: 10;
+  letter-spacing: 0.5px;
+}
+
+/* Stepped Pixel Bubble Tail */
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 20px;
+  width: 8px;
+  height: 6px;
+  background: #ffffff;
+  border-left: 2px solid var(--color-pixel-border);
+  border-bottom: 2px solid var(--color-pixel-border);
+  border-top: none;
+  border-right: none;
+  transform: skewX(-15deg);
+}
+
+.speech-bubble::before {
+  display: none;
+}
+
+.otter-bubble {
+  filter: drop-shadow(0 2px 0 rgba(74, 46, 86, 0.25));
+}
+
+/* ==========================================================================
+   Mascots System (Permanent Pixel Sprites)
+   ========================================================================== */
+.mascot-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+}
+
+.mascot, .pixelated {
+  width: 82px;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 4px 0 rgba(74, 46, 86, 0.25));
+  animation: breathe 3.5s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform var(--duration-fast) steps(2);
+}
+
+.mascot.celebrating {
+  animation: celebrationHop 0.5s steps(3) infinite;
+}
+
+.mascot.otter {
+  animation-delay: 0s;
+}
+
+.mascot.bunny {
+  animation-delay: 0.4s;
+}
+
+/* ==========================================================================
+   Audio Toggle Button (Pixel Styling)
+   ========================================================================== */
+#audio-toggle.pixel-btn,
+#audio-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 0;
+  border: 3px solid var(--color-pixel-border);
+  background: var(--color-arcade-blue-light);
+  box-shadow: 3px 3px 0 var(--color-pixel-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: var(--color-pixel-border);
+  z-index: 1000;
+  cursor: pointer;
+  transition: transform var(--duration-fast) steps(2),
+              background var(--duration-fast),
+              box-shadow var(--duration-fast) steps(2);
+}
+
+#audio-toggle .pixel-icon {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+}
+
+#audio-toggle:hover {
+  transform: translateY(-2px);
+  background: var(--color-arcade-blue);
+  box-shadow: 4px 4px 0 var(--color-pixel-border);
+}
+
+#audio-toggle:active {
+  transform: translateY(2px);
+  box-shadow: 1px 1px 0 var(--color-pixel-border);
+}
+
+#audio-toggle.muted {
+  opacity: 0.6;
+  filter: grayscale(0.6);
+}
+
+.scene-navigation {
+  position: fixed;
+  top: max(8px, env(safe-area-inset-top));
+  left: max(8px, env(safe-area-inset-left));
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+
+#scene-isabella {
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.scene-navigation button {
+  position: relative;
+  isolation: isolate;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.scene-navigation button::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  z-index: -1;
+  border: 1px solid #4a2e5659;
+  border-radius: 50%;
+  background: #fff9fbe6;
+  box-shadow: 0 1px 3px #4a2e561a;
+}
+
+.scene-navigation button:hover:not(:disabled)::before {
+  background: var(--color-arcade-pink-light);
+}
+
+.scene-navigation button:focus-visible {
+  outline: 3px solid var(--color-arcade-purple-dark);
+  outline-offset: 0;
+}
+
+.scene-navigation button:disabled {
+  opacity: .35;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Canvas Particle Overlay
+   ========================================================================== */
+#canvas-particles {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ==========================================================================
+   Modal Foundation
+   ========================================================================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(43, 27, 61, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--duration-normal) var(--ease-smooth),
+              visibility var(--duration-normal) var(--ease-smooth);
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+.hidden {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* 16-Bit Pixel Art Icon System */
+.pixel-icon {
+  display: inline-block;
+  vertical-align: -0.18em;
+  width: 1.15em;
+  height: 1.15em;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.pixel-icon.inline-left {
+  margin-right: 0.35em;
+}
+
+.pixel-icon.inline-right {
+  margin-left: 0.35em;
+}
+
+.pixel-icon.icon-lg {
+  width: 1.75em;
+  height: 1.75em;
+  vertical-align: -0.35em;
+}
+
+@media (max-width: 560px) {
+  #audio-toggle {
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+    border-width: 2px;
+  }
+
+  #audio-toggle .pixel-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+

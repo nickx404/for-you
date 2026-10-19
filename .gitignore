@@ -1,3 +1,6 @@
-screenshots/
 node_modules/
-media-backups/
+scratch/
+test/previews/
+test/*.png
+ChatGPT Image*.png
+_site/

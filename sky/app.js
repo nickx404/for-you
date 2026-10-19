@@ -8,7 +8,7 @@ const theme = new URLSearchParams(location.search).get('theme');
 if (['illustrated', 'scrapbook'].includes(theme)) document.body.dataset.theme = theme;
 $('#sky-mode').addEventListener('change', event => {
   document.body.dataset.sky = event.target.value;
-  $('meta[name="theme-color"]').content = {clouds:'#8fd1d2',pink:'#285373',purple:'#17162f'}[event.target.value];
+  $('meta[name="theme-color"]').content = {clouds:'#080f30',pink:'#285373',purple:'#17162f'}[event.target.value];
 });
 if (content.name) $('#greeting').textContent = `HEY, ${content.name.toUpperCase()}`;
 for (let i = 0; i < 95; i++) {
@@ -24,10 +24,10 @@ if (points.length === 6) {
 }
 // Derive the outline from the same image so the final fill matches its silhouette.
 $('#lines').innerHTML = `<defs><filter id="pixel-outline" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="erode" radius="4" result="inside"/><feComposite in="SourceAlpha" in2="inside" operator="out" result="edge"/><feFlood flood-color="#000000"/><feComposite in2="edge" operator="in"/></filter></defs>`;
-$('#constellation').insertAdjacentHTML('beforeend', '<img class="heart-complete pixel-outline" src="assets/smiling-heart.png" alt=""><img class="heart-glow pixel-outline" src="assets/smiling-heart.png" alt="">');
+$('#constellation').insertAdjacentHTML('beforeend', '<img class="heart-complete pixel-outline" src="assets/smiling-heart.png" alt="" loading="lazy"><img class="heart-glow pixel-outline" src="assets/smiling-heart.png" alt="" loading="lazy">');
 const heart = document.createElement('div');
 heart.className = 'heart-reveal'; heart.setAttribute('aria-hidden', 'true');
-heart.innerHTML = '<img src="assets/smiling-heart.png" alt="">';
+heart.innerHTML = '<img src="assets/smiling-heart.png" alt="" loading="lazy">';
 heart.querySelector('img').addEventListener('error', event => { event.target.hidden = true; });
 $('#constellation').append(heart);
 content.stars.forEach((star, index) => {
@@ -36,7 +36,7 @@ content.stars.forEach((star, index) => {
   button.classList.toggle('tip', points[index].y > 82);
   button.style.cssText = `left:${points[index].x}%;top:${points[index].y}%;--delay:${index*.4}s`;
   button.setAttribute('aria-label', `Open star ${index+1}: ${star.title}`);
-  button.innerHTML = `<img class="star-shape" src="assets/pastel-star.png" alt=""><span class="star-label"></span><span class="star-number" aria-hidden="true">${index+1}</span>`;
+  button.innerHTML = `<img class="star-shape" src="assets/pastel-star.png" alt="" loading="lazy"><span class="star-label"></span><span class="star-number" aria-hidden="true">${index+1}</span>`;
   button.querySelector('.star-label').textContent = star.label || star.title;
   button.addEventListener('click', () => openStar(index));
   $('#stars').append(button);

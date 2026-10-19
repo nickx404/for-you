@@ -1,0 +1,254 @@
+/* The original sheets are displayed through CSS crop windows; their artwork is unchanged. */
+.art-sticker {
+  display: block;
+  position: absolute;
+  width: var(--art-size, 100px);
+  background-repeat: no-repeat;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Keep the landscape still so the characters and their shadows stay planted. */
+#scene-hello { height: var(--scene-height); }
+.meadow-world { background: #b5dded; }
+.meadow-landscape { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+#scene-hello .hello-container { height: 100%; min-height: 0; padding: 0; }
+#scene-hello .hello-content { position: relative; width: 100%; max-width: none; height: 100%; display: block; }
+#scene-hello .typewriter-title {
+  position: absolute;
+  top: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1120px, 94vw);
+  display: block;
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  line-height: 1.5;
+  text-wrap: balance;
+  text-shadow: 2px 2px 0 #fff9fc, 4px 4px 0 #ffd1dc;
+}
+#scene-hello .typewriter-text { display: block; }
+#scene-hello .typewriter-cursor {
+  display: block;
+  width: max-content;
+  margin: 8px auto 0;
+  font-size: 0.6em;
+  line-height: 1;
+}
+#scene-hello .hello-mascots {
+  position: absolute;
+  left: 50%;
+  bottom: 24%;
+  transform: translateX(-50%);
+  translate: 0 10px;
+  gap: clamp(46px, 6vw, 84px);
+  margin: 0;
+  transition: opacity 600ms ease, translate 600ms ease;
+}
+#scene-hello .hello-mascots.visible { transform: translateX(-50%); translate: 0 0; }
+#scene-hello .mascot-figure { isolation: isolate; }
+#scene-hello .figure-bubble {
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  padding: 8px 12px;
+  max-width: 200px;
+  white-space: normal;
+  text-wrap: balance;
+}
+#scene-hello .mascot-figure::after { content: ''; position: absolute; bottom: -4px; left: 8%; right: 8%; height: 10px; background: #4b694c3d; border-radius: 50%; filter: blur(2px); z-index: -1; }
+#scene-hello .hello-mascots .otter { width: clamp(86px, 13vw, 140px); }
+#scene-hello .hello-mascots .bunny { width: clamp(64px, 9.6vw, 104px); }
+#scene-hello .hello-mascots .mascot { animation: meadowBreathe 4s ease-in-out infinite; transform-origin: center bottom; filter: drop-shadow(0 3px 0 #5b725333); }
+#scene-hello .hello-mascots .bunny { animation-delay: -2s; }
+#scene-hello .hello-btn { position: absolute; left: 50%; bottom: 10%; transform: translateX(-50%) scale(0.95); white-space: nowrap; }
+#scene-hello .hello-btn.visible { transform: translateX(-50%) scale(1); }
+#scene-hello .hello-btn:hover { translate: 0 -2px; }
+#scene-hello .hello-btn:active { translate: 0 2px; }
+@keyframes meadowBreathe { 50% { transform: scaleY(1.015); } }
+
+.meadow-petals { position: absolute; inset: 0; }
+.meadow-petals i { position: absolute; left: -6%; top: 20%; width: 15px; height: 9px; background: #f5bdd5; box-shadow: inset 2px 1px 0 #ffe6ef; border-radius: 70% 10% 70% 15%; opacity: 0; animation: meadowPetal 16s linear infinite; }
+.meadow-petals i:nth-child(2) { top: 36%; animation-delay: -4s; animation-duration: 19s; }
+.meadow-petals i:nth-child(3) { top: 62%; animation-delay: -8s; animation-duration: 21s; }
+.meadow-petals i:nth-child(4) { top: 48%; animation-delay: -12s; width: 9px; height: 5px; }
+.meadow-petals i:nth-child(5) { top: 77%; animation-delay: -2s; animation-duration: 23s; }
+.meadow-petals i:nth-child(6) { top: 10%; animation-delay: -10s; animation-duration: 18s; }
+.meadow-petals i:nth-child(7) { top: 56%; animation-delay: -6s; width: 8px; height: 5px; }
+.meadow-petals i:nth-child(8) { top: 86%; animation-delay: -14s; animation-duration: 20s; }
+@keyframes meadowPetal {
+  0% { transform: translate(0, 0) rotate(0); opacity: 0; }
+  12%, 80% { opacity: 0.85; }
+  35% { transform: translate(38vw, 32px) rotate(100deg); }
+  65% { transform: translate(70vw, -24px) rotate(220deg); }
+  100% { transform: translate(112vw, 52px) rotate(340deg); opacity: 0; }
+}
+.meadow-breeze { position: absolute; left: 4%; top: 44%; width: 130px; height: 18px; border-top: 2px solid #fffc; border-radius: 50%; opacity: 0; animation: meadowBreeze 11s ease-in-out infinite; }
+.meadow-breeze::after { content: ''; position: absolute; width: 60%; height: 12px; top: 6px; left: 25px; border-top: 1px solid #fff9; border-radius: 50%; }
+.breeze-two { top: 76%; left: 50%; animation-delay: -6s; width: 75px; }
+.breeze-three { top: 62%; left: 8%; animation-delay: -3s; animation-duration: 14s; width: 90px; }
+@keyframes meadowBreeze { 0%, 15%, 85%, 100% { opacity: 0; } 40%, 55% { opacity: 0.65; } to { transform: translate(42vw, -10px); } }
+.meadow-doodle { --art-size: 76px; left: 7%; top: 8%; rotate: -10deg; opacity: 0.85; }
+
+/* Cat doodles recur on the scrapbook, stationery, and arcade walls. */
+.scrap-paper .art-sticker { position: relative; --art-size: 116px; flex-shrink: 0; }
+.scrap-right .art-sticker { --art-size: 88px; }
+.scrapbook-cat-one { --art-size: 95px; left: 20%; top: 7%; rotate: -8deg; }
+.scrapbook-cat-two { --art-size: 95px; left: 19%; bottom: 9%; rotate: 8deg; }
+.scrapbook-cat-three { --art-size: 82px; left: 42%; bottom: 2%; rotate: -6deg; }
+.scrapbook-cat-four { --art-size: 95px; right: 21%; bottom: 2%; rotate: 5deg; }
+.scrapbook-floral-left { --art-size: 330px; left: -15px; bottom: -8px; opacity: 0.8; }
+.scrapbook-floral-right { --art-size: 310px; right: -10px; bottom: -5px; opacity: 0.75; }
+.scrapbook-flower-one { --art-size: 68px; right: 3%; top: 38%; rotate: 14deg; }
+.scrapbook-bunny { --art-size: 80px; right: 7%; top: 32%; rotate: -10deg; }
+.scrapbook-world .scrap-bunny { left: 30%; right: auto; bottom: 2%; width: 65px; height: 65px; }
+
+.stationery-note .art-sticker { position: relative; --art-size: 62px; }
+.desk-cat-one { --art-size: 100px; left: 5%; top: 40%; rotate: -8deg; }
+.desk-cat-two { --art-size: 110px; right: 4%; top: 44%; rotate: 10deg; }
+.desk-cat-three { --art-size: 90px; left: 41%; top: 3%; rotate: -7deg; }
+.desk-cat-four { --art-size: 85px; left: 27%; bottom: 5%; rotate: 7deg; }
+.desk-books { --art-size: 82px; right: 6%; bottom: 4%; rotate: 12deg; }
+.desk-floral-border { --art-size: 300px; left: calc(50% - 150px); bottom: 0; opacity: 0.7; }
+.desk-daisy { --art-size: 60px; left: 17%; top: 13%; rotate: 16deg; }
+
+.arcade-wall-sign .art-sticker { position: relative; --art-size: 50px; margin: 8px auto 0; }
+.prize-wall-shelf .art-sticker { position: relative; --art-size: 43px; margin-bottom: 4px; flex-shrink: 0; }
+.arcade-cat-one { --art-size: 85px; left: 21%; top: 32%; rotate: -8deg; }
+.arcade-cat-two { --art-size: 112px; right: 3%; bottom: 23%; rotate: 8deg; }
+.arcade-cat-three { --art-size: 64px; left: 24%; top: 11%; rotate: -12deg; }
+.arcade-bunny { --art-size: 65px; right: 8%; top: 43%; rotate: 6deg; }
+.arcade-flowers { --art-size: 115px; right: 17%; bottom: 3%; }
+.arcade-bush-one { --art-size: 110px; left: 2%; bottom: 1%; }
+.arcade-bush-two { --art-size: 140px; right: 1%; bottom: 1%; }
+
+@media (max-width: 1050px) {
+  .scrapbook-cat-one { left: 11%; top: 5%; --art-size: 75px; }
+  .scrapbook-bunny { right: 3%; --art-size: 60px; }
+  .desk-cat-one { left: 1%; --art-size: 75px; }
+  .desk-cat-two { right: 1%; --art-size: 75px; }
+  .arcade-cat-one { left: 16%; --art-size: 60px; }
+  .arcade-cat-two { right: 1%; --art-size: 80px; }
+}
+
+@media (max-width: 840px) {
+  #scene-hello .typewriter-title { top: 14%; width: 94vw; font-size: clamp(1.35rem, 6.4vw, 2.4rem); }
+  #scene-hello .figure-bubble { font-size: 0.55rem; padding: 7px 10px; max-width: 128px; }
+  #scene-hello .hello-mascots { bottom: 25%; gap: clamp(46px, 10vw, 70px); }
+  #scene-hello .hello-mascots .otter { width: 94px; }
+  #scene-hello .hello-mascots .bunny { width: 70px; }
+  #scene-hello .hello-btn { bottom: 10%; font-size: 0.75rem; padding: 13px 24px; }
+  .meadow-doodle { --art-size: 48px; left: 5%; top: 4%; }
+  .meadow-petals i { width: 10px; height: 6px; }
+  .meadow-petals i:nth-child(n+7) { display: none; }
+  .meadow-breeze { width: 75px; }
+
+  .scrapbook-cat-one { --art-size: 62px; top: 9%; left: 7%; }
+  .scrapbook-cat-two { --art-size: 56px; left: 7%; bottom: 6%; }
+  .scrapbook-cat-three { --art-size: 55px; left: auto; right: 9%; top: 9%; bottom: auto; }
+  .scrapbook-cat-four { --art-size: 70px; right: 7%; bottom: 5%; }
+  .scrapbook-bunny, .scrapbook-flower-one, .scrapbook-world .scrap-bunny { display: none; }
+  .scrapbook-world .scrap-heart { left: 43%; bottom: 6%; width: 40px; height: 40px; }
+  .scrapbook-world .scrap-bow { left: 43%; right: auto; top: 2%; width: 60px; height: 60px; }
+  .scrapbook-floral-left, .scrapbook-floral-right { --art-size: 170px; bottom: -10px; opacity: 0.65; }
+
+  .desk-cat-one { --art-size: 60px; left: 7%; top: auto; bottom: 15%; }
+  .desk-cat-two { --art-size: 60px; right: 11%; top: 11%; }
+  .desk-cat-three { --art-size: 65px; left: 31%; top: 4%; }
+  .desk-cat-four { --art-size: 50px; left: 41%; bottom: 5%; }
+  .desk-books, .desk-daisy { display: none; }
+  .desk-floral-border { --art-size: 200px; left: calc(50% - 100px); bottom: 0; opacity: 0.45; }
+
+  .arcade-cat-one, .arcade-cat-two, .arcade-bunny, .arcade-flowers, .arcade-bush-one, .arcade-bush-two { display: none; }
+  .arcade-cat-three { --art-size: 28px; left: 8%; top: 7px; }
+}
+
+@media (max-height: 650px) and (max-width: 840px) {
+  #scene-hello .hello-mascots { bottom: 24%; gap: 64px; }
+  #scene-hello .hello-mascots .otter { width: 80px; }
+  #scene-hello .hello-mascots .bunny { width: 60px; }
+  #scene-hello .hello-btn { bottom: 8%; font-size: 0.68rem; padding: 11px 20px; }
+  #scene-hello .figure-bubble { font-size: 0.52rem; }
+  .desk-cat-one, .desk-cat-two, .desk-cat-three, .desk-cat-four, .desk-floral-border { display: none; }
+  .scrapbook-cat-one, .scrapbook-cat-three { --art-size: 45px; top: 3%; }
+  .scrapbook-cat-two, .scrapbook-cat-four { --art-size: 45px; bottom: 3%; }
+  .scrapbook-floral-left, .scrapbook-floral-right { --art-size: 120px; }
+  .meadow-doodle { --art-size: 35px; top: 4%; }
+}
+
+/* Small, staggered gestures leave the artwork's original placement and tilt intact. */
+@media (prefers-reduced-motion: no-preference) {
+  .art-sticker {
+    --sticker-lift: -5px;
+    animation: stickerHop 5.6s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  .art-sticker:nth-child(3n) { animation-delay: -1.8s; animation-duration: 6.4s; }
+  .art-sticker:nth-child(3n + 1) { animation-delay: -3.7s; animation-duration: 7.2s; }
+  .art-sticker:nth-child(3n + 2) { animation-delay: -0.9s; }
+
+  .art-sticker:is(.cat-kiss, .cat-couple, .cat-flower-shy, .cute-books, .cute-boba, .bunny-boba, .bunny-cup) {
+    animation-name: stickerRock;
+  }
+  .art-sticker:is(.flower-pink, .flower-daisy, .floral-blossoms, .floral-meadow, .floral-butterflies, .bush-pink, .bush-white, .bush-purple) {
+    animation-name: stickerSway;
+    animation-duration: 7.8s;
+  }
+  .scene-sticker:is(.scrap-heart, .desk-heart, .arcade-heart, .scrap-bunny, .desk-bunny, .scrap-bow, .desk-bow) {
+    --sticker-lift: -5px;
+    animation: stickerFloat 6.8s ease-in-out infinite;
+  }
+  .scene-sticker:is(.desk-heart, .scrap-bunny, .desk-bow) { animation-delay: -2.4s; }
+  .scene-sticker:is(.arcade-heart, .desk-bunny) { animation-delay: -4.1s; animation-duration: 8s; }
+
+  @media (max-width: 840px) {
+    .art-sticker, .scene-backdrop .scene-sticker { --sticker-lift: -3px; }
+  }
+}
+
+@keyframes stickerHop {
+  0%, 58%, 80%, 100% { translate: 0 0; }
+  66% { translate: 0 var(--sticker-lift); }
+  73% { translate: 0 -1px; }
+}
+@keyframes stickerRock {
+  0%, 55%, 100% { transform: rotate(0deg); }
+  65% { transform: rotate(-3deg); }
+  77% { transform: rotate(2deg); }
+  89% { transform: rotate(-1deg); }
+}
+@keyframes stickerSway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+@keyframes stickerFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 var(--sticker-lift); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meadow-petals, .meadow-breeze { display: none; }
+  #scene-hello .hello-mascots .mascot, #scene-hello .figure-bubble { animation: none !important; }
+  #scene-hello .hello-mascots { transition: none; }
+}
+
+/* Crop coordinates from the supplied sheets, in their original pixel dimensions. */
+.cat-heart { aspect-ratio: 420 / 350; background-image: url('../assets/personal-art/cat-doodle-sheet.png'); background-size: 204.5238% 407.4286%; background-position: 8.6560% 1.6729%; }
+.cat-flower-shy { aspect-ratio: 365 / 345; background-image: url('../assets/personal-art/cat-doodle-sheet.png'); background-size: 235.3425% 413.3333%; background-position: 98.1781% 1.8501%; }
+.cat-flower-happy { aspect-ratio: 360 / 235; background-image: url('../assets/personal-art/cat-doodle-sheet.png'); background-size: 238.6111% 606.8085%; background-position: 19.2385% 37.6154%; }
+.cat-kiss { aspect-ratio: 359 / 260; background-image: url('../assets/personal-art/cat-doodle-sheet.png'); background-size: 239.2758% 548.4615%; background-position: 100.0000% 36.7067%; }
+.cat-pleading { aspect-ratio: 342 / 260; background-image: url('../assets/personal-art/cat-doodle-sheet.png'); background-size: 251.1696% 548.4615%; background-position: 12.5725% 69.8971%; }
+.cat-couple { aspect-ratio: 280 / 355; background-image: url('../assets/personal-art/cat-doodle-sheet.png'); background-size: 306.7857% 401.6901%; background-position: 97.5820% 72.6424%; }
+.cat-blush { aspect-ratio: 345 / 265; background-image: url('../assets/personal-art/cat-doodle-sheet.png'); background-size: 248.9855% 538.1132%; background-position: 11.6732% 98.6219%; }
+.bunny-strawberry { aspect-ratio: 122 / 160; background-image: url('../assets/personal-art/bunny-sticker-sheet.png'); background-size: 602.4590% 428.7500%; background-position: 50.0816% 1.5209%; }
+.bunny-boba { aspect-ratio: 140 / 156; background-image: url('../assets/personal-art/bunny-sticker-sheet.png'); background-size: 525.0000% 439.7436%; background-position: 73.6134% 1.8868%; }
+.bunny-cup { aspect-ratio: 148 / 160; background-image: url('../assets/personal-art/bunny-sticker-sheet.png'); background-size: 496.6216% 428.7500%; background-position: 99.6593% 1.7110%; }
+.bunny-heart { aspect-ratio: 143 / 154; background-image: url('../assets/personal-art/bunny-sticker-sheet.png'); background-size: 513.9860% 445.4545%; background-position: 0.1689% 65.4135%; }
+.cute-books { aspect-ratio: 135 / 132; background-image: url('../assets/personal-art/cute-sticker-sheet.png'); background-size: 544.4444% 696.2121%; background-position: 24.1667% 40.5337%; }
+.cute-frog { aspect-ratio: 128 / 140; background-image: url('../assets/personal-art/cute-sticker-sheet.png'); background-size: 574.2188% 656.4286%; background-position: 0.0000% 22.3363%; }
+.cute-boba { aspect-ratio: 127 / 145; background-image: url('../assets/personal-art/cute-sticker-sheet.png'); background-size: 578.7402% 633.7931%; background-position: 50.9868% 21.1886%; }
+.flower-pink { aspect-ratio: 117 / 118; background-image: url('../assets/personal-art/flower-sticker-sheet.png'); background-size: 628.2051% 582.2034%; background-position: 1.2945% 1.4060%; }
+.flower-daisy { aspect-ratio: 89 / 90; background-image: url('../assets/personal-art/flower-sticker-sheet.png'); background-size: 825.8427% 763.3333%; background-position: 36.8421% 38.6935%; }
+.floral-blossoms { aspect-ratio: 812 / 212; background-image: url('../assets/personal-art/botanical-borders.png'); background-size: 106.4039% 581.1321%; background-position: 53.8462% 3.9216%; }
+.floral-meadow { aspect-ratio: 813 / 210; background-image: url('../assets/personal-art/botanical-borders.png'); background-size: 106.2731% 586.6667%; background-position: 52.9412% 27.3973%; }
+.floral-butterflies { aspect-ratio: 812 / 214; background-image: url('../assets/personal-art/botanical-borders.png'); background-size: 106.4039% 575.7009%; background-position: 53.8462% 96.7583%; }
+.bush-pink { aspect-ratio: 250 / 196; background-image: url('../assets/personal-art/flower-bushes.png'); background-size: 294.4000% 500.5102%; background-position: 2.4691% 1.6561%; }
+.bush-white { aspect-ratio: 285 / 162; background-image: url('../assets/personal-art/flower-bushes.png'); background-size: 258.2456% 605.5556%; background-position: 59.2018% 1.7094%; }
+.bush-purple { aspect-ratio: 195 / 153; background-image: url('../assets/personal-art/flower-bushes.png'); background-size: 377.4359% 641.1765%; background-position: 72.6433% 41.0628%; }

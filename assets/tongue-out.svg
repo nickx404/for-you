@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Subtle Drop Shadow -->
+  <circle cx="34" cy="34" r="27" fill="#2b1b3d" opacity="0.3"/>
+  
+  <!-- Outer Outline (matches game's pixel border color) -->
+  <circle cx="32" cy="32" r="27" fill="#2b1b3d"/>
+  
+  <!-- Warm Kawaii Face Fill -->
+  <circle cx="32" cy="32" r="24" fill="#ffd166"/>
+  
+  <!-- Upper Specular Highlight -->
+  <ellipse cx="25" cy="18" rx="10" ry="5.5" fill="#fff6d6" opacity="0.8"/>
+  
+  <!-- Left Eye: Playful Wink (>) -->
+  <path d="M17 26 L23 30 L17 34" stroke="#2b1b3d" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Right Eye: Wide Cute Anime Eye -->
+  <ellipse cx="42" cy="29" rx="5.5" ry="6.5" fill="#2b1b3d"/>
+  <circle cx="40.5" cy="27" r="2.2" fill="#ffffff"/>
+  <circle cx="43.5" cy="31" r="1.1" fill="#ffffff"/>
+  
+  <!-- Rosy Blush Cheeks -->
+  <ellipse cx="17" cy="38" rx="4.5" ry="2.8" fill="#ff85a2" opacity="0.9"/>
+  <ellipse cx="47" cy="38" rx="4.5" ry="2.8" fill="#ff85a2" opacity="0.9"/>
+  
+  <!-- Smile Mouth Base -->
+  <path d="M23 37 Q32 40 41 37 Q32 49 23 37 Z" fill="#2b1b3d"/>
+  
+  <!-- Cute Tongue Sticking Out (NO SPARKLES) -->
+  <path d="M27 40 Q32 40 37 40 Q38 52 32 54 Q26 52 27 40 Z" fill="#ff4d6d" stroke="#2b1b3d" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Tongue Center Crease -->
+  <path d="M32 42 L32 49" stroke="#b5179e" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Tongue Soft Shine -->
+  <ellipse cx="30" cy="46" rx="1.2" ry="2.2" fill="#ff99c8" opacity="0.85"/>
+</svg>

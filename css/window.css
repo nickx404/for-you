@@ -1,0 +1,758 @@
+/**
+ * window.css - 3D Arched Window & Cozy Room Styles
+ * Aesthetic: Mystical Starlight Chamber & Arched Wooden Casement
+ * Interactive Web Experience for Pippo ✨
+ */
+
+/* ==========================================================================
+   Room Interior Container
+   ========================================================================== */
+
+.room-interior {
+  position: relative;
+  width: 100vw;
+  height: var(--scene-height);
+  min-height: var(--scene-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #1a1423 0%, #2d1f3d 50%, #1a1423 100%);
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 20px 16px 60px 16px;
+}
+
+/* Room Title Banner */
+.room-title {
+  color: #ffffff;
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    0 0 16px rgba(255, 179, 198, 0.7);
+  z-index: 10;
+  max-width: 90vw;
+}
+
+/* ==========================================================================
+   3D Arched Window Architecture (Stepped Pixel Frame)
+   ========================================================================== */
+
+.window-arch {
+  position: relative;
+  width: 320px;
+  height: 420px;
+  max-width: 86vw;
+  max-height: 58vh;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  border: 8px solid #5c3d2e;
+  border-top-left-radius: 160px;
+  border-top-right-radius: 160px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: #0a0a2e;
+  box-shadow: 
+    4px 6px 0 var(--color-pixel-border),
+    inset 0 0 0 4px #7a523e,
+    0 16px 40px rgba(0, 0, 0, 0.85),
+    0 0 25px rgba(201, 177, 255, 0.2);
+  margin-bottom: 20px;
+  image-rendering: pixelated;
+}
+
+/* Wooden Windowsill Base Ledge */
+.window-arch::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: -20px;
+  right: -20px;
+  height: 16px;
+  background: #5c3d2e;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 
+    0 4px 0 var(--color-pixel-border),
+    inset 0 3px 0 #7a523e;
+  z-index: 8;
+}
+
+/* ==========================================================================
+   Window Shutters (3D Perspective Doors - Pixel Planks)
+   ========================================================================== */
+
+.shutter {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    #5c3d2e 0px,
+    #5c3d2e 16px,
+    #43281c 16px,
+    #43281c 20px,
+    #6b4423 20px,
+    #6b4423 36px,
+    #43281c 36px,
+    #43281c 40px
+  );
+  transform-style: preserve-3d;
+  transition: transform 1.5s var(--ease-spring);
+  z-index: 5;
+  border: 4px solid var(--color-pixel-border);
+  box-sizing: border-box;
+}
+
+/* Horizontal cross-beam planks */
+.shutter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #43281c 0%,
+    #43281c 10%,
+    transparent 10%,
+    transparent 45%,
+    #43281c 45%,
+    #43281c 55%,
+    transparent 55%,
+    transparent 90%,
+    #43281c 90%,
+    #43281c 100%
+  );
+  pointer-events: none;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Wood frame bevel trim */
+.shutter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+/* Left Shutter */
+.left-shutter {
+  left: 0;
+  transform-origin: left center;
+  border-top-left-radius: 152px;
+}
+
+.left-shutter.open {
+  transform: rotateY(-115deg);
+}
+
+/* Right Shutter */
+.right-shutter {
+  right: 0;
+  transform-origin: right center;
+  border-top-right-radius: 152px;
+}
+
+.right-shutter.open {
+  transform: rotateY(115deg);
+}
+
+/* ==========================================================================
+   Padlock & Keyhole Assembly (16-Bit Pixel Brass Lock)
+   ========================================================================== */
+
+.window-lock {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  transition: all var(--duration-slow) var(--ease-smooth);
+}
+
+/* Padlock Metallic Shackle Arch */
+.lock-shackle {
+  width: 26px;
+  height: 26px;
+  border: 5px solid #ffd700;
+  border-color: #fff280 #ffd700 #b8860b;
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  margin-bottom: -4px;
+  box-shadow: 
+    2px 0 0 var(--color-pixel-border),
+    -2px 0 0 var(--color-pixel-border);
+  transition: transform var(--duration-normal) steps(2);
+  transform-origin: left bottom;
+}
+
+/* Padlock Brass Body */
+.padlock-body {
+  position: relative;
+  width: 44px;
+  height: 46px;
+  background: #ffd700;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 
+    3px 3px 0 var(--color-pixel-border),
+    inset 2px 2px 0 #fff899,
+    inset -2px -2px 0 #b8860b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Padlock Horizontal Trim Line */
+.padlock-body::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  right: 4px;
+  height: 3px;
+  background: #b8860b;
+}
+
+/* Padlock Keyhole Glowing Beacon */
+.keyhole {
+  position: relative;
+  width: 8px;
+  height: 14px;
+  background: #1a1423;
+  margin-top: 4px;
+  box-shadow: 0 0 10px var(--color-gold-glow);
+  animation: rayPulse 1.5s steps(3) infinite;
+}
+
+.keyhole::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #1a1423;
+  border-radius: 2px;
+}
+
+/* Padlock Unlocked & Drop States */
+.window-lock.unlocked .lock-shackle {
+  transform: translateY(-8px);
+}
+
+.window-lock.unlocked {
+  animation: lockDrop 0.8s var(--ease-smooth) forwards;
+}
+
+/* ==========================================================================
+   Translucent Curtains
+   ========================================================================== */
+
+.curtain {
+  position: absolute;
+  top: 0;
+  width: 32%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 240, 243, 0.22) 0%,
+    rgba(255, 240, 243, 0.1) 40%,
+    rgba(255, 240, 243, 0.2) 80%,
+    rgba(255, 240, 243, 0.08) 100%
+  );
+  animation: curtainSway 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.left-curtain {
+  left: 0;
+  transform-origin: top left;
+  border-top-left-radius: 152px;
+  animation-delay: 0s;
+}
+
+.right-curtain {
+  right: 0;
+  transform-origin: top right;
+  border-top-right-radius: 152px;
+  animation-delay: -2s;
+}
+
+/* Wind Blowing Curtains Aside */
+.left-curtain.blowing {
+  transform: translateX(-65%) rotate(-8deg);
+  transition: transform 1.2s var(--ease-smooth);
+  animation: none;
+}
+
+.right-curtain.blowing {
+  transform: translateX(65%) rotate(8deg);
+  transition: transform 1.2s var(--ease-smooth);
+  animation: none;
+}
+
+/* ==========================================================================
+   Starry Sky Peek (Behind Shutters)
+   ========================================================================== */
+
+.sky-peek {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 152px;
+  border-top-right-radius: 152px;
+  overflow: hidden;
+  z-index: 1;
+  background: radial-gradient(ellipse at 50% 30%, #1a1040 0%, #0a0a2e 70%, #05051a 100%);
+}
+
+/* Scattered Tiny White Star Dots */
+.sky-peek::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 
+    25px 40px 1px #fff,
+    70px 120px 0px #ffe,
+    120px 45px 1px #fff,
+    180px 90px 1px #fff,
+    220px 30px 1px #ffd,
+    260px 140px 1px #fff,
+    40px 200px 0px #fff,
+    140px 220px 1px #fff,
+    240px 240px 1px #fff,
+    90px 280px 1px #ffd,
+    190px 320px 1px #fff,
+    50px 350px 1px #fff,
+    270px 370px 0px #ffe;
+}
+
+/* Golden Twinkling Focal Stars */
+.sky-peek::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 
+    80px 60px 2px #fff,
+    210px 100px 2px #ffd700,
+    150px 180px 2px #fff;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+/* ==========================================================================
+   Draggable Golden Key (16-Bit Pixel Golden Heart Key)
+   ========================================================================== */
+
+.draggable-key {
+  position: absolute;
+  bottom: clamp(180px, 24vh, 210px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 52px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: levitate 2.4s steps(4) infinite;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  filter: drop-shadow(0 0 16px var(--color-gold-glow));
+  transition: filter var(--duration-fast);
+  z-index: 20;
+  image-rendering: pixelated;
+}
+
+.draggable-key:active {
+  cursor: grabbing;
+}
+
+/* Key Head */
+.draggable-key .key-head {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  background: #ffd700;
+  border: 3px solid var(--color-pixel-border);
+  box-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    inset 2px 2px 0 #fff899,
+    inset -2px -2px 0 #cc9900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inner Keyhole Ring */
+.draggable-key .key-ring {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #1a1423;
+  border: 2px solid var(--color-pixel-border);
+}
+
+/* Cute Heart Accent Inside Ring */
+.draggable-key .key-heart {
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.draggable-key .key-heart .pixel-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* Key Stem */
+.draggable-key .key-stem {
+  position: relative;
+  width: 10px;
+  height: 44px;
+  background: #ffd700;
+  border: 2px solid var(--color-pixel-border);
+  border-top: none;
+  box-shadow: 
+    2px 2px 0 var(--color-pixel-border),
+    inset 1px 0 0 #fff899;
+}
+
+/* Key Teeth */
+.draggable-key .key-teeth {
+  position: absolute;
+  right: -10px;
+  bottom: 6px;
+  width: 10px;
+  height: 18px;
+  background: #ffd700;
+  border: 2px solid var(--color-pixel-border);
+  border-left: none;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 35%, 25% 35%, 25% 60%, 100% 60%, 100% 100%, 0% 100%);
+}
+
+/* Key Sparkle */
+.draggable-key .key-sparkle {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  animation: twinkle 1.5s steps(2) infinite alternate;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.draggable-key .key-sparkle .pixel-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Dragging State */
+.draggable-key.dragging {
+  animation: none;
+  cursor: grabbing;
+  filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.85));
+}
+
+/* Snapped Into Keyhole & Turning */
+.draggable-key.snapped {
+  animation: keyTurn 0.6s var(--ease-spring) forwards;
+}
+
+/* ==========================================================================
+   Key Trail (Golden Sparkle Dust)
+   ========================================================================== */
+
+.key-trail {
+  position: absolute;
+  pointer-events: none;
+  z-index: 19;
+}
+
+.key-trail-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, #ffd700);
+  box-shadow: 0 0 8px var(--color-gold-glow);
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* ==========================================================================
+   Window Mascot Companions
+   ========================================================================== */
+
+.window-mascots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 14px;
+  width: 100%;
+  max-width: 320px;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.window-mascots .mascot {
+  grid-row: 2;
+  width: 60px;
+  height: auto;
+  pointer-events: auto;
+  animation: breathe 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+}
+
+.window-mascots .mascot.bunny {
+  animation-delay: 0.4s;
+}
+
+/* Speech Bubble in Window Scene */
+.window-mascots .speech-bubble {
+  position: relative;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  bottom: auto;
+  margin: 0 auto;
+  pointer-events: none;
+  width: fit-content;
+  max-width: 250px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Golden Flash Full Viewport Overlay
+   ========================================================================== */
+
+.golden-flash-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  animation: goldenFlash 0.8s ease-out forwards;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 245, 180, 0.95) 0%,
+    rgba(255, 215, 0, 0.8) 50%,
+    rgba(255, 180, 0, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ==========================================================================
+   Scene 6: Starry Sky Finale
+   ========================================================================== */
+
+.sky-container {
+  position: relative;
+  width: 100vw;
+  height: var(--scene-height);
+  min-height: var(--scene-height);
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0a0a2e 0%, #1a1040 50%, #2d1b69 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.sky-container h1 {
+  font-family: var(--font-pixel);
+  font-size: clamp(1rem, 3.2vw, 1.8rem);
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  text-shadow: 
+    3px 3px 0 var(--color-pixel-border),
+    0 0 24px rgba(255, 179, 198, 0.7);
+  margin: 16px 0 12px 0;
+  z-index: 5;
+}
+
+.sky-mascots-float {
+  z-index: 5;
+  animation: levitate 3s steps(4) infinite;
+  filter: drop-shadow(0 6px 0 var(--color-pixel-border));
+}
+
+.sky-mascots-float .mascot.duo {
+  width: 140px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.sky-subtitle {
+  color: #ffcbf2;
+  font-family: var(--font-pixel);
+  font-size: clamp(0.55rem, 1.8vw, 0.72rem);
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 0 24px 0;
+  z-index: 5;
+  text-shadow: 2px 2px 0 var(--color-pixel-border);
+}
+
+#btn-enter-sky {
+  margin-bottom: 18px;
+}
+
+.replay-btn {
+  z-index: 6;
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  padding: 12px 24px;
+  background: var(--color-arcade-pink);
+  border: 4px solid var(--color-pixel-border);
+  box-shadow: 
+    0 5px 0 var(--color-pixel-border),
+    0 8px 16px rgba(0, 0, 0, 0.4);
+  color: var(--color-pixel-border);
+  cursor: pointer;
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+
+.replay-btn:hover {
+  background: #ff8fab;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 7px 0 var(--color-pixel-border),
+    0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.replay-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--color-pixel-border);
+}
+
+.sky-container .stars-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #ffffff, transparent),
+    radial-gradient(1px 1px at 70px 80px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(2px 2px at 150px 120px, #ffd700, transparent),
+    radial-gradient(1.5px 1.5px at 240px 60px, #ffffff, transparent),
+    radial-gradient(2px 2px at 320px 210px, #ffb3c6, transparent),
+    radial-gradient(1px 1px at 380px 140px, #ffffff, transparent);
+  background-size: 400px 400px;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Mobile Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 560px) {
+  .room-interior {
+    padding: 14px 10px 14px 10px;
+    justify-content: center;
+  }
+
+  .room-title {
+    font-size: 0.65rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    max-width: 90vw;
+  }
+
+  .window-arch {
+    width: 240px;
+    height: 310px;
+    max-height: 44vh;
+    border-width: 6px;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    margin-bottom: 8px;
+  }
+
+  .left-shutter {
+    border-top-left-radius: 114px;
+  }
+
+  .right-shutter {
+    border-top-right-radius: 114px;
+  }
+
+  .sky-peek {
+    border-top-left-radius: 114px;
+    border-top-right-radius: 114px;
+  }
+
+  .draggable-key {
+    width: 44px;
+    height: 70px;
+    bottom: clamp(150px, 18vh, 175px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .draggable-key .key-head {
+    width: 32px;
+    height: 32px;
+  }
+
+  .draggable-key .key-stem {
+    height: 36px;
+  }
+
+  .window-mascots {
+    bottom: 6px;
+  }
+
+  .window-mascots .mascot {
+    width: 44px;
+  }
+
+  .window-mascots .speech-bubble {
+    bottom: auto;
+    font-size: 0.46rem;
+    line-height: 1.35;
+    padding: 5px 8px;
+    max-width: 210px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .window-mascots .speech-bubble::after {
+    bottom: -6px;
+    left: 28px;
+  }
+}

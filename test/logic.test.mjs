@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { heartPoints, allViewed, whatsappUrl } from '../dist/logic.js';
+import { heartPoints, allViewed, whatsappUrl } from '../sky/logic.js';
 test('counts can change without breaking heart layout or completion', () => {
   for (const count of [1,5,6,8,12,20]) {
     const points = heartPoints(count);
@@ -27,3 +27,4 @@ test('six stars include a centred bottom tip and symmetric pairs', () => {
   assert.ok(Math.abs(p[1].x+p[4].x-100)<0.0001);
   assert.ok(Math.abs(p[2].x+p[3].x-100)<0.0001);
 });
+

@@ -3,19 +3,53 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const runtimeRequire = createRequire(path.join(process.env.USERPROFILE, '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/package.json'));
 const { chromium } = runtimeRequire('playwright');
+async function checkMeadow(page, width, height) {
+  await page.locator('#sky-mode').selectOption('clouds');
+  const image = page.locator('.meadow-background img');
+  await image.evaluate(img => img.decode());
+  const layout = await image.evaluate(img => {
+    const world = document.querySelector('#world').getBoundingClientRect();
+    return {width:world.width,height:world.height,source:img.currentSrc,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,fit:getComputedStyle(img).objectFit,position:getComputedStyle(img).objectPosition};
+  });
+  const mobile = width <= 700;
+  assert.ok(layout.source.endsWith(`starry-meadow-${mobile?'mobile':'desktop'}.webp`));
+  assert.deepEqual([layout.naturalWidth,layout.naturalHeight],mobile?[1179,2556]:[3840,2160]);
+  assert.equal(layout.position,layout.fit==='contain'?'50% 30%':'50% 0%');
+  // Conservative bounds include the moon's glow in each supplied composition.
+  const moon = mobile ? {left:.66,right:.96,top:.055,bottom:.18} : {left:.70,right:.90,top:.04,bottom:.35};
+  const scale = Math[layout.fit==='contain'?'min':'max'](layout.width/layout.naturalWidth,layout.height/layout.naturalHeight);
+  const renderedWidth = layout.naturalWidth*scale;
+  const renderedHeight = layout.naturalHeight*scale;
+  const left = (layout.width-renderedWidth)/2;
+  const top = layout.fit==='contain'?(layout.height-renderedHeight)*.3:0;
+  if (mobile) {
+    assert.equal(layout.fit,'contain','Mobile shows the complete meadow artwork');
+    assert.ok(top+renderedHeight<=layout.height+1,'Flowers at the bottom are not cropped');
+    assert.ok(top+renderedHeight*.85<Math.min(height,layout.height),'Flower bed is visible in the initial viewport');
+  }
+  assert.ok(left+moon.left*renderedWidth>=0 && left+moon.right*renderedWidth<=layout.width,'Full moon glow fits horizontally');
+  assert.ok(top+moon.top*renderedHeight>=0 && top+moon.bottom*renderedHeight<=Math.min(height,layout.height),'Full moon glow fits vertically in the viewport');
+  const disk = mobile ? {left:.74,right:.89,top:.087,bottom:.155} : {left:.755,right:.845,top:.12,bottom:.28};
+  const picker = await page.locator('.sky-picker').boundingBox();
+  assert.ok(left+disk.right*renderedWidth<=picker.x || left+disk.left*renderedWidth>=picker.x+picker.width || top+disk.bottom*renderedHeight<=picker.y || top+disk.top*renderedHeight>=picker.y+picker.height,'Sky picker does not obscure the moon');
+  assert.equal(await page.locator('.hill').first().isVisible(),false);
+  assert.equal(await page.evaluate(()=>document.getAnimations().some(a=>a.animationName==='sky-drift')),false);
+  assert.equal(await page.locator('body').evaluate(el=>el.scrollWidth<=innerWidth),true);
+  await page.screenshot({path:`screenshots/meadow-${width}x${height}.png`,fullPage:true});
+}
 (async () => {
   const browser = await chromium.launch({headless:true,channel:'msedge'});
-  for (const [width,height] of [[1366,768],[1920,1080],[393,852]]) {
+  for (const [width,height] of [[1366,768],[1920,1080],[393,852],[375,667],[852,393]]) {
     const page = await browser.newPage({viewport:{width,height}});
     const errors=[]; page.on('pageerror',error=>errors.push(error.message));
-    await page.goto('http://127.0.0.1:4173');
-    const initialSkyX=await page.locator('#world').evaluate(el=>new DOMMatrixReadOnly(getComputedStyle(el,'::before').transform).m41);
-    await page.waitForFunction(start=>Math.abs(new DOMMatrixReadOnly(getComputedStyle(document.querySelector('#world'),'::before').transform).m41-start)>2,initialSkyX,{timeout:2000});
+    await page.goto((process.env.SKY_URL || 'http://127.0.0.1:4174/sky/index.html'));
+    await checkMeadow(page,width,height);
     assert.equal(await page.locator('#welcome').isVisible(),true);
     for(const mode of ['purple','pink','clouds']) {
       await page.locator('#sky-mode').selectOption(mode);
       assert.equal(await page.locator('body').getAttribute('data-sky'),mode);
-      assert.ok(await page.evaluate(() => document.getAnimations().some(a=>['sky-drift','drift'].includes(a.animationName))));
+      assert.equal(await page.locator('.meadow-background').isVisible(),mode==='clouds');
+      assert.equal(await page.evaluate(() => document.getAnimations().some(a=>a.animationName==='drift')),mode!=='clouds');
       await page.screenshot({path:`screenshots/${mode}-${width}.png`});
     }
     await page.screenshot({path:`screenshots/welcome-${width}.png`});
@@ -96,8 +130,16 @@ const { chromium } = runtimeRequire('playwright');
     await page.screenshot({path:`screenshots/yes-${width}.png`});
     await page.close(); console.log(`Passed full journey at ${width} × ${height}`);
   }
+  const shapes = await browser.newPage();
+  for(const [width,height] of [[360,640],[412,823],[360,1000],[2560,720],[700,900],[701,900]]) {
+    await shapes.setViewportSize({width,height});
+    await shapes.goto((process.env.SKY_URL || 'http://127.0.0.1:4174/sky/index.html'));
+    await checkMeadow(shapes,width,height);
+    console.log(`Passed background fit at ${width} × ${height}`);
+  }
+  await shapes.close();
   const quiet = await browser.newPage({reducedMotion:'reduce'});
-  await quiet.goto('http://127.0.0.1:4173');
+  await quiet.goto((process.env.SKY_URL || 'http://127.0.0.1:4174/sky/index.html'));
   for(const mode of ['purple','pink','clouds']) {
     await quiet.locator('#sky-mode').selectOption(mode);
     assert.equal(await quiet.evaluate(() => document.getAnimations().some(a=>['sky-drift','drift'].includes(a.animationName))),false);
@@ -115,6 +157,7 @@ const { chromium } = runtimeRequire('playwright');
   console.log('Passed reduced-motion checks for all three skies');
   await browser.close();
 })().catch(error=>{console.error(error);process.exit(1)});
+
 
 
 

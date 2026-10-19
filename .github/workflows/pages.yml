@@ -22,9 +22,14 @@ jobs:
         with:
           node-version: '22'
       - run: npm test
+      - name: Prepare complete website
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -R assets css js sky _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: _site
       - uses: actions/deploy-pages@v4
         id: deployment

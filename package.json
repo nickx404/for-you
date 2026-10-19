@@ -1,1 +1,8 @@
-{"name":"a-little-sky-for-you","private":true,"type":"module","scripts":{"test":"node --test","start":"node server.js"}}
+{
+  "name": "for-you",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/logic.test.mjs"
+  }
+}

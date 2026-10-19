@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>For Pippo</title>
+  <link rel="icon" type="image/svg+xml" href="assets/pixel-sparkle.svg">
+
+  <!-- Google Fonts: Pixel Fonts (Press Start 2P, Silkscreen) + Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Core & Feature Stylesheets in Execution Order -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/envelope.css">
+  <link rel="stylesheet" href="css/claw.css">
+  <link rel="stylesheet" href="css/capsule.css">
+  <link rel="stylesheet" href="css/window.css">
+  <link rel="stylesheet" href="css/scenery.css">
+  <link rel="stylesheet" href="css/personal-art.css">
+  <link rel="stylesheet" href="css/passcode.css">
+</head>
+<body class="pixel-theme" data-theme="pixel">
+
+  <section id="passcode-gate" aria-labelledby="passcode-title">
+    <button id="gate-audio-toggle" class="gate-sound" type="button" aria-label="Mute sound" aria-pressed="false"><img src="assets/pixel-sound-on.svg" width="22" height="22" alt=""></button>
+    <div class="gate-scrapbook">
+      <div class="gate-decor" aria-hidden="true">
+        <span class="art-sticker cat-heart gate-cat"></span>
+        <span class="art-sticker bunny-heart gate-bunny"></span>
+        <span class="art-sticker flower-pink gate-flower"></span>
+        <span class="art-sticker floral-meadow gate-meadow"></span>
+        <picture class="gate-sticker gate-bow"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pink-bow-still.png"><img src="assets/stickers/pink-bow.webp" width="480" height="480" alt=""></picture>
+        <picture class="gate-sticker gate-stars"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pastel-stars-still.png"><img src="assets/stickers/pastel-stars.webp" width="480" height="480" alt=""></picture>
+      </div>
+      <div class="gate-card">
+        <picture class="gate-sticker gate-tape" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/gingham-tape-still.png"><img src="assets/stickers/gingham-tape.webp" width="480" height="252" alt=""></picture>
+        <p class="gate-address">for Swethaa</p>
+        <img class="gate-heart" src="assets/pixel-heart.svg" width="42" height="42" alt="" aria-hidden="true">
+        <h1 id="passcode-title">A little secret<br>just for you</h1>
+        <p class="gate-description">Four little digits<br>and a whole lot of stuffs waiting inside :)</p>
+        <form id="passcode-form" novalidate>
+          <label for="passcode-input" class="gate-label"> </label>
+          <div class="gate-code">
+            <div class="gate-slots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <input id="passcode-input" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" enterkeyhint="go" aria-label="Secret code" aria-describedby="passcode-status" required>
+          </div>
+          <div class="gate-keypad" role="group" aria-label="Passcode number pad">
+            <button type="button" data-code-key="1">1</button>
+            <button type="button" data-code-key="2">2</button>
+            <button type="button" data-code-key="3">3</button>
+            <button type="button" data-code-key="4">4</button>
+            <button type="button" data-code-key="5">5</button>
+            <button type="button" data-code-key="6">6</button>
+            <button type="button" data-code-key="7">7</button>
+            <button type="button" data-code-key="8">8</button>
+            <button type="button" data-code-key="9">9</button>
+            <button type="button" data-code-key="clear" class="gate-key-action">Clear</button>
+            <button type="button" data-code-key="0">0</button>
+            <button type="button" data-code-key="delete" class="gate-key-action" aria-label="Delete last digit">⌫</button>
+          </div>
+          <p id="passcode-status" role="status" aria-live="polite"></p>
+          <button class="pixel-btn gate-unlock" id="passcode-submit" type="submit">Unlock my surprise <span aria-hidden="true">♡</span></button>
+          <p id="passcode-hint" aria-live="polite" hidden>Need a little hint? Text me 💌</p>
+        </form>
+        <noscript><p class="gate-noscript">Turn on JavaScript to enter your code and open your surprise.</p></noscript>
+        <div class="gate-celebration" aria-hidden="true"><span>♡</span><span>♥</span><span>♡</span><span>♥</span><span>♡</span></div>
+      </div>
+      <p class="gate-footnote" aria-hidden="true">a tiny lock for a very special surprise</p>
+    </div>
+  </section>
+  <div id="site-content" hidden inert>
+  <nav class="scene-navigation" aria-label="Revisit scenes">
+    <button id="scene-back" type="button" disabled aria-label="Previous scene" title="Previous scene">←</button>
+    <button id="scene-forward" type="button" disabled aria-label="Next visited scene" title="Revisit a scene you have already reached">→</button>
+  </nav>
+  <button id="audio-toggle" class="audio-btn pixel-btn" aria-label="Toggle sound"><img src="assets/pixel-sound-on.svg" class="pixel-icon" alt="Sound"></button>
+
+  <!-- Background / Ambient Particle Overlay -->
+  <canvas id="canvas-particles"></canvas>
+
+  <!-- =========================================================================
+       SCENE 1: HELLO PAGE (Initial Landing Scene)
+       ========================================================================= -->
+  <section id="scene-hello" class="scene hidden" aria-label="Hello Intro Scene">
+    <div class="scene-backdrop meadow-world" aria-hidden="true" inert>
+      <img class="meadow-landscape" src="assets/personal-art/rolling-hills-background.png" width="1200" height="675" alt="" fetchpriority="high">
+      <div class="meadow-petals"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="meadow-breeze breeze-one"></div><div class="meadow-breeze breeze-two"></div><div class="meadow-breeze breeze-three"></div>
+      <span class="art-sticker cat-heart meadow-doodle"></span>
+    </div>
+    <div class="intro-container hello-container">
+      <div class="hello-content">
+        <h1 class="pixel-heading typewriter-title" id="hello-title">
+          <span class="typewriter-text" id="typewriter-text"></span>
+          <span class="typewriter-cursor" id="typewriter-cursor">|</span>
+        </h1>
+        <!-- Mascot Companions Waving with Dialogue -->
+        <div class="mascot-container hello-mascots" id="hello-mascots">
+          <div class="mascot-figure otter-figure">
+            <div class="speech-bubble pixel-bubble figure-bubble otter-speech" id="otter-speech">
+              Halloss Rabbitt Madam!
+            </div>
+            <img class="mascot otter pixelated" src="assets/otter-pixel.png" alt="Pixel Otter">
+          </div>
+
+          <div class="mascot-figure bunny-figure">
+            <div class="speech-bubble pixel-bubble figure-bubble bunny-speech" id="bunny-speech">
+              Halloss Mr. Otterr!
+            </div>
+            <img class="mascot bunny pixelated" src="assets/bunny-pixel.png" alt="Pixel Bunny">
+          </div>
+        </div>
+
+        <!-- Next Button -->
+        <button id="btn-hello-next" class="spring-btn pixel-btn hello-btn">
+          Continue <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"> →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCENE 2: ISABELLA MEME CARD
+       ========================================================================= -->
+  <section id="scene-isabella" class="scene hidden" aria-label="Isabella Meme Scene">
+    <div class="scene-backdrop scrapbook-world" aria-hidden="true" inert>
+      <div class="scrap-paper scrap-left"><span>little moments,<br>big smiles</span><span class="art-sticker cat-kiss"></span></div>
+      <div class="scrap-paper scrap-right"><span>you + me</span><span class="art-sticker cat-heart"></span></div>
+      <span class="art-sticker cat-flower-shy scrapbook-cat-one"></span>
+      <span class="art-sticker cat-blush scrapbook-cat-two"></span>
+      <span class="art-sticker cat-pleading scrapbook-cat-three"></span>
+      <span class="art-sticker cat-couple scrapbook-cat-four"></span>
+      <span class="art-sticker floral-meadow scrapbook-floral-left"></span>
+      <span class="art-sticker floral-butterflies scrapbook-floral-right"></span>
+      <span class="art-sticker flower-pink scrapbook-flower-one"></span>
+      <span class="art-sticker bunny-strawberry scrapbook-bunny"></span>
+      <div class="scrap-doodle doodle-one">✧</div><div class="scrap-doodle doodle-two">♡</div><div class="scrap-doodle doodle-three">✦</div>
+      <picture class="scene-sticker scrap-heart"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pixel-heart-still.png"><img src="assets/stickers/pixel-heart.webp" width="480" height="480" alt=""></picture>
+      <picture class="scene-sticker scrap-bow"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pink-bow-still.png"><img src="assets/stickers/pink-bow.webp" width="480" height="480" alt=""></picture>
+      <picture class="scene-sticker scrap-bunny"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pixel-bunny-still.png"><img src="assets/stickers/pixel-bunny.webp" width="246" height="246" alt=""></picture>
+    </div>
+    <div class="intro-container isabella-container">
+      <div class="isabella-card pixel-card">
+        <picture class="scene-sticker card-tape tape-left" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/gingham-tape-still.png"><img src="assets/stickers/gingham-tape.webp" width="480" height="252" alt=""></picture>
+        <picture class="scene-sticker card-tape tape-right" aria-hidden="true"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/gingham-tape-still.png"><img src="assets/stickers/gingham-tape.webp" width="480" height="252" alt=""></picture>
+        <div class="isabella-card-header">
+          <span class="card-sparkle">✦</span>
+          <h2 class="isabella-title">Whatcha doin, pippo? <img src="assets/pixel-eyes.svg" class="pixel-icon inline-right" alt="eyes"></h2>
+          <span class="card-sparkle">✦</span>
+        </div>
+        <div class="isabella-media-wrapper">
+          <img class="isabella-gif pixel-frame" src="assets/isabella.gif" alt="Isabella saying Whatcha doin">
+          <div class="floating-emotes" aria-hidden="true">
+            <span class="float-emote fe-1"><img src="assets/pixel-question.svg" class="pixel-icon" alt="?"></span>
+            <span class="float-emote fe-2"><img src="assets/pixel-eyes.svg" class="pixel-icon" alt="eyes"></span>
+            <span class="float-emote fe-3"><img src="assets/pixel-sparkle.svg" class="pixel-icon" alt="sparkle"></span>
+          </div>
+        </div>
+        <button id="btn-isabella-next" class="spring-btn pixel-btn isabella-btn">
+          Next → <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCENE 3: ENVELOPE INVITATION
+       ========================================================================= -->
+  <section id="scene-envelope" class="scene hidden" aria-labelledby="envelope-title" data-state="sealed">
+    <div class="scene-backdrop stationery-world" aria-hidden="true" inert>
+      <div class="writing-mat"></div>
+      <div class="tea-saucer"><div class="tea-cup"><i></i><i></i><i></i></div></div>
+      <div class="stationery-note"><span class="art-sticker bunny-boba"></span><span>just for you</span></div>
+      <span class="art-sticker cat-pleading desk-cat-one"></span>
+      <span class="art-sticker cat-flower-happy desk-cat-two"></span>
+      <span class="art-sticker cat-kiss desk-cat-three"></span>
+      <span class="art-sticker cat-blush desk-cat-four"></span>
+      <span class="art-sticker cute-books desk-books"></span>
+      <span class="art-sticker floral-blossoms desk-floral-border"></span>
+      <span class="art-sticker flower-daisy desk-daisy"></span>
+      <div class="postage-stamps"><span>♡</span><span>✦</span></div>
+      <div class="desk-pencil"></div><div class="paper-clip clip-one"></div><div class="paper-clip clip-two"></div>
+      <picture class="scene-sticker desk-bow"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pink-bow-still.png"><img src="assets/stickers/pink-bow.webp" width="480" height="480" alt=""></picture>
+      <picture class="scene-sticker desk-heart"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pixel-heart-still.png"><img src="assets/stickers/pixel-heart.webp" width="480" height="480" alt=""></picture>
+      <picture class="scene-sticker desk-bunny"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pixel-bunny-still.png"><img src="assets/stickers/pixel-bunny.webp" width="246" height="246" alt=""></picture>
+    </div>
+    <div class="envelope-scene-content">
+      <h2 id="envelope-title" class="envelope-title">A little something for you</h2>
+      <div class="envelope-stage">
+        <span class="envelope-star star-left" aria-hidden="true">✦</span>
+        <span class="envelope-star star-right" aria-hidden="true">✧</span>
+        <div class="envelope">
+          <div class="envelope-back" aria-hidden="true"></div>
+          <div class="envelope-flap" aria-hidden="true"></div>
+          <article id="envelope-letter" class="envelope-letter" aria-hidden="true" inert>
+            <div class="letter-content">
+              <img src="assets/pixel-sparkle.svg" class="letter-sparkle" alt="" aria-hidden="true">
+              <h3>For Pippo:</h3>
+              <p>Your surprise is waiting just beyond this letter... ✨</p>
+              <button id="btn-enter-arcade" class="spring-btn pixel-btn hidden" type="button">SHOWWMEE!</button>
+            </div>
+          </article>
+          <div class="envelope-pocket" aria-hidden="true"></div>
+          <span class="envelope-address" aria-hidden="true">for pippo, with love</span>
+          <button id="wax-seal" class="wax-seal" type="button" aria-label="Open the envelope" aria-controls="envelope-letter" aria-expanded="false">
+            <img src="assets/pixel-heart.svg" alt="" aria-hidden="true">
+          </button>
+        </div>
+      </div>
+      <p id="envelope-hint" class="envelope-hint" aria-live="polite">Tap the heart to open</p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCENE 4: CLAW MACHINE
+       ========================================================================= -->
+  <section id="scene-claw" class="scene hidden" aria-label="Arcade Claw Machine">
+    <div class="scene-backdrop arcade-world" aria-hidden="true" inert>
+      <div class="arcade-light-string"><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span></div>
+      <div class="arcade-wall-sign">GOOD<br>LUCK!<span class="art-sticker cat-pleading"></span></div>
+      <div class="plush-shelf"><img src="assets/otter-kawaii.png" width="72" height="86" alt=""><img src="assets/bunny-kawaii.png" width="62" height="80" alt=""></div>
+      <div class="prize-wall-shelf"><span class="art-sticker cute-frog"></span><span class="art-sticker cute-boba"></span><span class="art-sticker bunny-cup"></span></div>
+      <span class="art-sticker cat-flower-happy arcade-cat-one"></span>
+      <span class="art-sticker cat-kiss arcade-cat-two"></span>
+      <span class="art-sticker cat-heart arcade-cat-three"></span>
+      <span class="art-sticker bunny-heart arcade-bunny"></span>
+      <span class="art-sticker bush-purple arcade-flowers"></span>
+      <span class="art-sticker bush-pink arcade-bush-one"></span>
+      <span class="art-sticker bush-white arcade-bush-two"></span>
+      <div class="arcade-wall-window"><span>✧</span><span>✦</span><span>✧</span></div>
+      <picture class="scene-sticker arcade-stars"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pastel-stars-still.png"><img src="assets/stickers/pastel-stars.webp" width="480" height="480" alt=""></picture>
+      <picture class="scene-sticker arcade-heart"><source media="(prefers-reduced-motion: reduce)" srcset="assets/stickers/pixel-heart-still.png"><img src="assets/stickers/pixel-heart.webp" width="480" height="480" alt=""></picture>
+      <div class="arcade-skirting"></div><div class="arcade-floor"></div>
+      <div class="arcade-plant plant-left"></div><div class="arcade-plant plant-right"></div>
+    </div>
+    <div class="claw-stage-wrapper">
+      <div class="arcade-cabinet pixel-cabinet">
+      
+      <!-- Winged Crown Marquee Topper (Reference 1) -->
+      <div class="cabinet-crown">
+        <div class="crown-wing left-wing"></div>
+        <div class="crown-character">
+          <div class="crown-ears"></div>
+          <div class="crown-face">
+            <span class="crown-eye"></span>
+            <span class="crown-mouth">ω</span>
+            <span class="crown-eye"></span>
+          </div>
+          <div class="crown-blush"></div>
+        </div>
+        <div class="crown-wing right-wing"></div>
+      </div>
+
+      <!-- Cabinet Marquee Header (Pastel Blue & Pink) -->
+      <header class="cabinet-marquee">
+        <div class="marquee-decorations left-stars">✦ ★</div>
+        <div class="marquee-center">
+          <h2 class="arcade-title">LUCKY CLAW</h2>
+          <div class="marquee-badge">FOR PIPPO <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></div>
+        </div>
+        <div class="marquee-decorations right-stars">★ ✦</div>
+      </header>
+
+      <!-- Glass Cabinet Play Area with Ceiling Grid (Reference 2) -->
+      <div class="cabinet-glass">
+        <!-- Overhead Ceiling Grid Perspective Lines -->
+        <div class="ceiling-grid"></div>
+
+        <!-- Floating Glass Sparkles -->
+        <div class="glass-sparkle s1">✦</div>
+        <div class="glass-sparkle s2">✧</div>
+        <div class="glass-sparkle s3">✦</div>
+
+        <!-- First Hint Popup inside the Black Screen (Fade In & Fade Out) -->
+        <div class="glass-hint-popup" id="glass-hint-popup" aria-live="polite">
+          <img src="assets/tongue-out-pixel.svg" class="hint-popup-emote" alt=":P" width="22" height="22">
+          <span class="hint-popup-text"><span class="hint-popup-controls">Hold ← → or drag the joystick</span>Hint: It might be something golden and sparkly</span>
+          <img src="assets/tongue-out-pixel.svg" class="hint-popup-emote" alt=":P" width="22" height="22">
+        </div>
+
+        <!-- Gantry & Claw Assembly with Coiled Cable -->
+        <div class="gantry-rail">
+          <div class="claw-carriage" id="claw-carriage">
+            <div class="claw-cable-wrapper">
+              <div class="claw-cable-coil"></div>
+              <div class="claw-cable"></div>
+            </div>
+            <div class="claw-head">
+              <div class="claw-prong left"></div>
+              <div class="claw-prong center"></div>
+              <div class="claw-prong right"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prize Pit with Kawaii Egg Capsules (Key in Blue Egg, Chocolate in Red, Flower in Pink) -->
+        <div class="prize-pit">
+          <!-- Red Egg Capsule (Chocolate Reward Inside) -->
+          <div class="capsule reward-capsule" id="red-capsule" data-type="reward" data-reward="chocolate" data-color="red" title="Ruby Red Egg">
+            <div class="capsule-half shell-top"></div>
+            <div class="capsule-band"></div>
+            <div class="capsule-half shell-bottom"></div>
+          </div>
+
+          <!-- Blue Egg Capsule (Special Key Inside!) -->
+          <div class="capsule special-key reward-capsule" id="key-capsule" data-type="key" data-reward="key" data-color="blue" title="Pastel Blue Egg">
+            <div class="capsule-half shell-top"></div>
+            <div class="capsule-band"></div>
+            <div class="capsule-half shell-bottom"></div>
+          </div>
+
+          <!-- Chocolate Brown Egg -->
+          <div class="capsule" data-type="decoy" data-color="brown" title="Chocolate Brown Egg">
+            <div class="capsule-half shell-top"></div>
+            <div class="capsule-band"></div>
+            <div class="capsule-half shell-bottom"></div>
+          </div>
+
+          <!-- Golden Egg Capsule (Sparkle inside!) -->
+          <div class="capsule" data-type="decoy" data-color="gold" title="Golden Egg">
+            <div class="capsule-half shell-top"></div>
+            <div class="capsule-band">
+              <span class="star-pattern egg-sparkle"><img src="assets/pixel-sparkle.svg" class="pixel-icon" alt="sparkle"></span>
+            </div>
+            <div class="capsule-half shell-bottom"></div>
+          </div>
+
+          <!-- Mint Green Egg -->
+          <div class="capsule" data-type="decoy" data-color="green" title="Mint Green Egg">
+            <div class="capsule-half shell-top"></div>
+            <div class="capsule-band"></div>
+            <div class="capsule-half shell-bottom"></div>
+          </div>
+
+          <!-- Pink Egg Capsule (Flower Reward Inside) -->
+          <div class="capsule reward-capsule" id="pink-capsule" data-type="reward" data-reward="flower" data-color="pink" title="Sweet Pink Egg">
+            <div class="capsule-half shell-top"></div>
+            <div class="capsule-band"></div>
+            <div class="capsule-half shell-bottom"></div>
+          </div>
+
+          <!-- Dreamy Lavender Egg -->
+          <div class="capsule" data-type="decoy" data-color="lavender" title="Dreamy Lavender Egg">
+            <div class="capsule-half shell-top"></div>
+            <div class="capsule-band"></div>
+            <div class="capsule-half shell-bottom"></div>
+          </div>
+        </div>
+
+        <!-- Glass Reflection Layer -->
+        <div class="glass-reflection"></div>
+      </div>
+
+      <!-- Lower Prize Collection Tray (Pastel Blue & Pink Gradient with Continuously Twinkling Stars) -->
+      <div class="prize-chute">
+        <div class="chute-stars-track" aria-hidden="true">
+          <span class="chute-star">✦</span>
+          <span class="chute-star">★</span>
+          <span class="chute-star">✧</span>
+          <span class="chute-star">★</span>
+          <span class="chute-star">✦</span>
+          <span class="chute-star">★</span>
+          <span class="chute-star">✧</span>
+          <span class="chute-star">★</span>
+        </div>
+        <div class="chute-tray" id="prize-tray"></div>
+      </div>
+
+      <!-- Protruding Arcade Control Deck (References 1 & 2) -->
+      <div class="control-deck pixel-deck">
+        <!-- Interactive Ball-Top Joystick -->
+        <div class="deck-section joystick-section">
+          <div class="joystick-pod" id="joystick-pod" title="Click or use Arrow Keys to Move!">
+            <div class="joystick-base"></div>
+            <div class="joystick-shaft" id="joystick-shaft">
+              <div class="joystick-ball"></div>
+            </div>
+          </div>
+          <div class="joystick-arrows">
+            <button class="ctrl-btn arrow-btn pixel-ctrl" id="btn-left" aria-label="Move Claw Left">◀</button>
+            <button class="ctrl-btn arrow-btn pixel-ctrl" id="btn-right" aria-label="Move Claw Right">▶</button>
+          </div>
+        </div>
+
+        <!-- Retro Coin & Status LED Panel -->
+        <div class="deck-section status-section">
+          <div class="coin-insert-panel">
+            <span class="coin-label">INSERT COIN</span>
+            <div class="led-display" id="credit-display">
+              <span class="led-text">01</span>
+            </div>
+            <button class="coin-slot-btn" id="btn-coin" title="Insert 100¥ / Coin">
+              <span class="coin-slot"></span>
+              <span class="coin-text">100¥</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Chunky 3D Arcade DROP Button -->
+        <div class="deck-section drop-section">
+          <button class="ctrl-btn drop-btn pixel-drop" id="btn-drop" aria-label="Drop Claw">
+            <span class="drop-text">DROP</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- Mascot Companion Cheerleaders (Permanent Pixel Otter & Bunny) -->
+      <div class="mascot-container claw-mascots">
+        <img class="arcade-pet indian-dog pixelated" src="assets/personal-art/indian-dog.png" alt="Your Indian dog" width="420" height="600" draggable="false">
+        <img class="arcade-pet husky pixelated" src="assets/personal-art/husky.png" alt="Her husky" width="450" height="600" draggable="false">
+        <span class="arcade-pet-talk indian-dog">WUFF!</span>
+        <span class="arcade-pet-talk husky">BOW!</span>
+        <img class="mascot otter pixelated" src="assets/otter-pixel.png" 
+             alt="Pixel Otter with Orange Scarf">
+        <div class="speech-bubble otter-bubble pixel-bubble" id="otter-claw-bubble">Go get that capsule, kuttupups! <img src="assets/pixel-joystick.svg" class="pixel-icon inline-right" alt="joystick"></div>
+        
+        <div class="speech-bubble bunny-bubble pixel-bubble" id="bunny-claw-bubble">Yay, let's play! <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></div>
+        <img class="mascot bunny pixelated" id="claw-bunny" src="assets/bunny-pixel.png" 
+             alt="Pixel Bunny with Pink Ribbon">
+      </div>
+
+    <!-- Right Column: Collectibles Shelf -->
+    <aside class="claw-collectibles-shelf pixel-shelf" id="collectibles-shelf" aria-label="Treasures Found">
+      <div class="shelf-header">
+        <div class="shelf-title-wrap">
+          <span class="shelf-sparkle">✦</span>
+          <h3 class="shelf-title">COLLECTIBLES</h3>
+          <span class="shelf-sparkle">✦</span>
+        </div>
+        <div class="shelf-counter-badge" id="shelf-counter">0 / 3</div>
+      </div>
+
+      <div class="shelf-slots">
+        <!-- Slot 1: Chocolate (KitKat) -->
+        <div class="shelf-slot locked" id="slot-chocolate" data-item="chocolate" role="button" tabindex="0" title="??">
+          <div class="slot-pedestal">
+            <div class="slot-mystery"><img src="assets/pixel-question.svg" class="pixel-icon" alt="?"></div>
+            <img class="slot-img pixelated hidden" src="assets/chocolate.png" alt="KitKat Chocolate">
+          </div>
+          <div class="slot-meta">
+            <span class="slot-name">??</span>
+            <span class="slot-status">LOCKED</span>
+          </div>
+        </div>
+
+        <!-- Slot 2: Flower (Bouquet) -->
+        <div class="shelf-slot locked" id="slot-flower" data-item="flower" role="button" tabindex="0" title="??">
+          <div class="slot-pedestal">
+            <div class="slot-mystery"><img src="assets/pixel-question.svg" class="pixel-icon" alt="?"></div>
+            <img class="slot-img pixelated hidden" src="assets/flower.png" alt="Flower Bouquet">
+          </div>
+          <div class="slot-meta">
+            <span class="slot-name">??</span>
+            <span class="slot-status">LOCKED</span>
+          </div>
+        </div>
+
+        <!-- Slot 3: Key (Golden Key) -->
+        <div class="shelf-slot locked" id="slot-key" data-item="key" role="button" tabindex="0" title="??">
+          <div class="slot-pointer hidden" id="key-pointer" aria-hidden="true"><img src="assets/pixel-pointer.svg" class="pixel-icon" alt="pointer"></div>
+          <div class="slot-pedestal">
+            <div class="slot-mystery"><img src="assets/pixel-question.svg" class="pixel-icon" alt="?"></div>
+            <div class="slot-key-glyph hidden"><img src="assets/pixel-key.svg" class="pixel-icon" alt="key"></div>
+          </div>
+          <div class="slot-meta">
+            <span class="slot-name">??</span>
+            <span class="slot-status">LOCKED</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shelf-hint-box" id="shelf-hint-box">
+        <p class="shelf-hint" id="shelf-hint">
+          <img src="assets/tongue-out-pixel.svg" class="shelf-hint-emote" alt=":P" width="15" height="15">
+          Hint: It might be something golden and sparkly
+        </p>
+      </div>
+    </aside>
+  </div>
+  </section>
+
+  <!-- =========================================================================
+       CAPSULE REVEAL MODAL
+       ========================================================================= -->
+  <div id="capsule-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Open Capsule Modal">
+    <div class="capsule-stage">
+      <!-- Interactive Clickable Shell -->
+      <div class="capsule-shell" id="capsule-shell" data-cracks="0">
+        <div class="crack-line crack-1"></div>
+        <div class="crack-line crack-2"></div>
+        <div class="crack-line crack-3"></div>
+        <div class="light-rays"></div>
+        <div class="shell-top"></div>
+        <div class="shell-bottom"></div>
+      </div>
+
+      <!-- Capsule Hidden Treasures (Supports 3 Rewards: Key, Flower, Chocolate) -->
+      <div class="capsule-contents hidden" id="capsule-contents">
+        <!-- Reward 1: Golden Key (Inside Blue Egg) -->
+        <div class="reward-view" id="reward-view-key">
+          <div class="golden-key-float" id="golden-key-preview">
+            <div class="key-head">
+              <div class="key-ring"></div>
+              <div class="key-heart"><img src="assets/pixel-heart.svg" class="pixel-icon" alt="heart"></div>
+            </div>
+            <div class="key-stem"></div>
+            <div class="key-teeth"></div>
+            <div class="key-sparkle"><img src="assets/pixel-sparkle.svg" class="pixel-icon" alt="sparkle"></div>
+          </div>
+          <div class="mini-scroll hidden" id="mini-scroll">
+            <div class="scroll-roll"></div>
+            <div class="scroll-paper">For pippo... I saved the best view for you <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></div>
+          </div>
+        </div>
+
+        <!-- Reward 2: Flower (Inside Pink Egg) -->
+        <div class="reward-view hidden" id="reward-view-flower">
+          <div class="reward-image-container flower-reward">
+            <img id="flower-reward-img" class="reward-image" src="assets/flower.png" alt="Flower for Pippo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="reward-fallback-icon" style="display:none;"><img src="assets/pixel-flower.svg" class="pixel-icon icon-lg" alt="flower"></div>
+          </div>
+          <div class="reward-message-card">
+            indhaa a special phool for you from a fool for you :)<img src="assets/pixel-flower.svg" class="pixel-icon" alt="flower"><img src="assets/pixel-heart.svg" class="pixel-icon" alt="heart">
+          </div>
+        </div>
+
+        <!-- Reward 3: Chocolate (Inside Red Egg) -->
+        <div class="reward-view hidden" id="reward-view-chocolate">
+          <div class="reward-image-container chocolate-reward">
+            <img id="chocolate-reward-img" class="reward-image" src="assets/chocolate.png" alt="Chocolate for Pippo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="reward-fallback-icon" style="display:none;"><img src="assets/pixel-choki.svg" class="pixel-icon icon-lg" alt="chocolate"></div>
+          </div>
+          <div class="reward-message-card">
+            indhaaa chokii for the sweetest girl ever :) <img src="assets/pixel-heart.svg" class="pixel-icon" alt="heart">
+          </div>
+        </div>
+        <!-- Reward 4: Empty Dud Egg (For Decoys) -->
+        <div class="reward-view hidden" id="reward-view-empty">
+          <div class="reward-image-container dud-reward" id="dud-reward-container">
+            <div class="dud-icon" id="dud-icon">
+              <img src="assets/tongue-out-pixel.svg" class="dud-tongue-img" alt="Fool you!" width="80" height="80">
+            </div>
+          </div>
+          <div class="reward-message-card" id="dud-message-card">
+            HAHAHAHAHA, FOOLED YOU HAHAHAA! <img src="assets/pixel-laugh.svg" class="pixel-icon" alt="XD"><br/>
+            Try again, pippo! <img src="assets/pixel-joystick.svg" class="pixel-icon inline-right" alt="joystick">
+          </div>
+        </div>
+      </div>
+
+      <!-- User Instruction Prompt -->
+      <div class="tap-prompt" id="tap-prompt">Tap the capsule! <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></div>
+    </div>
+
+    <!-- Transition Action Buttons -->
+    <button id="btn-goto-window" class="spring-btn hidden">Lessgo Kuttupups !</button>
+    <button id="btn-collect-continue" class="spring-btn hidden">Add to Collectibles <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></button>
+    <button id="btn-try-again" class="spring-btn hidden">Try Again <img src="assets/pixel-joystick.svg" class="pixel-icon inline-right" alt="joystick"></button>
+  </div>
+
+  <!-- =========================================================================
+       SCENE 5: ARCHED WINDOW ROOM
+       ========================================================================= -->
+  <section id="scene-window" class="scene hidden" aria-label="Arched Window Scene">
+    <div class="room-interior">
+      <h2 class="room-title">Open the window, kuttupups <img src="assets/pixel-moon.svg" class="pixel-icon inline-right" alt="moon"></h2>
+      
+      <!-- 3D Perspective Arched Window -->
+      <div class="window-arch" id="window-frame">
+        <div class="shutter left-shutter" id="left-shutter"></div>
+        <div class="shutter right-shutter" id="right-shutter"></div>
+        
+        <!-- Padlock & Keyhole -->
+        <div class="window-lock" id="window-lock">
+          <div class="lock-shackle"></div>
+          <div class="padlock-body">
+            <div class="keyhole" id="keyhole"></div>
+          </div>
+        </div>
+
+        <!-- Curtains and Starlight Slits -->
+        <div class="curtain left-curtain"></div>
+        <div class="curtain right-curtain"></div>
+        <div class="sky-peek"></div>
+      </div>
+
+      <!-- Draggable Golden Key -->
+      <div class="draggable-key" id="draggable-key" draggable="false" tabindex="0" role="button" aria-label="Draggable Golden Key">
+        <div class="key-head">
+          <div class="key-ring"></div>
+          <div class="key-heart"><img src="assets/pixel-heart.svg" class="pixel-icon" alt="heart"></div>
+        </div>
+        <div class="key-stem"><div class="key-teeth"></div></div>
+        <div class="key-sparkle"><img src="assets/pixel-sparkle.svg" class="pixel-icon" alt="sparkle"></div>
+      </div>
+
+      <!-- Fairy Dust Particle Trail Anchor -->
+      <div class="key-trail" id="key-trail"></div>
+
+      <!-- Mascot Companions for Window Scene (Pixel Mascots) -->
+      <div class="mascot-container window-mascots">
+        <img class="mascot otter pixelated" src="assets/otter-pixel.png" 
+             alt="Pixel Otter with Orange Scarf">
+        <div class="speech-bubble otter-bubble pixel-bubble" id="otter-window-bubble">Here's your key, pippo... try the lock! <img src="assets/pixel-key.svg" class="pixel-icon inline-right" alt="key"></div>
+        <img class="mascot bunny pixelated" src="assets/bunny-pixel.png" 
+             alt="Pixel Bunny with Pink Ribbon">
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SCENE 6: STARRY SKY PREVIEW
+       ========================================================================= -->
+  <section id="scene-sky" class="scene hidden" aria-label="Starry Sky Finale">
+    <div class="sky-container pixel-sky">
+      <div class="sky-mascots-float">
+        <img class="mascot duo pixelated" src="assets/duo-pixel.png" 
+             alt="Pixel Otter and Bunny together">
+      </div>
+      <h1 class="pixel-heading">I built a sky for you, kuttupups <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></h1>
+      <p class="sky-subtitle pixel-subtitle">Always by your side, through every star and every story <img src="assets/pixel-sparkle.svg" class="pixel-icon inline-right" alt="sparkle"></p>
+      <a id="btn-enter-sky" class="spring-btn replay-btn pixel-btn" href="sky/index.html">ENTER YOUR SKY ✦</a>
+      <button id="btn-replay" class="spring-btn replay-btn pixel-btn">↺ PLAY AGAIN, PIPPO</button>
+      <div class="stars-layer"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       JAVASCRIPT MODULES (Deferred)
+       ========================================================================= -->
+  </div>
+  <script src="js/passcode.js" defer></script>
+  <script src="js/audio.js" defer></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/claw.js" defer></script>
+  <script src="js/capsule.js" defer></script>
+  <script src="js/window.js" defer></script>
+  <script src="js/envelope.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
