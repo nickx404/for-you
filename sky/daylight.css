@@ -6,7 +6,7 @@ body{color:#fff6e1}
 .meadow-background img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
 @container sky (aspect-ratio < 3/2) or (aspect-ratio > 3/1){.meadow-background img{object-fit:contain;object-position:center 30%}}
 @media(max-width:700px){
-  .meadow-background img{object-fit:contain;object-position:center 30%}
+  .meadow-background img{object-fit:cover;object-position:center 30%}
 }
 body[data-sky=clouds] :is(.hill,.flower,#stardust){display:none}
 .cloud,.moon{display:none}
