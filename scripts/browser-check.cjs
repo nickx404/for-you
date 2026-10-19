@@ -86,6 +86,7 @@ async function checkMeadow(page, width, height) {
       }
       if(i===count-1) {
         await page.waitForFunction(()=>document.querySelector('#constellation').classList.contains('outline-glow'));
+        assert.equal(await page.locator('.heart-complete').evaluate(el=>getComputedStyle(el).opacity),'1');
         const glowFrames = await page.locator('.heart-glow').evaluate(el=>el.getAnimations()[0].effect.getKeyframes());
         assert.ok(glowFrames[0].clipPath.startsWith('inset(100%'));
         assert.ok(glowFrames.at(-1).clipPath.startsWith('inset(0'));

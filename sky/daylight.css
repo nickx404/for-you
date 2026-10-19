@@ -123,7 +123,7 @@ body[data-sky=daydream] #progress-marks .filled{color:#84584e}
 .heart-reveal{left:0;top:0;transform:scale(.15);z-index:1}
 .heart-shown .heart-reveal{transform:scale(1);animation:pixel-heart-fill .7s ease-out both}
 .heart-reveal::before{inset:0}
-@keyframes pixel-outline-reveal{from{opacity:.2;clip-path:inset(100% 0 0 0)}to{opacity:.6;clip-path:inset(0)}}
+@keyframes pixel-outline-reveal{from{opacity:1;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(0)}}
 @keyframes pixel-heart-fill{0%{opacity:0;transform:translateY(22px) scale(.15)}70%{opacity:1;transform:translateY(0) scale(1.04)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @media(prefers-reduced-motion:reduce){.complete .heart-complete.pixel-outline,.heart-shown .heart-reveal{animation:none}.heart-shown .heart-reveal{transform:scale(1)}}
 
@@ -135,7 +135,7 @@ body[data-sky=daydream] #progress-marks .filled{color:#84584e}
 
 .heart-glow.pixel-outline{opacity:0;filter:url('#pixel-outline') drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 10px #ffffff)}
 .complete.outline-glow .heart-glow.pixel-outline{opacity:1;animation:outline-glow 2s ease-out both}
-@keyframes outline-glow{from{opacity:.2;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(0)}}
+@keyframes outline-glow{from{opacity:1;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(0)}}
 #next:not([hidden]){animation:next-rise .4s ease-out both}
 #next:not([hidden]){position:relative;top:12px}
 @keyframes next-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
