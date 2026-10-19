@@ -147,6 +147,8 @@
    ========================================================================== */
 
 #scene-claw {
+  align-items: flex-start;
+  padding-top: max(72px, calc(env(safe-area-inset-top) + 60px));
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -1524,7 +1526,7 @@
   #scene-claw {
     align-items: flex-start;
     justify-content: center;
-    padding: 24px 8px 48px 8px;
+    padding: max(72px, calc(env(safe-area-inset-top) + 60px)) 8px 48px;
   }
 
   .claw-stage-wrapper {
@@ -1615,7 +1617,7 @@
 
 @media (max-width: 560px) {
   #scene-claw {
-    padding: 16px 6px 40px 6px;
+    padding: max(72px, calc(env(safe-area-inset-top) + 60px)) 6px 40px;
   }
 
   .arcade-cabinet.pixel-cabinet {

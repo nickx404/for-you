@@ -43,7 +43,7 @@ content.stars.forEach((star, index) => {
   button.classList.toggle('tip', points[index].y > 82);
   button.style.cssText = `left:${points[index].x}%;top:${points[index].y}%;--delay:${index*.4}s`;
   button.setAttribute('aria-label', `Open star ${index+1}: ${star.title}`);
-  button.innerHTML = `<img class="star-shape" src="assets/pastel-star.png" alt="" loading="lazy"><span class="star-number" aria-hidden="true">${index+1}</span>`;
+  button.innerHTML = `<img class="star-shape" src="assets/pastel-star.webp" alt="" loading="eager"><span class="star-number" aria-hidden="true">${index+1}</span>`;
   button.addEventListener('click', () => openStar(index));
   $('#stars').append(button);
 });

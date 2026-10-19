@@ -11,7 +11,7 @@ async function checkMeadow(page, width, height) {
     return {width:world.width,height:world.height,source:img.currentSrc,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,fit:getComputedStyle(img).objectFit,position:getComputedStyle(img).objectPosition};
   });
   const mobile = width <= 700;
-  assert.ok(layout.source.endsWith(mobile?'starry-meadow-mobile-v2.png':'starry-meadow-desktop.webp'));
+  assert.ok(layout.source.endsWith(mobile?'starry-meadow-mobile-v2.webp':'starry-meadow-desktop.webp'));
   assert.deepEqual([layout.naturalWidth,layout.naturalHeight],mobile?[941,1672]:[3840,2160]);
   assert.equal(layout.position,mobile || layout.fit==='contain'?'50% 30%':'50% 0%');
   // Conservative bounds include the moon's glow in each supplied composition.

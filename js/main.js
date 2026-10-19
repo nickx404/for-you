@@ -116,6 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (sceneId !== 'scene-claw') window.clawGame?.stopMove();
 
+    if (sceneId === 'scene-window' || sceneId === 'scene-sky') {
+      for (const file of [matchMedia('(max-width:700px)').matches ? 'starry-meadow-mobile-v2.webp' : 'starry-meadow-desktop.webp', 'pastel-star.webp']) {
+        const image = new Image();
+        image.src = `sky/assets/${file}`;
+      }
+    }
+
     document.querySelectorAll('.scene').forEach(s => {
       if (s.id !== sceneId) {
         s.classList.remove('active');
