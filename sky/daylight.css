@@ -272,12 +272,17 @@ body.finale-open{overflow:hidden}
 .guide-otter{left:73px;rotate:-8deg}.guide-bunny{right:73px;rotate:8deg}
 .guide-speech{position:absolute;bottom:104px;left:0;width:100%;margin:0;padding:10px 12px;background:#fff;color:#4a2e56;border:3px solid #4a2e56;border-radius:6px;box-shadow:3px 3px 0 #ffd1dc,4px 4px 0 #4a2e561f;font-family:Pixel,'Courier New',monospace;font-size:9px;line-height:1.8;text-align:center}
 .guide-speech::after{content:'';position:absolute;top:100%;left:105px;border:6px solid transparent;border-top-color:#4a2e56;border-bottom:0}
-.exploring{--constellation-top:clamp(135px,16svh,180px);--constellation-size:min(490px,43svh,86vw)}
+.exploring{--constellation-top:calc(clamp(135px,16svh,180px) + 24px);--constellation-size:min(490px,43svh,86vw)}
 #world.exploring{height:100svh;min-height:100svh}
 .exploring .explore-heading{padding-top:12px}
 .explore-heading .sky-dedication{font-size:16px;line-height:1.4;margin:6px auto;max-width:calc(100% - 32px)}
 .exploring .explore-heading h1{margin-bottom:6px}
 .exploring .explore-heading>p:last-child{margin:6px 0}
+@media(min-height:551px){
+  .exploring .explore-heading h1{margin-bottom:14px}
+  .explore-heading .sky-dedication{margin:14px auto}
+  .exploring .explore-heading>p:last-child{margin:14px 0}
+}
 .exploring #constellation{top:var(--constellation-top);width:var(--constellation-size)}
 .exploring .progress{left:50%;right:auto;top:calc(var(--constellation-top) + var(--constellation-size) + 12px);bottom:auto;transform:translateX(-50%);width:400px}
 .exploring #progress-marks{margin-bottom:8px}
@@ -344,7 +349,7 @@ body[data-sky=clouds] .dust{opacity:.3}
   .guide-otter{left:65px}.guide-bunny{right:65px}
   .guide-speech{bottom:90px;font-size:8px;line-height:1.8;padding:9px 10px}
   .guide-speech::after{left:86px}
-  .exploring{--constellation-top:170px;--constellation-size:min(300px,74vw,40svh)}
+  .exploring{--constellation-top:194px;--constellation-size:calc(min(300px,74vw,40svh) - 24px)}
   .exploring .explore-heading{padding-top:48px}
   .explore-heading .sky-dedication{font-size:14px}
   .exploring .progress{width:340px}

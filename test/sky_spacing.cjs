@@ -40,7 +40,7 @@ const { chromium } = createRequire(path.join(process.env.USERPROFILE, '.cache/co
       let layout = await measure();
       const separate = (a, b) => a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom;
       const landscape = height <= 550 && width >= 550;
-      const minimumSize = landscape ? Math.min(300, height * .72, width * .44) : width <= 700 ? Math.min(300, width * .74, height * .4) : Math.min(490, height * .43, width * .86);
+      const minimumSize = landscape ? Math.min(300, height * .72, width * .44) : width <= 700 ? Math.min(300, width * .74, height * .4) - 24 : Math.min(490, height * .43, width * .86);
       assert.ok(layout.constellation.width >= minimumSize - 1);
       assert.equal(await page.locator('.star-label').count(), 0);
       const progressOrder = await page.evaluate(() => {
