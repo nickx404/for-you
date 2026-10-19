@@ -1,4 +1,4 @@
-import { content } from './content.js?v=cosmic-ending';
+import { content } from './content.js?v=fast-card-images';
 import { heartPoints, allViewed, whatsappUrl } from './logic.js';
 const $ = selector => document.querySelector(selector);
 window.skyMusic.start();
@@ -43,7 +43,7 @@ content.stars.forEach((star, index) => {
   button.classList.toggle('tip', points[index].y > 82);
   button.style.cssText = `left:${points[index].x}%;top:${points[index].y}%;--delay:${index*.4}s`;
   button.setAttribute('aria-label', `Open star ${index+1}: ${star.title}`);
-  button.innerHTML = `<img class="star-shape" src="assets/pastel-star.webp" alt="" loading="eager"><span class="star-number" aria-hidden="true">${index+1}</span>`;
+  button.innerHTML = `<span class="star-art" aria-hidden="true"><img class="star-shape" src="assets/pastel-star.webp" alt=""><img class="star-white" src="assets/pastel-star-white.webp" alt=""></span><span class="star-number" aria-hidden="true">${index+1}</span>`;
   button.addEventListener('click', () => openStar(index));
   $('#stars').append(button);
 });
@@ -371,9 +371,17 @@ finale.addEventListener('close', () => {
   $('#next').focus();
 });
 function closeDialog() { $('#card').querySelector('video')?.pause(); $('#card').close(); }
-$('#close').onclick = closeDialog;
+$('#card').addEventListener('cancel', event => event.preventDefault());
 $('#card').addEventListener('close', () => { $('#card').querySelector('video')?.pause(); $('#card').querySelector('iframe')?.remove(); window.skyMusic.release(); revealHeart(); });
 $('#start').onclick = () => { $('#welcome').hidden = true; $('#explore').hidden = false; $('#world').classList.add('exploring'); updateProgress(); $('.star')?.focus(); };
 $('#next').onclick = () => { if (heartRevealed && allViewed(content.stars, viewed)) question(); };
 updateProgress();
+
+// Warm the small card images while the welcome and constellation are being read.
+for (const star of content.stars) {
+  if (!star.photo) continue;
+  const image = new Image();
+  image.fetchPriority = 'low';
+  image.src = star.photo;
+}
 

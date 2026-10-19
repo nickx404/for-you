@@ -55,13 +55,16 @@ async function checkMeadow(page, width, height) {
     assert.equal(await page.locator('.heart-complete').evaluate(el=>getComputedStyle(el).opacity),'0');
     assert.deepEqual(await page.locator('.star-number').allTextContents(),['1','2','3','4','5','6','7','8']);
     assert.equal(await page.locator('.check').count(),0);
-    assert.ok(await page.locator('.star-shape').evaluateAll(images=>images.every(image=>getComputedStyle(image).filter.includes('grayscale(1)'))));
+    assert.ok(await page.locator('.star-shape').evaluateAll(images=>images.every(image=>getComputedStyle(image).opacity==='0')));
     assert.equal(await page.locator('.heart-reveal').evaluate(el=>getComputedStyle(el).opacity),'0');
     assert.equal(await page.locator('#next').isEnabled(),false);
     assert.equal(await page.locator('#next').isVisible(),false);
     for (let i=0;i<count;i++) {
       await stars.nth(i).click();
       assert.equal(await page.locator('#card').isVisible(),true);
+      assert.equal(await page.locator('#card .close').count(),0);
+      await page.keyboard.press('Escape');
+      assert.equal(await page.locator('#card').isVisible(),true,'Only the bottom button dismisses a star');
       if(i===3) {
         const video=page.locator('.tv video');
         assert.ok((await video.getAttribute('src')).endsWith('for-you-optimized.mp4'));
@@ -72,9 +75,9 @@ async function checkMeadow(page, width, height) {
         const box=await page.getByLabel('Playback speed').boundingBox();
         assert.ok(box.x>=0 && box.x+box.width<=width);
       }
-      await page.keyboard.press('Escape');
+      await page.locator('#card-content > button').click();
       assert.equal(await stars.nth(i).locator('.star-number').isVisible(),false);
-      await page.waitForFunction(index=>!getComputedStyle(document.querySelectorAll('.star-shape')[index]).filter.includes('grayscale'),i);
+      await page.waitForFunction(index=>getComputedStyle(document.querySelectorAll('.star-shape')[index]).opacity==='1' && getComputedStyle(document.querySelectorAll('.star-white')[index]).opacity==='0',i);
       assert.equal(await page.locator('#counter').textContent(),`${i+1} of ${count} stars discovered`);
       if(i===0) {
         assert.equal(await page.locator('#counter').textContent(),`1 of ${count} stars discovered`);
@@ -131,7 +134,7 @@ async function checkMeadow(page, width, height) {
   await quiet.getByRole('button',{name:'Show me'}).click();
   for(let i=0;i<8;i++) {
     await quiet.locator('.star').nth(i).click();
-    await quiet.keyboard.press('Escape');
+    await quiet.locator('#card-content > button').click();
   }
   await quiet.waitForFunction(()=>!document.querySelector('#next').disabled);
   assert.equal(await quiet.locator('.heart-reveal img').isVisible(),false);

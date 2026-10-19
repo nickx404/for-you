@@ -19,7 +19,7 @@ assert.match(await page.locator('#guide-line').textContent(),/Pick a star/);
 const overlap=await page.evaluate(()=>{const a=document.querySelector('.sky-guides').getBoundingClientRect(),b=document.querySelector('.progress').getBoundingClientRect(),c=document.querySelector('#constellation').getBoundingClientRect();return {progress:a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top,constellation:a.left<c.right&&a.right>c.left&&a.top<c.bottom&&a.bottom>c.top};});
 assert.deepEqual(overlap,{progress:false,constellation:false},`Guides clear the controls at ${width}`);
 await page.screenshot({path:`screenshots/mascots-explore-${width}.png`});
-for(let i=0;i<8;i++){await page.locator('.star').nth(i).click();assert.equal(await page.locator('#card .mascot-conversation img').count(),2);if(i===0)await page.screenshot({path:`screenshots/mascots-card-${width}.png`});await page.keyboard.press('Escape');}
+for(let i=0;i<8;i++){await page.locator('.star').nth(i).click();assert.equal(await page.locator('#card .mascot-conversation img').count(),2);if(i===0)await page.screenshot({path:`screenshots/mascots-card-${width}.png`});await page.locator('#card-content > button').click();}
 await page.locator('#next').waitFor();
 assert.ok(await page.evaluate(()=>{const p=document.querySelector('.progress').getBoundingClientRect(),speech=document.querySelector('.guide-speech').getBoundingClientRect(),stars=document.querySelector('#constellation').getBoundingClientRect();return Math.abs(p.left+p.width/2-innerWidth/2)<1&&p.top>stars.bottom&&p.bottom+8<speech.top;}),'Completed progress is centered below the stars and clears dialogue');
 await page.screenshot({path:`screenshots/centered-progress-${width}.png`});

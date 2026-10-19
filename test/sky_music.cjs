@@ -36,7 +36,7 @@ async function playing(page) {
       const videoIndex = await page.evaluate(async () => (await import('/sky/content.js?v=cosmic-ending')).content.stars.findIndex(star => star.video));
       for (let i = 0; i < videoIndex; i++) {
         await page.locator('.star').nth(i).click();
-        await page.keyboard.press('Escape');
+        await page.locator('#card-content > button').click();
       }
       await page.locator('.star').nth(videoIndex).click();
       await page.waitForTimeout(400);
@@ -49,7 +49,7 @@ async function playing(page) {
       await page.locator('video').evaluate(video => video.pause());
       await page.waitForTimeout(200);
       assert.equal(await page.locator('#sky-music').evaluate(audio => audio.paused), true, 'Music stays quiet during a video pause');
-      await page.keyboard.press('Escape');
+      await page.locator('#card-content > button').click();
       await playing(page);
       assert.ok(await page.locator('#sky-music').evaluate(audio => audio.currentTime) > pausedAt, 'Closing resumes from the same music position');
       await page.locator('.star').nth(videoIndex).click();
@@ -62,12 +62,12 @@ async function playing(page) {
       await playing(page);
       await page.waitForTimeout(1100);
       assert.equal(await page.locator('#sky-music').evaluate(audio => audio.paused), false, 'A stale fade timer cannot pause music after the video ends');
-      await page.keyboard.press('Escape');
+      await page.locator('#card-content > button').click();
       await page.locator('#sky-music-control').click();
       await page.waitForFunction(() => document.querySelector('#sky-music').paused);
       await page.locator('.star').nth(videoIndex).click();
       await page.locator('video').evaluate(video => video.play());
-      await page.keyboard.press('Escape');
+      await page.locator('#card-content > button').click();
       await page.waitForTimeout(1100);
       assert.equal(await page.locator('#sky-music').evaluate(audio => audio.paused), true, 'Leaving video respects the music off setting');
       await page.locator('#sky-music-control').click();
@@ -77,7 +77,7 @@ async function playing(page) {
       const count = await page.locator('.star').count();
       for (let i = 0; i < count; i++) {
         await page.locator('.star').nth(i).click();
-        await page.keyboard.press('Escape');
+        await page.locator('#card-content > button').click();
       }
       await page.locator('#next').click(); await playing(page);
       await page.locator('#answer-yes').click(); await playing(page);

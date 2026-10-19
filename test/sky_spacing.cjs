@@ -62,7 +62,7 @@ const { chromium } = createRequire(path.join(process.env.USERPROFILE, '.cache/co
       await page.screenshot({ path: `screenshots/spaced-stars-unopened-${width}.png`, fullPage: true });
       for (let i = 0; i < 8; i++) {
         await page.locator('.star').nth(i).click();
-        await page.keyboard.press('Escape');
+        await page.locator('#card-content > button').click();
       }
       await page.locator('#next').waitFor();
       layout = await measure();

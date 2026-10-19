@@ -52,7 +52,7 @@ async function checkCollage(page, selector) {
       const starCount = await page.locator('.star').count();
       for (let i = 0; i < starCount; i++) {
         await page.locator('.star').nth(i).click();
-        await page.keyboard.press('Escape');
+        await page.locator('#card-content > button').click();
         if (i < starCount - 1) assert.equal(await page.locator('#next').isVisible(), false);
       }
       await page.locator('#next').waitFor();
@@ -171,7 +171,7 @@ async function checkCollage(page, selector) {
         await page.keyboard.press('Escape');
       }
       await page.locator('.star').first().click();
-      await page.keyboard.press('Escape');
+      await page.locator('#card-content > button').click();
       assert.deepEqual(errors, []);
       console.log(`Passed finale, dodging, WhatsApp link, return and ${reduced ? 'reduced' : 'full'} motion at ${width}×${height}`);
       await context.close();

@@ -13,13 +13,13 @@ for(const width of [393,1366]){
   for(let j=0;j<8;j++)assert.equal(await stars.nth(j).isEnabled(),j<=index,`Star ${j+1} availability before ${index+1}`);
   assert.equal(await page.locator('.star.current').getAttribute('data-index'),String(index));
   if(index<7){await stars.nth(index+1).dispatchEvent('click');assert.equal(await page.locator('#card').isVisible(),false,'Cannot bypass the order');}
-  await stars.nth(index).click();await page.keyboard.press('Escape');
+  await stars.nth(index).click();await page.locator('#card-content > button').click();
   assert.equal(await page.locator('#counter').textContent(),`${index+1} of 8 stars discovered`);
-  if(index>0){await stars.first().click();await page.keyboard.press('Escape');assert.equal(await page.locator('#counter').textContent(),`${index+1} of 8 stars discovered`,'Reopening does not change progress');}
+  if(index>0){await stars.first().click();await page.locator('#card-content > button').click();assert.equal(await page.locator('#counter').textContent(),`${index+1} of 8 stars discovered`,'Reopening does not change progress');}
  }
  assert.equal(await page.locator('.star:disabled').count(),0);
  await page.locator('#next').waitFor();
- for(let j=7;j>=0;j--){await stars.nth(j).click();await page.keyboard.press('Escape');}
+ for(let j=7;j>=0;j--){await stars.nth(j).click();await page.locator('#card-content > button').click();}
  assert.equal(await page.locator('#counter').textContent(),'8 of 8 stars discovered');
  assert.equal(await page.locator('#next').isEnabled(),true);
  assert.deepEqual(errors,[]);console.log(`Ordered unlock and unrestricted revisits passed at ${width}px`);await page.close();

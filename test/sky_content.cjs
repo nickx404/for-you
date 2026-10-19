@@ -13,7 +13,7 @@ const { chromium } = createRequire(path.join(process.env.USERPROFILE, '.cache/co
       await page.goto(process.env.SKY_URL || 'http://127.0.0.1:4173/sky/index.html');
       await page.locator('#start').click();
       const titles = ['Remember this?', 'The first date?', 'First of many.', 'Something from me', 'A little of what I feel', 'Last option', 'And we still met', 'My favorite photo'];
-      const photos = ['first-game-score.png', 'first-date-drawing.png', 'first-of-many.png', null, null, 'just-five-more-minutes.png', 'and-we-still-met.png', 'hold-my-hand.png'];
+      const photos = ['first-game-score.webp', 'first-date-drawing.webp', 'first-of-many.webp', null, null, 'just-five-more-minutes.webp', 'and-we-still-met.webp', 'hold-my-hand.webp'];
       for (let index = 0; index < titles.length; index++) {
         await page.locator('.star').nth(index).click();
         assert.equal(await page.locator('#card-title').textContent(), titles[index]);
@@ -66,7 +66,7 @@ const { chromium } = createRequire(path.join(process.env.USERPROFILE, '.cache/co
           assert.equal(await firstReel.getAttribute('aria-label'), 'Reel 1, opened');
           assert.equal(await page.locator('.reel-link.opened').count(), 1);
           assert.equal(await firstReel.locator('.reel-status').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(40, 115, 68)');
-          await page.keyboard.press('Escape');
+          await page.locator('#card-content > button').click();
           await page.locator('.star').nth(4).click();
           assert.equal(await firstReel.getAttribute('aria-label'), 'Reel 1, opened');
           await page.locator('.reel-list').scrollIntoViewIfNeeded();
@@ -74,13 +74,17 @@ const { chromium } = createRequire(path.join(process.env.USERPROFILE, '.cache/co
         }
         assert.ok(await page.locator('#card').evaluate(el => el.scrollWidth <= el.clientWidth));
         if ([2, 4, 6, 7].includes(index)) await page.screenshot({ path: `screenshots/star-${index + 1}-${width}.png` });
-        await page.keyboard.press('Escape');
+        await page.locator('#card-content > button').click();
         if (index === 4) await page.waitForFunction(() => !document.querySelector('.song-player'));
       }
       assert.equal(await page.locator('#counter').textContent(), '8 of 8 stars discovered');
       await page.locator('#next').waitFor();
       await page.reload();
       await page.locator('#start').click();
+      for (let index = 0; index < 4; index++) {
+        await page.locator('.star').nth(index).click();
+        await page.locator('#card-content > button').click();
+      }
       await page.locator('.star').nth(4).click();
       assert.equal(await page.locator('.reel-link').first().getAttribute('aria-label'), 'Reel 1, opened');
       assert.deepEqual(errors, []);

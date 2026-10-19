@@ -99,8 +99,13 @@ body[data-sky=daydream] #progress-marks .filled{color:#84584e}
 @media(max-width:700px){header{padding:20px 16px}.brand{gap:5px;font-size:10px}}
 
 .star{padding:0;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
-.star-shape{display:block;width:48px;height:48px;object-fit:contain;image-rendering:pixelated;filter:grayscale(1) drop-shadow(0 0 7px #ffffff66);transition:filter .3s}
-.visited .star-shape{filter:drop-shadow(0 0 9px #fff0b9)}
+.star-art{position:relative;display:block}
+.star-shape{display:block;width:48px;height:48px;object-fit:contain;image-rendering:pixelated;opacity:0;transition:opacity .3s}
+.star-white{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;opacity:1;transition:opacity .3s}
+.visited .star-shape{opacity:1}
+.visited .star-white{opacity:0}
+.star:hover .star-shape{transform:none}
+@media(prefers-reduced-motion:reduce){.star-shape,.star-white{transition:none}}
 .heart-reveal{position:absolute;left:50%;top:55%;width:120px;height:120px;opacity:0;transform:translate(-50%,-50%) scale(.15);pointer-events:none}
 .heart-reveal::before{content:'';position:absolute;inset:-30%;background:radial-gradient(ellipse,#fff2d9aa,transparent 70%);z-index:-1}
 .heart-reveal img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
@@ -337,8 +342,8 @@ body[data-sky=clouds] .dust{opacity:.3}
 @keyframes petal-fall{0%{opacity:0;transform:translate(0,-15px) rotate(0)}12%,75%{opacity:.75}45%{transform:translate(24px,30vh) rotate(140deg)}100%{opacity:0;transform:translate(-18px,70vh) rotate(300deg)}}
 @keyframes sky-twinkle{0%,70%,100%{opacity:.05;transform:scale(.65)}32%{opacity:1;transform:scale(1.25)}48%{opacity:.3;transform:scale(.85)}}
 @media(prefers-reduced-motion:no-preference){
-  .star .star-shape{animation:constellation-pulse 3.8s var(--delay) ease-in-out infinite}
-  .star:hover .star-shape,.star:focus-visible .star-shape{animation-play-state:paused}
+  .star .star-art{animation:constellation-pulse 3.8s var(--delay) ease-in-out infinite}
+  .star:hover .star-art,.star:focus-visible .star-art{animation-play-state:paused}
 }
 @keyframes constellation-pulse{0%,100%{transform:scale(.96)}50%{transform:scale(1.045)}}
 @keyframes butterfly-wander{0%,100%{transform:translate(0,0) rotate(-8deg)}30%{transform:translate(-35px,-22px) rotate(8deg)}65%{transform:translate(-80px,5px) rotate(-6deg)}}
