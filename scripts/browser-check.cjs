@@ -42,6 +42,8 @@ async function checkMeadow(page, width, height) {
     await page.goto((process.env.SKY_URL || 'http://127.0.0.1:4174/sky/index.html'));
     await checkMeadow(page,width,height);
     assert.equal(await page.locator('#welcome').isVisible(),true);
+    assert.equal(await page.locator('#pixel-outline feFlood').getAttribute('flood-color'),'#ffffff');
+    assert.ok(await page.locator('.heart-glow').evaluate(el=>getComputedStyle(el).filter.includes('rgb(255, 255, 255)')));
 
     await page.screenshot({path:`screenshots/welcome-${width}.png`});
     await page.getByRole('button',{name:'Show me'}).click();

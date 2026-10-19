@@ -30,7 +30,7 @@ if (points.length === 6) {
   points[1].y += 8; points[4].y += 8;
 }
 // Derive the outline from the same image so the final fill matches its silhouette.
-$('#lines').innerHTML = `<defs><filter id="pixel-outline" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="erode" radius="4" result="inside"/><feComposite in="SourceAlpha" in2="inside" operator="out" result="edge"/><feFlood flood-color="#000000"/><feComposite in2="edge" operator="in"/></filter></defs>`;
+$('#lines').innerHTML = `<defs><filter id="pixel-outline" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="erode" radius="4" result="inside"/><feComposite in="SourceAlpha" in2="inside" operator="out" result="edge"/><feFlood flood-color="#ffffff"/><feComposite in2="edge" operator="in"/></filter></defs>`;
 $('#constellation').insertAdjacentHTML('beforeend', '<img class="heart-complete pixel-outline" src="assets/smiling-heart.png" alt="" loading="lazy"><img class="heart-glow pixel-outline" src="assets/smiling-heart.png" alt="" loading="lazy">');
 const heart = document.createElement('div');
 heart.className = 'heart-reveal'; heart.setAttribute('aria-hidden', 'true');

@@ -133,7 +133,7 @@ body[data-sky=daydream] #progress-marks .filled{color:#84584e}
 .star:disabled:hover .star-shape{transform:none}
 .star.current .star-number{background:#ffe6a6;border-color:#d9a965;box-shadow:0 0 9px #fff0bd88}
 
-.heart-glow.pixel-outline{opacity:0;filter:url('#pixel-outline') drop-shadow(0 0 3px #ffe7ed) drop-shadow(0 0 10px #ffd0e0)}
+.heart-glow.pixel-outline{opacity:0;filter:url('#pixel-outline') drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 10px #ffffff)}
 .complete.outline-glow .heart-glow.pixel-outline{opacity:1;animation:outline-glow 2s ease-out both}
 @keyframes outline-glow{from{opacity:.2;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(0)}}
 #next:not([hidden]){animation:next-rise .4s ease-out both}
