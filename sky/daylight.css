@@ -1,4 +1,4 @@
-/* The meadow artwork stays still; unusual page shapes show it whole to protect the moon. */
+/* The meadow artwork stays still; mobile fills the screen, while unusual desktop shapes protect the moon. */
 :root{--sky:#080f30;--ink:#254e5b;--muted:#ddd5e9;--gold:#fff0c5}
 body{color:#fff6e1}
 #world,body[data-theme=illustrated] #world{background:var(--sky);container:sky / size}
@@ -72,6 +72,7 @@ body[data-sky] .heart-complete{stroke:#ffd2df}
 body[data-sky] #progress-marks .filled{color:#f5d898}
 @media(max-width:700px){header{padding:20px 16px}.sky-picker{gap:6px;font-size:10px}.sky-picker select{padding:8px 5px}.brand{gap:5px;font-size:10px}}
 
+.star{padding:0;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
 .star-shape{display:block;width:48px;height:48px;object-fit:contain;image-rendering:pixelated;filter:grayscale(1) drop-shadow(0 0 7px #ffffff66);transition:filter .3s}
 .visited .star-shape{filter:drop-shadow(0 0 9px #fff0b9)}
 .heart-reveal{position:absolute;left:50%;top:55%;width:120px;height:120px;opacity:0;transform:translate(-50%,-50%) scale(.15);pointer-events:none}
