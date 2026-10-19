@@ -1,6 +1,7 @@
 node_modules/
 scratch/
 test/previews/
+screenshots/
 test/*.png
 ChatGPT Image*.png
 _site/
